@@ -1,0 +1,8 @@
+          ----
+  pdfjam: This is pdfjam version 2.06.
+  pdfjam: Called with '--vanilla': no user or site configuration
+          files will be read.
+  pdfjam: Effective call for this run of pdfjam:
+          ../bin/pdfjam --vanilla --nup '2x1' --frame 'true' --landscape --outfile actual output/PDF files/test1.pdf -- PDF\ sources/sub\ dir/numbers-A4.pdf - 
+  pdfjam: Calling pdflatex...
+  pdfjam: Finished.  Output was written to 'actual output/PDF files/test1.pdf'.

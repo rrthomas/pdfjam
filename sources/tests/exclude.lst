@@ -1,0 +1,4 @@
+*.svn*
+*.DS_Store*
+*~
+*exclude.lst*
