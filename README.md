@@ -99,7 +99,7 @@ For those scripts and for more information on them, please now see
 For some years now, **pdfjam** has been included in the _TeX Live_ distribution, 
 which includes all the necessary programs and packages to make `pdfjam` run smoothly.
 If you have the necessary bandwidth and disk space for it, I do recommend installing 
-_TeX Live_.
+[_TeX Live_](https://tug.org/texlive/).
 
 # <a name="documentation"></a> Documentation
 
@@ -128,8 +128,8 @@ man pdfjam
 
 There are two main ways:
 
-1. Install the current _TeX Live_ distribution (how you do this will depend on
-details of your operating system).
+1. Install the [current _TeX Live_ distribution](https://tug.org/texlive/) 
+(how you do this will depend on details of your operating system).
 _TeX Live_ will already contain a recent release of **pdfjam**. 
 Many thanks to Karl Berry
 for setting up and maintaining **pdfjam** as a _CTAN_ package that is part of 
