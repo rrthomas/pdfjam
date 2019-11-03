@@ -511,27 +511,27 @@ listed below.
   longer used, and in particular "`--orient auto`" is no longer available. 
   **This is different behaviour from previous versions.**
 - Other new features include: 
-      + `--keepinfo` option, to allow preservation of PDF document information, 
+    + `--keepinfo` option, to allow preservation of PDF document information, 
 		if the `pdfinfo` utility and the LaTeX `hyperref` package are 
 		available (thanks to Robert Wenner for suggesting this); 
-      + `--pdftitle`, `--pdfauthor`, `--pdfsubject` and `--pdfkeywords` 
+    + `--pdftitle`, `--pdfauthor`, `--pdfsubject` and `--pdfkeywords` 
 		options, to specify new PDF document information 
 		(these require the LaTeX `hyperref` package); 
-      + many more "named" output page sizes are available if the LaTeX 
+    + many more "named" output page sizes are available if the LaTeX 
 		`geometry` package is installed (the full list of allowed paper 
 		specifications is: `a0paper, a1paper, a2paper, a3paper, a4paper, 
 		a5paper, a6paper b0paper, b1paper, b2paper, b3paper, b4paper, 
 		b5paper, b6paper letterpaper, executivepaper, legalpaper`; 
 		thanks to Corné Verbruggen and Mel Irizarry for suggesting this) and 
 		non-standard page sizes can also be defined; 
-      + `--checkfiles` option to request that input files be checked using the 
+    + `--checkfiles` option to request that input files be checked using the 
 		`file` utility, rather than requiring the file name to end in 
 		"`.pdf`" or "`.PDF`"; 
-      + `--twoside` option, to allow the LaTeX _twoside_ class option to be 
+    + `--twoside` option, to allow the LaTeX _twoside_ class option to be 
 		specified (thanks to Johannes Reinhard for suggesting this); 
-      + `--pagecolor` option, to allow the background colour of output pages 
+    + `--pagecolor` option, to allow the background colour of output pages 
 		to be changed (thanks to James Fisher for suggesting this); 
-      + `--vanilla` option to run `pdfjam` without reading site-wide or user 
+    + `--vanilla` option to run `pdfjam` without reading site-wide or user 
 		configuration files. 
 - In addition, various reported bugs have been fixed — many thanks to all 
   those kind people who reported them.
