@@ -2,9 +2,9 @@
 
 _David Firth_ <http://warwick.ac.uk/dfirth>
 
-**A snapshot of this page is included as _README.md_ 
+A snapshot of this page is included as _README.md_ 
 in the distributed package.  The most up-to-date version is maintained online at 
-<https://github.com/DavidFirth/pdfjam>.**
+<https://github.com/DavidFirth/pdfjam>.
 
 1. [Overview](#overview)
     - [What is pdfjam?](#whatis)
@@ -406,7 +406,7 @@ who knows?  The wrapper scripts (**no longer maintained**) can now be found at
 
 ### Version release notes
 
-**3.00** [2019-??-??]: 
+**3.00** [in development]: 
 
 - Re-styled the package name to **pdfjam**. (Previously the package --- which then
   contained several scripts --- was named PDFjam).
