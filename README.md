@@ -165,7 +165,8 @@ site has a non-standard TeX installation, or a non-standard location for
 temporary files, or a paper size that is different from the A4 international 
 standard --- or some other reason.
 
-The file [pdfjam.conf](<https://github.com/DavidFirth/pdfjam/pdfjam.conf)
+The file 
+[pdfjam.conf](https://github.com/DavidFirth/pdfjam/raw/master/sources/pdfjam.conf)
 is a sample configuration file which can be edited as needed.  After editing, 
 either install the file for site-wide use (at `/etc/pdfjam.conf`, 
 `/usr/share/etc/pdfjam.conf`, `/usr/local/share/pdfjam.conf`, or 
