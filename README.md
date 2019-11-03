@@ -138,7 +138,7 @@ _TeX Live_.
 2.  Install it yourself (e.g., if you don't want _TeX Live_, or if you want a later
 release of **pdfjam** than the one that's currently in _TeX Live_).  
 Download the latest packaged release of **pdfjam** as
-[pdfjam_latest.tgz](https://github.com/DavidFirth/pdfjam/releases/pdfjam_latest.tgz).
+[pdfjam_latest.tgz](https://github.com/DavidFirth/pdfjam/raw/master/releases/pdfjam_latest.tgz).
 If for some reason you don't want the latest released version, you can still get 
 older versions too: see <https://github.com/DavidFirth/pdfjam/releases>.
 
