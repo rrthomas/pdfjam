@@ -291,7 +291,7 @@ where
                   pdfjam on all of the input files, producing a single
                   output document).  For the location of output
                   files, see '--outfile'.  The --batch option cannot be
-                  used in the case of input fron stdin.
+                  used in the case of input from stdin.
      --outfile PATH  (or -o PATH)
                   Specifies where the output file(s) will go.  If PATH is an
                   existing directory, pdfjam will attempt to write its
