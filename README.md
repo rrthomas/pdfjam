@@ -429,7 +429,13 @@ who knows?  The wrapper scripts (**no longer maintained**) can now be found at
 - Simplified the package by removal of all the 'wrapper' scripts 
   (`pdfnup`, `pdfjoin`, etc.).
 - Settings specified via `--preamble` are now protected from the normal 
-  tidying of the TeX input file to remove redundant packages. 
+  tidying of the TeX input file to remove redundant packages.
+- The possibility to use `lualatex` or `xelatex` in place of `pdflatex` is
+  now described explicitly in the README.  Thanks to Mircea for suggesting this.
+- Added new `--runs` option, so as to allow for example `--runs 2` in a situation
+  where two runs of `pdflatex` (or `lualatex` or `xelatex`) are needed (typically
+  where the result document is being indexed in some way, so more than one run is 
+  needed).  Thanks to Ferdinand for this suggestion (and patch).
 
 **2.09** [never released]:
 

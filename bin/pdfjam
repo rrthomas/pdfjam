@@ -179,6 +179,8 @@ outFile="$pwd"           ##  Output to the current working directory
 ##
 ##  A few more default settings for pdfjam:
 ##
+runs=1                     ## Run latex just once
+##
 tidy='true'                ##  Delete all temporary files at the end
 ##
 keepinfo='false'           ##  Don't try to preserve "pdfinfo" data
@@ -365,6 +367,16 @@ while test -n "${1}${2}"; do
 				$E_USAGE ;
 			fi
 			;;
+		    --runs)
+			runs="${2}" ;
+			## check if the argument is a number > 0
+                        if [ "$runs" -lt 1 ] 2> /dev/null; then
+                          error_exit \
+                                "'--runs' number must be at least 1" \
+                                $E_USAGE ;
+                        fi
+                        callOptions="$callOptions --runs ${2}" ;
+                        shift ;;
 		    --tidy)
 			tidy=true ;
 			callOptions="$callOptions --tidy" ;
@@ -1000,7 +1012,10 @@ EndTemplate
 ##
 ##  RUN PDFLATEX AND COPY THE RESULTING PDF FILE 
 ##
-prattle "Calling ${pdflatex}..."  ;
+if [ "$runs" -eq 1 ] ;
+then prattle "Calling ${pdflatex}..."
+else prattle "Calling ${pdflatex} $runs times..."
+fi
 cd "$PDFJAM_TEMP_DIR" || exit 1
 failureText=\
 "FAILED.
@@ -1009,10 +1024,22 @@ If '--no-tidy' was used, you can examine the
 log file at
         $fileName.log
 to try to diagnose the problem."
-$pdflatex $texFile > $msgFile || {
-    prattle "$failureText"
-    error_exit "Output file not written" $E_SOFTWARE 
+if [ "$runs" -eq 1 ] ;
+then {
+    $pdflatex $texFile > $msgFile || {
+	prattle "$failureText"
+	error_exit "Output file not written" $E_SOFTWARE 
+    }
 }
+else {
+    for i in `seq 1 $runs`; do
+	$pdflatex $texFile > $msgFile || {
+            prattle "$failureText"
+            error_exit "Run $i: Output file not written" $E_SOFTWARE
+	}
+    done
+}
+fi
 cd "$pwd" || exit 1
 if test -f "$fileName".pdf  ## if LaTeX didn't choke
 then

@@ -134,6 +134,9 @@ where
                   pdfjam should be deleted.  Use '--no-tidy' to help debug
                   most errors.
                   [Default for you at this site: tidy=$tidy]
+     --runs N
+                  Run latex N times 
+                  [Default for you at this site: runs=$runs]
      --vanilla
                   Suppress the reading of any site-wide or user-specific
                   configuration files.
@@ -157,7 +160,7 @@ where
 * '--' can be used to signal that there are no more options to come.
 
 Defaults for the options '--suffix', '--keepinfo', '--paper', '--outfile', 
-'--landscape', '--twoside', '--tidy', '--checkfiles' and '--preamble' can be 
+'--landscape', '--twoside', '--tidy', 'runs', '--checkfiles' and '--preamble' can be 
 set in site-wide or user-specific configuration files.  The path that is 
 searched for site-wide configuration files (named pdfjam.conf) at this 
 installation is
