@@ -117,7 +117,11 @@ documented there, `pdfjam` provides access to all of the options of the
 that might change, so users are referred to the current 
 [pdfpages manual (PDF)](http://www.ctan.org/tex-archive/macros/latex/contrib/pdfpages/pdfpages.pdf) to see what's available.
 
-In addition, `pdfjam` has a (very basic) `man` page, accessed in the usual way
+In case you want to look at the `pdfjam --help` text template online, for example
+before you decide whether to install **pdfjam**, the source is available at
+<https://github.com/DavidFirth/pdfjam/blob/master/pdfjam-help.txt>.
+
+There is also a (very basic) `man` page, accessed in the usual way
 (after installation) by
 
 ```
@@ -276,8 +280,11 @@ pdfjam --nup 2x3 --frame true --noautoscale false --delta "0.2cm 0.3cm" --scale 
 The `--delta` option here comes from the pdfpages package; the `--scale` 
 option is passed to LaTeX's `\includegraphics` command. 
 
-(Slides made by LaTeX's _beamer_ package, using the `handout` class option, 
-work especially nicely with this!)
+Slides made by LaTeX's _beamer_ package, using the `handout` class option, 
+work especially nicely with this! The example wrapper scripts `pdfjam-slides3up`
+and `pdfjam-slides6up`, in the 
+[pdfjam-extras](https://github.com/DavidFirth/pdfjam-extras) repository,
+are for 3-up and 6-up handouts, respectively.
 
 ### Example 6: Trimming pages; and piped output
 
