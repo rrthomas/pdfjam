@@ -178,16 +178,22 @@ either install the file for site-wide use (at `/etc/pdfjam.conf`,
 User settings made at `~/.pdfjam.conf` override corresponding settings made 
 in a site-wide configuration file.
 
-For example, if you want your own output to be on "US letter" size paper by 
-default, simply put the line 
+For example, if you prefer to use `/usr/bin/xelatex` as your LaTeX engine 
+(in place of the standard `pdflatex`), and you want your output page size to be
+"US letter" size paper by default, you would simply include the lines 
 
 ```
+pdflatex=/usr/bin/xelatex
 paper=letterpaper
 ```
 
 in a plain text file named  '`.pdfnup.conf`' in your home directory. 
-The code word `letterpaper` is how LaTeX refers to that particular page size; 
-for other available paper sizes, and all the many 
+The path `usr/bin/xelatex` specifies exactly _which_ LaTeX program will be
+used: it could be a path to any one of the `pdflatex`, `lualatex` or 
+`xelatex` executables.  (You can get the full path to an executable 
+by, for example, the command `which xelatex`.)
+The code word `letterpaper` is how LaTeX refers to that particular page size.
+For other available paper sizes, and all the many 
 other options that could be set as defaults if you want, please see the output of
 
 ```
