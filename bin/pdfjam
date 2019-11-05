@@ -813,6 +813,10 @@ else
     (umask 077 && mkdir "$PDFJAM_TEMP_DIR")
 fi
 umask $original_umask
+## Next is from the Cygwin patch contributed by Lucas
+case `uname` in
+    *CYGWIN*) PDFJAM_TEMP_DIR=`cygpath -w "$PDFJAM_TEMP_DIR"`;;
+esac
 ##
 ##  TEMPORARY DIRECTORY ALL DONE
 ##
@@ -937,7 +941,11 @@ do
 	    sourceFullPath="$sourceDir"/"$pdfName"
 	    uniqueName="source-$counter.pdf"
 	    uniqueName="$PDFJAM_TEMP_DIR"/"$uniqueName"
- 	    ln -s "$sourceFullPath" "$uniqueName"
+	    ## Next is from the Cygwin patch contributed by Lucas
+	    case `uname` in
+		*CYGWIN*) cp "$sourceFullPath" "$uniqueName";;
+		*) ln -s "$sourceFullPath" "$uniqueName";;
+            esac
 	    ;;
     esac
     filePageList="$filePageList","$uniqueName","$pageSpec"
@@ -987,6 +995,10 @@ fileName="$PDFJAM_TEMP_DIR"/a
 texFile="$fileName".tex
 msgFile="$fileName".msgs
 tempFile="$PDFJAM_TEMP_DIR"/temp.tex
+## Next is adapted from the Cygwin patch sent by Lucas
+case `uname` in
+    *CYGWIN*) filePageList=$(echo $filePageList | sed 's~\\~/~g') ;;
+esac
 (cat <<EndTemplate
 \batchmode
 \documentclass[$documentOptions]{article}

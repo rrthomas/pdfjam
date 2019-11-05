@@ -443,6 +443,8 @@ who knows?  The wrapper scripts (**no longer maintained**) can now be found at
   default size being ISO A4 ('a4paper' in LaTeX). This can still be over-ridden 
   in a configuration file, or on the command line.  Thanks to Jonathan for this
   suggestion.
+- Innocuous edits made to make pdfjam work better in Cygwin.  Thanks to Lucas for 
+  sending a helpful patch for this.
   
 **2.09** [never released]:
 
