@@ -166,8 +166,8 @@ the instructions that appear in `tests/README-tests.txt`.
 If configuration _is_ needed, this can be done through a site-wide or 
 user-specific configuration file. This might be necessary if, for example, your 
 site has a non-standard TeX installation, or a non-standard location for 
-temporary files, or a paper size that is different from the A4 international 
-standard --- or some other reason.
+temporary files, or a specific paper size for output PDFs --- 
+or some other reason.
 
 The file 
 [pdfjam.conf](https://github.com/DavidFirth/pdfjam/raw/master/pdfjam.conf)
@@ -439,7 +439,11 @@ who knows?  The wrapper scripts (**no longer maintained**) can now be found at
   where two runs of `pdflatex` (or `lualatex` or `xelatex`) are needed (typically
   where the result document is being indexed in some way, so more than one run is 
   needed).  Thanks to Ferdinand for this suggestion (and patch).
-
+- Default paper size is now guessed from the locale where possible, with fallback 
+  default size being ISO A4 ('a4paper' in LaTeX). This can still be over-ridden 
+  in a configuration file, or on the command line.  Thanks to Jonathan for this
+  suggestion.
+  
 **2.09** [never released]:
 
 - The default behaviour of `pdfbook` is reverted to its pre-2.06 state, 
