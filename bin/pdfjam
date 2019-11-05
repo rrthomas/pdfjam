@@ -5,12 +5,13 @@ version=N.NN
 ##  pdfjam: A shell-script interface to the "pdfpages" LaTeX package   ##
 ##  ------                                                             ##
 ##                                                                     ##
-##  Author: David Firth (http://go.warwick.ac.uk/dfirth)               ##
+##  Author: David Firth (http://warwick.ac.uk/dfirth)                  ##
 ##                                                                     ##
-##  Usage: see http://go.warwick.ac.uk/pdfjam or "pdfjam --help"       ##
+##  Usage: see https://github.com/DavidFirth/pdfjam                    ##
+##         or "pdfjam --help"                                          ##
 ##                                                                     ##
 ##  Relies on:                                                         ##
-##  -- pdflatex                                                        ##
+##  -- pdflatex (or xelatex or lualatex)                               ##
 ##  -- the 'pdfpages' package for LaTeX (ideally version >= 0.4f)      ##
 ##                                                                     ##
 ##  License: GPL version 2 or later.  This software comes with         ##
@@ -149,22 +150,21 @@ prattle "This is pdfjam version ${version}."
 ##  once, the last instance prevails.)
 ##
 ##  An example configuration file can be found at
-##     http://go.warwick.ac.uk/pdfjam
+##     https://github.com/DavidFirth/pdfjam
 ##
 ##  The path searched for site-wide configuration files can be changed
 ##  by editing the variable 'configpath' at the top of this file.
 ##
 ##
-##  First check whether 'pdflatex' is in the user's path:
+##  First get the full path (if it exists) to pdflatex:
 ##
-pdflatex=pdflatex
-(hash pdflatex >/dev/null 2>&1)  ||  pdflatex="not found"
+latex=$(command -v pdflatex)
+if [ -z "$latex" ] ; then latex="not found" ; fi
 ##
+##  Likewise for the pdfinfo (only needed for `--keepinfo'):
 ##
-##  Likewise for the pdfinfo utility (only needed for `--keepinfo'):
-##
-pdfinfo='pdfinfo'
-(hash pdfinfo >/dev/null 2>&1)  ||  pdfinfo="not found"
+pdfinfo=$(command -v pdfinfo)
+if [ -z "$pdfinfo" ] ; then pdfinfo="not found"; fi
 ##
 ##
 ##  Next a permitted location for temporary files on your system:
@@ -238,6 +238,8 @@ else
 	prattle "files will be read." 1
     fi
 fi
+## For backwards compatibility, check here for a $pdflatex setting in the config file
+if [ -n "$pdflatex" ] ; then latex="$pdflatex" ; fi
 ##
 ##  END OF CONFIGURATION BLOCK
 ##
@@ -333,6 +335,10 @@ while test -n "${1}${2}"; do
 		    pageSpecAwaited=false
 		fi
 		case ${1} in
+		    --latex)
+			latex="${2}" ;
+			callOptions="$callOptions --latex ${2}" ;
+			shift ;;
 		    --batch)
 			batch=true ;
 			;;
@@ -643,18 +649,16 @@ documentOptions=`printf "%s" "$documentOptions" | sed 's/^,//' | sed 's/,$//'`
 ##
 if test $PDFJAM_CALL_NUMBER -eq 0  ## not a secondary call
 then
-    ##  Check whether there's a pdflatex, if "$pdflatex" is still unset:
-    case $pdflatex in
+    ##  Check whether there's a suitable latex to use:
+    case $latex in
 	"not found")
 	    error_exit "can't find pdflatex!" $E_UNAVAILABLE
 	    ;;
-	pdflatex)
-	    ;;
-	*)  ## $pdflatex was set in a configuration file
-	    if test ! -x "$pdflatex"
+	*)  ## 
+	    if test ! -x "$latex"
 	    then
 		error_exit \
-		    "configuration error, $pdflatex is not an executable file" \
+		    "configuration error, $latex is not an executable file" \
 		    $E_CONFIG
 	    fi
 	    ;;
@@ -662,7 +666,7 @@ then
     ##
     ##  Check that necessary LaTeX packages are installed:
     ##
-    modifyPath=`printf "%s" "$pdflatex" | sed 's/\/[^\/]*$//'`
+    modifyPath=`printf "%s" "$latex" | sed 's/\/[^\/]*$//'`
     if [ -n "$modifyPath" ] ; then
 	PATH="$modifyPath:$PATH"
 	export PATH
@@ -868,7 +872,7 @@ prattle "$theCall" 1
 ##
 #########################################################################
 ##
-##  NOW MAKE THE INPUT FILE ETC., READY FOR PDFLATEX
+##  NOW MAKE THE INPUT FILE ETC., READY FOR LATEX
 ##
 filePageList=""  ## initialize a string to supply to \includepdfmerge
 counter=0
@@ -961,7 +965,7 @@ then
     fi
 fi
 ##
-##  Now set up the files for pdflatex...
+##  Now set up the files for latex...
 ##
 fileName="$PDFJAM_TEMP_DIR"/a
 texFile="$fileName".tex
@@ -1010,36 +1014,28 @@ EndTemplate
 ##
 #########################################################################
 ##
-##  RUN PDFLATEX AND COPY THE RESULTING PDF FILE 
+##  RUN LATEX AND COPY THE RESULTING PDF FILE 
 ##
 if [ "$runs" -eq 1 ] ;
-then prattle "Calling ${pdflatex}..."
-else prattle "Calling ${pdflatex} $runs times..."
+then prattle "Calling ${latex}..."
+else prattle "Calling ${latex} $runs times..."
 fi
 cd "$PDFJAM_TEMP_DIR" || exit 1
 failureText=\
 "FAILED.
-The call to 'pdflatex' resulted in an error.
+The call to $latex resulted in an error.
 If '--no-tidy' was used, you can examine the
 log file at
         $fileName.log
 to try to diagnose the problem."
-if [ "$runs" -eq 1 ] ;
-then {
-    $pdflatex $texFile > $msgFile || {
-	prattle "$failureText"
-	error_exit "Output file not written" $E_SOFTWARE 
+i=1
+while [ "$i" -le "$runs" ] ; do
+    $latex $texFile > $msgFile || {
+        prattle "$failureText"
+        error_exit "Run $i: Output file not written" $E_SOFTWARE
     }
-}
-else {
-    for i in `seq 1 $runs`; do
-	$pdflatex $texFile > $msgFile || {
-            prattle "$failureText"
-            error_exit "Run $i: Output file not written" $E_SOFTWARE
-	}
-    done
-}
-fi
+    i=`expr $i + 1`
+done
 cd "$pwd" || exit 1
 if test -f "$fileName".pdf  ## if LaTeX didn't choke
 then

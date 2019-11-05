@@ -170,7 +170,7 @@ temporary files, or a paper size that is different from the A4 international
 standard --- or some other reason.
 
 The file 
-[pdfjam.conf](https://github.com/DavidFirth/pdfjam/raw/master/sources/pdfjam.conf)
+[pdfjam.conf](https://github.com/DavidFirth/pdfjam/raw/master/pdfjam.conf)
 is a sample configuration file which can be edited as needed.  After editing, 
 either install the file for site-wide use (at `/etc/pdfjam.conf`, 
 `/usr/share/etc/pdfjam.conf`, `/usr/local/share/pdfjam.conf`, or 
@@ -178,12 +178,12 @@ either install the file for site-wide use (at `/etc/pdfjam.conf`,
 User settings made at `~/.pdfjam.conf` override corresponding settings made 
 in a site-wide configuration file.
 
-For example, if you prefer to use `/usr/bin/xelatex` as your LaTeX engine 
+For example, if you prefer to use `/usr/bin/xelatex` as your default LaTeX engine 
 (in place of the standard `pdflatex`), and you want your output page size to be
 "US letter" size paper by default, you would simply include the lines 
 
 ```
-pdflatex=/usr/bin/xelatex
+latex=/usr/bin/xelatex
 paper=letterpaper
 ```
 
@@ -431,7 +431,10 @@ who knows?  The wrapper scripts (**no longer maintained**) can now be found at
 - Settings specified via `--preamble` are now protected from the normal 
   tidying of the TeX input file to remove redundant packages.
 - The possibility to use `lualatex` or `xelatex` in place of `pdflatex` is
-  now described explicitly in the README.  Thanks to Mircea for suggesting this.
+  now described explicitly in the README. The specification of which LaTeX
+  engine to use can be made either in a configuration file, or on the command
+  line via option (for example) `--latex /usr/bin/xelatex`.  Thanks to
+  Mircea for suggesting this.
 - Added new `--runs` option, so as to allow for example `--runs 2` in a situation
   where two runs of `pdflatex` (or `lualatex` or `xelatex`) are needed (typically
   where the result document is being indexed in some way, so more than one run is 

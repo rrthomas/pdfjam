@@ -134,8 +134,14 @@ where
                   pdfjam should be deleted.  Use '--no-tidy' to help debug
                   most errors.
                   [Default for you at this site: tidy=$tidy]
+     --latex PATHTOLATEX
+                  Specify the LaTeX engine to be used (one of pdflatex,
+		  xelatex, lualatex).  The PATHTOLATEX string must be
+		  the full path to a suitable LaTeX executable (for example
+		  /usr/bin/xelatex on many unix systems).
+		  [Default for you at this site: latex=$latex]
      --runs N
-                  Run latex N times 
+                  Run latex N times, for each output document made. 
                   [Default for you at this site: runs=$runs]
      --vanilla
                   Suppress the reading of any site-wide or user-specific
@@ -160,15 +166,15 @@ where
 * '--' can be used to signal that there are no more options to come.
 
 Defaults for the options '--suffix', '--keepinfo', '--paper', '--outfile', 
-'--landscape', '--twoside', '--tidy', 'runs', '--checkfiles' and '--preamble' can be 
-set in site-wide or user-specific configuration files.  The path that is 
-searched for site-wide configuration files (named pdfjam.conf) at this 
-installation is
+'--landscape', '--twoside', '--tidy', '--latex', '--runs', '--checkfiles'
+and '--preamble' can be set in site-wide or user-specific configuration files.
+The path that is searched for site-wide configuration files (named pdfjam.conf)
+at this installation is
     $configpath
 This configuration path can be changed by editing the pdfjam script if
 necessary.  Any user-specific configuration should be put in a file named
 .pdfjam.conf in your home directory.  (All of these files are ignored
 if the '--vanilla' argument is used.)
 
-For more information, including an example configuration file, see
+For more information, including a sample configuration file, see
 https://github.com/DavidFirth/pdfjam.
