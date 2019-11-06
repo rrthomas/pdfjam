@@ -458,6 +458,8 @@ who knows?  The wrapper scripts (**no longer maintained**) can now be found at
   suggestion.
 - Innocuous edits made to make pdfjam work better in Cygwin.  Thanks to Lucas for 
   sending a helpful patch for this.
+- Included a note in the FAQ about the (sometimes reported) 'Too many open files'
+  error.  Thanks to George for information about this.
   
 **2.09** [never released]:
 
