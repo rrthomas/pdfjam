@@ -39,8 +39,8 @@ unlike some other indirect methods such as `pdf2ps|psnup|ps2pdf`
 
 `pdfjam` is designed for Unix-like systems, including Linux and Mac OS X. 
 It seems that it will work also on Windows computers with a suitable 
-installation of [Cygwin](http://www.cygwin.com) (with the Cygwin 
-`tetex-extras` package installed), but this has not been thoroughly tested.
+installation of [Cygwin](http://www.cygwin.com) (with TeX Live 
+installed), but this has not been thoroughly tested.
 
 An alternative set of PDF manipulation tools, which are java-based, is 
 provided by the [Multivalent](http://multivalent.sourceforge.net) project. 
