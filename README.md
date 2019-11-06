@@ -366,6 +366,19 @@ You could check also that `pdftex.def`, typically to be found in
 is up to date. If the problem persists even with up-to-date versions of pdfTeX, 
 `pdftex.def` and pdfpages, then please do report it. 
 
+**2. What can I do to solve a 'Too many open files' error?
+
+This error has been reported to occur sometimes, when dealing with large numbers of 
+documents/pages. A suggested solution, if this happens, 
+is to include additionally (in the call to `pdfjam`):
+
+```
+    -- preamble '\let\mypdfximage\pdfximage \def\pdfximage{\immediate\mypdfximage}'
+```
+
+See for example 
+<https://stackoverflow.com/questions/1715677/error-too-many-open-files-in-pdflatex>
+for this suggestion and links to more information.
 
 # <a name="bugs"></a> Reporting bugs
 
