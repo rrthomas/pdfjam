@@ -198,12 +198,12 @@ preamble=''                ##  Default LaTeX preamble string.
 ##  Guess default paper size from locale if possible, otherwise A4
 ##
 if locale=$(command -v locale) ; then
-    paperheight=`locale -k LC_PAPER | sed -e '1!d' -e 's/height=//'` ;
+    paperheight=$(locale -k LC_PAPER | sed -e '1!d' -e 's/.*=//') ;
     case $paperheight in
-	"297")
+	297)
 	    paper='a4paper' ;
 	    ;;
-	"279")
+	279)
 	    paper='letterpaper' ;
 	    ;;
 	*)
