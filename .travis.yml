@@ -1,0 +1,6 @@
+language: shell
+script:
+  - cd tests
+  - ./run.sh
+  - cd ..
+  - shellcheck --exclude=SC1004 bin/pdfjam
