@@ -187,7 +187,7 @@ latex=/usr/bin/xelatex
 paper=letterpaper
 ```
 
-in a plain text file named  '`.pdfnup.conf`' in your home directory. 
+in a plain text file named  '`.pdfjam.conf`' in your home directory. 
 The path `usr/bin/xelatex` specifies exactly _which_ LaTeX program will be
 used: it could be a path to any one of the `pdflatex`, `lualatex` or 
 `xelatex` executables.  (You can get the full path to an executable 
@@ -338,7 +338,7 @@ With '`file -Lb`' available, we can use PDF files whose names lack the usual
 '`.pdf`' extension.  For example, 
 
 ```
-pdfnup --nup 2x1 --checkfiles 'my PDF file'
+pdfjam --nup 2x1 --checkfiles 'my PDF file'
 ```
 
 will result in a file named '`my PDF file-2x1.pdf`' 
