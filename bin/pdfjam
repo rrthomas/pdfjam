@@ -1022,7 +1022,7 @@ if test "$geometry" = false; then   ## geometry package is not to be used
 fi
 if test -z "$pagecolor"; then   ## color package is not needed
     cp "$texFile" "$tempFile"
-    sed '/\\\usepackage.*{color}/d'"$tempFile" > "$texFile"
+    sed '/\\\usepackage.*{color}/d' "$tempFile" > "$texFile"
     rm "$tempFile"
 fi
 (cat <<EndTemplate
