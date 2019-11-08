@@ -1,3 +1,4 @@
+[![](https://travis-ci.org/DavidFirth/pdfjam.svg?branch=master)](https://travis-ci.org/DavidFirth/pdfjam)
 # pdfjam
 
 _David Firth_ <http://warwick.ac.uk/dfirth>
