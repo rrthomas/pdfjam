@@ -1,0 +1,22 @@
+          ----
+  pdfjam: This is pdfjam version N.NN.
+  pdfjam: Called with '--vanilla': no user or site configuration
+          files will be read.
+  pdfjam: --
+  pdfjam: Processing file 1, '../space-in-the-file-name/numbers A4.pdf'...
+  pdfjam: Page spec is '2,4,6,8'.
+              ----
+  pdfjam:     This is pdfjam version N.NN.
+  pdfjam:     Effective call for this run of pdfjam:
+              ../../bin/pdfjam --vanilla --nup '2x2' --suffix actual-output --outfile . -- ../space-in-the-file-name/numbers\ A4.pdf 2,4,6,8
+  pdfjam:     Calling pdflatex...
+  pdfjam:     Finished.  Output was written to './numbers A4-2,4,6,8-actual-output.pdf'.
+  pdfjam: --
+  pdfjam: Processing file 2, 'letters.pdf'...
+  pdfjam: Page spec is '2,4,6,8'.
+              ----
+  pdfjam:     This is pdfjam version N.NN.
+  pdfjam:     Effective call for this run of pdfjam:
+              ../../bin/pdfjam --vanilla --nup '2x2' --suffix actual-output --outfile . -- letters.pdf 2,4,6,8
+  pdfjam:     Calling pdflatex...
+  pdfjam:     Finished.  Output was written to './letters-2,4,6,8-actual-output.pdf'.

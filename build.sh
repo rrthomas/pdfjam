@@ -42,7 +42,7 @@ do cp "$file" `echo $file | sed 's/\(test.*\)/\1Temp/'`; rm "$file";
     chmod a+r "$file";
 done
 cd "$sourceDir"/build_tmp/sources
-rm -rf 'tests/actual output'
+rm -f tests/*/*actual-output*
 rm -f tests.zip
 zip -vrq tests tests -x@tests/exclude.lst
 ##

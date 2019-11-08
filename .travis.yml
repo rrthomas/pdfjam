@@ -1,6 +1,6 @@
 language: shell
+before_install:
+- sudo apt-get install texlive-latex-extra
 script:
-  - cd tests
-  - ./run.sh
-  - cd ..
-  - shellcheck --exclude=SC1004 bin/pdfjam
+- tests/run.sh
+- shellcheck --exclude=SC1004 bin/pdfjam
