@@ -4,7 +4,7 @@ layout: default
 
 ## Earlier releases of pdfjam
 
-Releases of pdfjam before _version 3.00_ can be downloaded from here.  (Just in case they are ever needed.)  
+Releases of pdfjam **before version 3.00** can be downloaded from here.  (Just in case they are ever needed.)  
 
 For the version history with release notes, please see the README file at [https://github.com/DavidFirth/pdfjam](https://github.com/DavidFirth/pdfjam).
 
