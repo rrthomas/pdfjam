@@ -1,11 +1,13 @@
 ---
 layout: default
+title: Earlier releases of pdfjam
 ---
 
-## Earlier releases of pdfjam
+Releases of pdfjam before _version 3.00_ can be downloaded from here.  (Just in case they are ever needed.)  
 
-Releases of pdfjam before _version 3.00_ can be downloaded from here.  (Just in case they are ever needed.)  For the version history with release notes, please see the README file at [https://github.com/DavidFirth/pdfjam](https://github.com/DavidFirth/pdfjam).
+For the version history with release notes, please see the README file at [https://github.com/DavidFirth/pdfjam](https://github.com/DavidFirth/pdfjam).
 
+- [pdfjam_208.tgz](releases/pdfjam_208.tgz)
 - [pdfjam_207.tgz](releases/pdfjam_207.tgz)
 - [pdfjam_206.tgz](releases/pdfjam_206.tgz)
 - [pdfjam_205.tgz](releases/pdfjam_205.tgz)
