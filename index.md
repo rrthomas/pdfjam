@@ -1,5 +1,5 @@
 ---
-layout: single
+layout: default
 ---
 
 ## Earlier versions of pdfjam
