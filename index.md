@@ -5,6 +5,6 @@
 layout: home
 ---
 
-{% for file in site.posts %}
+{% for file in site.releases %}
      * [{{ file.path }}]({{ site.baseurl }}{{ file.path }})
 {% endfor %}
