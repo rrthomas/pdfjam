@@ -1,4 +1,7 @@
- 
+---
+layout: single
+---
+
 ## Contents
 
 test
