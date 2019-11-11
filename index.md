@@ -1,7 +1,8 @@
 ---
 layout: default
-title: Earlier releases of pdfjam
 ---
+
+## Earlier releases of pdfjam
 
 Releases of pdfjam before _version 3.00_ can be downloaded from here.  (Just in case they are ever needed.)  
 
