@@ -7,8 +7,3 @@ layout: home
 
 ## Contents:
 
-{% for file in site.releases %}
-
-- [{{ file.name }}]({{ site.baseurl }}{{ file.path }})
-
-{% endfor %}
