@@ -7,6 +7,6 @@ layout: home
 
 Contents:
 
-{% for page in site.posts %}
-- [{{ page.name }}]({{ site.baseurl }}{{ page.path }})
+{% for file in site.releases %}
+- [{{ file.name }}]({{ site.baseurl }}{{ file.path }})
 {% endfor %}
