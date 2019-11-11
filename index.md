@@ -5,4 +5,6 @@
 layout: home
 ---
 
-test
+{% for file in site.posts %}
+     * [{{ file.path }}]({{ site.baseurl }}{{ file.path }})
+{% endfor %}
