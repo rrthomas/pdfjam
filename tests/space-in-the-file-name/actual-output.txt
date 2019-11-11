@@ -1,0 +1,8 @@
+          ----
+  pdfjam: This is pdfjam version N.NN.
+  pdfjam: Called with '--vanilla': no user or site configuration
+          files will be read.
+  pdfjam: Effective call for this run of pdfjam:
+          ../../bin/pdfjam --vanilla --paper letterpaper --nup '2x1' --frame 'true' --landscape --suffix actual-output --outfile . -- numbers\ A4.pdf - 
+  pdfjam: Calling /usr/bin/pdflatex...
+  pdfjam: Finished.  Output was written to './numbers A4-actual-output.pdf'.
