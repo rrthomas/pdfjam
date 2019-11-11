@@ -2,17 +2,28 @@
 layout: default
 ---
 
-## Earlier versions of pdfjam
+## Earlier releases of pdfjam
 
-Versions of pdfjam before version 3.00 can be downloaded from here.  Provided just in case they are ever needed.
+Releases of pdfjam before _version 3.00_ can be downloaded from here.  (Just in case they are ever needed.)  For the version history with release notes, please see the README file at [https://github.com/DavidFirth/pdfjam](https://github.com/DavidFirth/pdfjam).
 
 - [pdfjam_207.tgz](releases/pdfjam_207.tgz)
 - [pdfjam_206.tgz](releases/pdfjam_206.tgz)
 - [pdfjam_205.tgz](releases/pdfjam_205.tgz)
-- [pdfjam_204.tgz](releases/pdfjam_204.tgz)
-- [pdfjam_203.tgz](releases/pdfjam_203.tgz)
-- [pdfjam_202.tgz](releases/pdfjam_202.tgz)
-- [pdfjam_201.tgz](releases/pdfjam_201.tgz)
-
+- [pdfjam_2.04.tgz](releases/pdfjam_2.04.tgz)
+- [pdfjam_2.03.tgz](releases/pdfjam_2.03.tgz)
+- [pdfjam_2.02.tgz](releases/pdfjam_2.02.tgz)
+- [pdfjam_2.01.tgz](releases/pdfjam_2.01.tgz)
+- [pdfjam_2.00.tgz](releases/pdfjam_2.00.tgz)
+- [pdfjam_1.31.tgz](releases/pdfjam_1.31.tgz)
+- [pdfjam_1.30.tgz](releases/pdfjam_1.30.tgz)
+- [pdfjam_1.30.tgz](releases/pdfjam_1.30.tgz)
+- [pdfjam_1.21.tar.gz](releases/pdfjam_1.21.tar.gz)
+- [pdfjam_1.20.tgz](releases/pdfjam_1.20.tgz)
+- [pdfjam_1.11.tgz](releases/pdfjam_1.11.tgz)
+- [pdfjam_1.10.tgz](releases/pdfjam_1.10.tgz)
+- [pdfjam_1.03.tgz](releases/pdfjam_1.03.tgz)
+- [pdfjam_1.02.tgz](releases/pdfjam_1.02.tgz)
+- [pdfjam_1.01.tgz](releases/pdfjam_1.01.tgz)
+- [pdfjam_1.00.tgz](releases/pdfjam_1.00.tgz)
 
 
