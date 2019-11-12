@@ -1,9 +1,5 @@
 #!/bin/sh
 ##
-## Enter the parent directory of this script:
-##
-cd $(dirname ${BASH_SOURCE[0]})
-##
 ## First remove any old construction site
 ##
 rm -rf built_package
