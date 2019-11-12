@@ -161,8 +161,8 @@ If you go the second way, then you will have a bit more to do:
 On many unix-like systems `pdfjam` should run without any further configuration, 
 provided that the pre-requisite TeX installation (such as _TeX Live_) is present. 
 If you want to  check (e.g., prior to installation) that `pdfjam` will work on 
-your system, please enter the _tests_ sub-directory of the package and follow 
-the instructions that appear there in [`README.md`](README.md).
+your system, please `cd` to the `tests` sub-directory of the package and follow 
+the instructions that appear there in `README.md`.
 
 If configuration _is_ needed, this can be done through a site-wide or 
 user-specific configuration file. This might be necessary if, for example, your 
