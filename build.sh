@@ -1,8 +1,8 @@
 #!/bin/sh
 ##
-## Start at top level of the repository
+## Enter the parent directory of this script:
 ##
-sourceDir=`pwd`
+cd $(dirname ${BASH_SOURCE[0]})
 ##
 ## First remove any old construction site
 ##
@@ -17,15 +17,11 @@ mkdir built_package built_package/sources
 cp -r bin man1 tests COPYING VERSION pdfjam.conf README.md pdfjam-help.txt built_package/sources
 cd built_package  
 ##
-## Put the current version number in files where needed
+## Put the current version number in the pdfjam script
 ##
-version=`sed 's/^.*pdfjam\ //' sources/VERSION`
-for file in sources/bin/pdf* ; 
-  do cp "$file" `echo $file | sed 's/\(pdf.*\)/\1Temp/'`; rm "$file";
-     sed "s/N.NN/${version}/" "$file"Temp > "$file";
-     rm "$file"Temp;
-     chmod a+x "$file";
-done
+version=$(sed 's/^.*pdfjam\ //' sources/VERSION)
+sed -i "s/N.NN/${version}/" sources/bin/pdfjam
+chmod a+x sources/bin/pdfjam;
 ##
 ## Insert the latest help text into the pdfjam script
 ##
@@ -37,11 +33,11 @@ rm sources/pdfjam-help.txt
 cd sources/tests
 test_dirs=$(find . -mindepth 1 -maxdepth 1 -type d)
 for test_dir in $test_dirs; do
-    sed -i "s/This\ is\ pdfjam\ version.*$/This\ is\ pdfjam\ version\ ${version}./" $test_dir/expected-output.txt
+    sed -i "s/This\ is\ pdfjam\ version.*$/This\ is\ pdfjam\ version\ ${version}./" "$test_dir"/expected-output.txt
 done    
 ##
-## Finally rename the built package with the version number
+## Finally rename the built package with the current version number
 ##
 cd ../..
-version=`echo "$version" | sed 's/\.//'`
+version=$(echo "$version" | sed 's/\.//')
 mv sources pdfjam_"$version"

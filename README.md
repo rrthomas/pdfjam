@@ -145,15 +145,15 @@ release of **pdfjam** than the one that's currently in _TeX Live_).
 Download the latest packaged release of **pdfjam** as
 [pdfjam_latest.tgz](https://github.com/DavidFirth/pdfjam/raw/master/releases/pdfjam_latest.tgz).
 If for some reason you don't want the latest released version, you can still get 
-older versions too: see <https://github.com/DavidFirth/pdfjam/releases>.
+older versions too: see <https://davidfirth.github.io/pdfjam>.
 
 **The first way, via _TeX Live_, is recommended** as the easiest way for most users.
 
 If you go the second way, then you will have a bit more to do:
 
-- The `pdfjam` shell script in the _bin_ sub-directory of the package should be 
-  placed on the `PATH` of anyone who needs to use it.
-- The man file in the _man1_ sub-directory should be installed on the `MANPATH` 
+- The `pdfjam` shell script in the _bin_ sub-directory of the released package 
+  should be  placed on the `PATH` of anyone who needs to use it.
+- The `man` file in the _man1_ sub-directory should be installed on the `MANPATH` 
   of all who might need to read it.
 
 # <a name="config"></a> Configuration
@@ -161,8 +161,8 @@ If you go the second way, then you will have a bit more to do:
 On many unix-like systems `pdfjam` should run without any further configuration, 
 provided that the pre-requisite TeX installation (such as _TeX Live_) is present. 
 If you want to  check (e.g., prior to installation) that `pdfjam` will work on 
-your system, please unzip the _tests_ sub-directory of the package and follow 
-the instructions that appear in [`tests/README.md`](tests/README.md).
+your system, please enter the _tests_ sub-directory of the package and follow 
+the instructions that appear there in [`README.md`](README.md).
 
 If configuration _is_ needed, this can be done through a site-wide or 
 user-specific configuration file. This might be necessary if, for example, your 
@@ -461,6 +461,8 @@ who knows?  The wrapper scripts (**no longer maintained**) can now be found at
   sending a helpful patch for this.
 - Included a note in the FAQ about the (sometimes reported) 'Too many open files'
   error.  Thanks to George for information about this.
+- Tidying of the `pdfjam` script, and better organisation of the `tests` folder.
+  Thanks to Lucas for help with this.
   
 **2.09** [never released]:
 
