@@ -2,5 +2,6 @@ language: shell
 before_install:
 - sudo apt-get install texlive-latex-extra
 script:
-- tests/run.sh
-- shellcheck --exclude=SC1004 bin/pdfjam
+- ./build.sh
+- built_package/pdfjam*/tests/run.sh
+- shellcheck --exclude=SC1004 built_package/pdfjam*/bin/pdfjam

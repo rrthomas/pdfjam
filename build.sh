@@ -6,16 +6,16 @@ sourceDir=`pwd`
 ##
 ## First remove any old construction site
 ##
-rm -rf build_tmp
+rm -rf built_package
 ##
 ## Make a new construction site
 ##
-mkdir build_tmp build_tmp/sources
+mkdir built_package built_package/sources
 ##
 ## Copy everything that will be needed
 ##
-cp -r bin man1 tests COPYING VERSION pdfjam.conf README.md pdfjam-help.txt build_tmp/sources
-cd build_tmp  
+cp -r bin man1 tests COPYING VERSION pdfjam.conf README.md pdfjam-help.txt built_package/sources
+cd built_package  
 ##
 ## Put the current version number in files where needed
 ##
@@ -34,24 +34,14 @@ rm sources/pdfjam-help.txt
 ##
 ## Update all the tests
 ##
-cd sources/tests/expected\ output
-for file in Prattled/test* ;
-do cp "$file" `echo $file | sed 's/\(test.*\)/\1Temp/'`; rm "$file";
-    sed "s/This\ is\ pdfjam\ version.*$/This\ is\ pdfjam\ version\ ${version}./" "$file"Temp > "$file";
-    rm "$file"Temp;
-    chmod a+r "$file";
-done
-cd "$sourceDir"/build_tmp/sources
-rm -f tests/*/*actual-output*
-rm -f tests.zip
-zip -vrq tests tests -x@tests/exclude.lst
+cd sources/tests
+test_dirs=$(find . -mindepth 1 -maxdepth 1 -type d)
+for test_dir in $test_dirs; do
+    sed -i "s/This\ is\ pdfjam\ version.*$/This\ is\ pdfjam\ version\ ${version}./" $test_dir/expected-output.txt
+done    
 ##
-## Finally make two (identical) .tgz files for distribution
+## Finally rename the built package with the version number
 ##
-cd "$sourceDir"/build_tmp
+cd ../..
 version=`echo "$version" | sed 's/\.//'`
-rm -f ../releases/pdfjam_"$version".tgz
 mv sources pdfjam_"$version"
-tar -c  --exclude 'tests' --exclude='.*' --exclude='*~' pdfjam_"$version" | gzip > ../releases/pdfjam_"$version".tgz 
-cp ../releases/pdfjam_"$version".tgz ../releases/pdfjam_latest.tgz
-

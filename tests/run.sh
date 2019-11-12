@@ -19,7 +19,7 @@ for test_dir in $test_dirs; do
         exit 1
     fi
     # We ignore the "Calling" log messages that contain the pdflatex cmd full path:
-    diff -I' *pdfjam: *Calling .*pdflatex...' expected-output.txt actual-output.txt
+    diff -I' *pdfjam: *Calling .*pdflatex...' -I'/pdfjam' expected-output.txt actual-output.txt
     echo OK
     cd - >/dev/null
 done
