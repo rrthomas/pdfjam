@@ -9,4 +9,5 @@ script:
 branches:
   except:
   - devel
+  - built_for_release
   
