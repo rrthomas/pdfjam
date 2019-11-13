@@ -1,5 +1,15 @@
 #!/bin/sh
 ##
+## This script works in the pdfjam source directory, to create a subdirectory
+## named "built_package" that contains a finished package ready for distribution.
+##
+## The "finished" package (a subdirectory of "built_package") has:
+##   -- the current version number (in the pdfjam script itself, in
+##      the expected outputs from tests, and in the package name);
+##   -- the text needed for 'pdfjam --help' inserted in the pdfjam script;
+##
+## -----------------------------------------------------------------------------
+##
 ## First remove any old construction site
 ##
 rm -rf built_package
@@ -35,5 +45,4 @@ done
 ## Finally rename the built package with the current version number
 ##
 cd ../..
-version=$(echo "$version" | sed 's/\.//')
-mv sources pdfjam_"$version"
+mv sources pdfjam-"$version"
