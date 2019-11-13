@@ -1,11 +1,11 @@
 [![](https://travis-ci.com/DavidFirth/pdfjam.svg?branch=master)](https://travis-ci.com/DavidFirth/pdfjam)
 # pdfjam
 
-_David Firth_ <http://warwick.ac.uk/dfirth>
+_David Firth_ <https://warwick.ac.uk/dfirth>
 
 A snapshot of this page is included as _README.md_ 
 in the distributed package.  The most up-to-date version is maintained online at 
-<https://github.com/DavidFirth/pdfjam>.
+<htts://github.com/DavidFirth/pdfjam>.
 
 1. [Overview](#overview)
     - [What is pdfjam?](#whatis)
@@ -141,11 +141,10 @@ for setting up and maintaining **pdfjam** as a _CTAN_ package that is part of
 _TeX Live_.
 
 2.  Install it yourself (e.g., if you don't want _TeX Live_, or if you want a later
-release of **pdfjam** than the one that's currently in _TeX Live_).  
-Download the latest packaged release of **pdfjam** as
-[pdfjam_latest.tgz](https://github.com/DavidFirth/pdfjam/raw/master/releases/pdfjam_latest.tgz).
-If for some reason you don't want the latest released version, you can still get 
-older versions too: see <https://davidfirth.github.io/pdfjam>.
+release of **pdfjam** than the one that's currently in _TeX Live_). 
+Download the latest packaged release of **pdfjam** from
+<https://github.com/DavidFirth/pdfjam/releases>.
+If for some reason you don't want the latest released version, or even a recently released version, you can still get older versions too: see <https://davidfirth.github.io/pdfjam>.
 
 **The first way, via _TeX Live_, is recommended** as the easiest way for most users.
 
@@ -386,7 +385,7 @@ for this suggestion and links to more information.
 Please report any bugs found in `pdfjam`, either
 
 - by reporting as an issue at GitHub, <https://github.com/DavidFirth/pdfjam/issues>
-- by email (see <http://warwick.ac.uk/dfirth> for my email address)
+- by email (see <https://warwick.ac.uk/dfirth> for my email address)
 
 ### Some known problems:
 
