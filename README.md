@@ -55,7 +55,7 @@ It comes with **ABSOLUTELY NO WARRANTY** of fitness for any purpose whatever.
 
 ## <a name="wrappers"> Wrapper scripts no longer included here
 
-Previous versions of **pdfjam** (before 3.00) included some _other_ scripts too,
+Previous versions of **pdfjam** (before 3.01) included some _other_ scripts too,
 in addition to the `pdfjam` script iteslf.
 Those other scripts are simple wrappers for calls to `pdfjam`, designed to perform 
 some common tasks such as joining or n-upping PDF files or to illustrate 
@@ -70,7 +70,7 @@ in case anyone wants to see them, to use them, or to improve and maintain
 them independently as a separate project.
 
 The specific wrapper scripts that were removed from the **pdfjam** package 
-at version 3.00 are:
+at version 3.01 are:
 
 - `pdfnup`, `pdfpun`
 - `pdfjoin`
@@ -420,7 +420,7 @@ many more options. Along with `pdfjam` various 'wrapper' scripts --- i.e.,
 other scripts that use `pdfjam` in different ways --- were provided, mainly as
 examples.
 
-From version 3.00, the extra 'wrapper' scripts are removed from the package,
+From version 3.01, the extra 'wrapper' scripts are removed from the package,
 mainly because they are hard to maintain: different users want different
 things, and `pdfjam` itself provides all the options in any case. So I have
 broken out the wrapper scripts into a separate repository, _unsupported_ ---
@@ -433,7 +433,7 @@ who knows?  The wrapper scripts (**no longer maintained**) can now be found at
 
 ### Version release notes
 
-**3.00** [in development]: 
+**3.01** [in development]: 
 
 - Re-styled the package name to **pdfjam**. (Previously the package --- which then
   contained several scripts --- was named PDFjam).
