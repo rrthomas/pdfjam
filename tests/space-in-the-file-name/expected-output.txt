@@ -1,5 +1,5 @@
           ----
-  pdfjam: This is pdfjam version N.NN.
+  pdfjam: This is pdfjam version 3.02.
   pdfjam: Called with '--vanilla': no user or site configuration
           files will be read.
   pdfjam: Effective call for this run of pdfjam:
