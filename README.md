@@ -464,7 +464,7 @@ who knows?  The wrapper scripts (**no longer maintained**) can now be found at
   
 ----------
 
-#### Older versions still available at <https://davidfirth.github.io/pdfjam>:
+_Older releases are still available at <https://davidfirth.github.io/pdfjam>._
 
 **2.09** [never released]:
 
