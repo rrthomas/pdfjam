@@ -407,7 +407,7 @@ Please report any bugs found in `pdfjam`, either
 	  do not at the same time use the `--pagecolor` option to `pdfjam`.
 
 
-# Version history
+#  <a name="history"> Version history
 
 ### Overview of the history
 
@@ -429,8 +429,7 @@ And maybe even someone else will
 want to take on the task of improving and maintaining some of them,
 who knows?  The wrapper scripts (**no longer maintained**) can now be found at 
 <https://github.com/DavidFirth/pdfjam-extras>.
-
-
+ 
 ### Version release notes
 
 **3.02** [2019-11-14]: 
