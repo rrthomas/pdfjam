@@ -432,7 +432,7 @@ who knows?  The wrapper scripts (**no longer maintained**) can now be found at
  
 ### Version release notes
 
-**3.02** [2019-11-14]: 
+[**3.02**](https://github.com/DavidFirth/pdfjam/releases/tag/v3.02) [2019-11-14]: 
 
 - Re-styled the package name to **pdfjam**. (Previously the package --- which then
   contained several scripts --- was named PDFjam).
