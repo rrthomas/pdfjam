@@ -461,7 +461,9 @@ who knows?  The wrapper scripts (**no longer maintained**) can now be found at
   error.  Thanks to George for information about this.
 - Tidying of the `pdfjam` script, and better organisation of the `tests` folder.
   Thanks to Lucas for help with this.
-  
+
+#### Older versions still available at <https://davidfirth.github.io/pdfjam>:
+
 **2.09** [never released]:
 
 - The default behaviour of `pdfbook` is reverted to its pre-2.06 state, 
