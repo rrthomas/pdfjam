@@ -5,7 +5,7 @@ _David Firth_ <https://warwick.ac.uk/dfirth>
 
 A snapshot of this page is included as _README.md_ 
 in the distributed package.  The most up-to-date version is maintained online at 
-<htts://github.com/DavidFirth/pdfjam>.
+<https://github.com/DavidFirth/pdfjam>.
 
 1. [Overview](#overview)
     - [What is pdfjam?](#whatis)
