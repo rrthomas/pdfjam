@@ -40,9 +40,12 @@ cd sources/tests
 test_dirs=$(find . -mindepth 1 -maxdepth 1 -type d)
 for test_dir in $test_dirs; do
     sed -i "s/This\ is\ pdfjam\ version.*$/This\ is\ pdfjam\ version\ ${version}./" "$test_dir"/expected-output.txt
-done    
+done
+cd ..
+zip -vrq tests tests
+rm -rf tests
 ##
 ## Finally rename the built package with the current version number
 ##
-cd ../..
+cd ..
 mv sources pdfjam-"$version"
