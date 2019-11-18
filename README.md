@@ -368,7 +368,7 @@ You could check also that `pdftex.def`, typically to be found in
 is up to date. If the problem persists even with up-to-date versions of pdfTeX, 
 `pdftex.def` and pdfpages, then please do report it. 
 
-**2. What can I do to solve a 'Too many open files' error?
+**2. What can I do to solve a 'Too many open files' error?**
 
 This error has been reported to occur sometimes, when dealing with large numbers of 
 documents/pages. A suggested solution, if this happens, 
