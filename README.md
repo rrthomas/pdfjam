@@ -434,6 +434,10 @@ who knows?  The wrapper scripts (**no longer maintained**) can now be found at
  
 ### Version release notes
 
+[**3.03**](https://github.com/DavidFirth/pdfjam/releases/tag/v3.03) [2019-11-18]:
+
+- Built package now (again) has tests in a zip archive. (needed for CTAN)
+
 [**3.02**](https://github.com/DavidFirth/pdfjam/releases/tag/v3.02) [2019-11-14]: 
 
 - Re-styled the package name to **pdfjam**. (Previously the package --- which then
