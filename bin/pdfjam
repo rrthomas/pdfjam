@@ -808,10 +808,6 @@ else
     (umask 077 && mkdir "$PDFJAM_TEMP_DIR")
 fi
 umask "$original_umask"
-## Next is from the Cygwin patch contributed by Lucas
-case $(uname) in
-    *CYGWIN*) PDFJAM_TEMP_DIR=$(cygpath -w "$PDFJAM_TEMP_DIR");;
-esac
 ##
 ##  TEMPORARY DIRECTORY ALL DONE
 ##
