@@ -760,6 +760,11 @@ else
 	esac
     fi
 fi
+## A function to check if using non-Cygwin "${latex}" from Cygwin
+using_non_cygwin_latex_from_cygwin () {
+  [ x"$(uname -o)" = x"Cygwin" ] \
+  && "${latex}" -version | head -1 | grep -qv Cygwin
+}
 ##
 ##  END OF CHECKING THE SETUP
 ##
@@ -809,9 +814,9 @@ else
 fi
 umask "$original_umask"
 ## Next is from the Cygwin patch contributed by Lucas
-case $(uname) in
-    *CYGWIN*) PDFJAM_TEMP_DIR=$(cygpath -w "$PDFJAM_TEMP_DIR");;
-esac
+if using_non_cygwin_latex_from_cygwin; then
+    PDFJAM_TEMP_DIR=$(cygpath -w "$PDFJAM_TEMP_DIR")
+fi
 ##
 ##  TEMPORARY DIRECTORY ALL DONE
 ##
@@ -937,10 +942,11 @@ do
 	    uniqueName="source-$counter.pdf"
 	    uniqueName="$PDFJAM_TEMP_DIR"/"$uniqueName"
 	    ## Next is from the Cygwin patch contributed by Lucas
-	    case $(uname) in
-		*CYGWIN*) cp "$sourceFullPath" "$uniqueName";;
-		*) ln -s "$sourceFullPath" "$uniqueName";;
-            esac
+	    if using_non_cygwin_latex_from_cygwin; then
+		cp "$sourceFullPath" "$uniqueName"
+	    else
+		ln -s "$sourceFullPath" "$uniqueName"
+	    fi
 	    ;;
     esac
     filePageList="$filePageList","$uniqueName","$pageSpec"
@@ -991,9 +997,9 @@ texFile="$fileName".tex
 msgFile="$fileName".msgs
 tempFile="$PDFJAM_TEMP_DIR"/temp.tex
 ## Next is adapted from the Cygwin patch sent by Lucas
-case $(uname) in
-    *CYGWIN*) filePageList=$(echo "$filePageList" | sed 's~\\~/~g') ;;
-esac
+if using_non_cygwin_latex_from_cygwin; then
+    filePageList=$(echo "$filePageList" | sed 's~\\~/~g')
+fi
 (cat <<EndTemplate
 \batchmode
 \documentclass[$documentOptions]{article}
