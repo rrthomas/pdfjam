@@ -664,7 +664,7 @@ documentOptions=$(printf "%s" "$documentOptions" | sed 's/^,//' | sed 's/,$//')
 if test $PDFJAM_CALL_NUMBER -eq 0  ## not a secondary call
 then
     ##  Check whether there's a suitable latex to use:
-    case $latex in
+    case "$latex" in
 	"not found")
 	    error_exit "can't find pdflatex!" $E_UNAVAILABLE
 	    ;;
@@ -735,7 +735,7 @@ then
 else
     if  test "$keepinfo" = true
     then
-	case $pdfinfo in
+	case "$pdfinfo" in
 	    "not found")
 		if test $PDFJAM_CALL_NUMBER -eq 0
 		then
@@ -1059,7 +1059,7 @@ log file at
 to try to diagnose the problem."
 i=1
 while [ "$i" -le "$runs" ] ; do
-    $latex "$texFile" > "$msgFile" || {
+    "$latex" "$texFile" > "$msgFile" || {
         prattle "$failureText"
         error_exit "Run $i: Output file not written" $E_SOFTWARE
     }
