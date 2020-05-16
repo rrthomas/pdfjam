@@ -762,8 +762,15 @@ else
 fi
 ## A function to check if using non-Cygwin "${latex}" from Cygwin
 using_non_cygwin_latex_from_cygwin () {
-  [ x"$(uname -o)" = x"Cygwin" ] \
-  && "${latex}" -version | head -1 | grep -qv Cygwin
+    if [ -z "${__cache__using_non_cygwin_latex_from_cygwin}" ]; then
+	if [ x"$(uname -o)" = x"Cygwin" ] \
+	    && "${latex}" -version | head -1 | grep -qv Cygwin; then
+	    __cache__using_non_cygwin_latex_from_cygwin=0
+	else
+	    __cache__using_non_cygwin_latex_from_cygwin=1
+	fi
+    fi
+    return "${__cache__using_non_cygwin_latex_from_cygwin}"
 }
 ##
 ##  END OF CHECKING THE SETUP
