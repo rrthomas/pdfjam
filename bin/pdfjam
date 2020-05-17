@@ -958,17 +958,17 @@ then
 	prattle "Calling ${pdfinfo}..."  ;
 	PDFinfo=$(pdfinfo "$uniqueName");
 	pdftitl=$(printf "%s" "$PDFinfo" | \
-	    grep -e '^Title:'| 'sed s/^Title:\\\s\*//' | \
-	    sed -e 's/[#$%^&_{}~]/\\\&/g');
+	    grep -e '^Title:'| sed 's/^Title:\s*//' | \
+	    sed -e 's/[#$%^&_{}~]/\\&/g');
 	pdfauth=$(printf "%s" "$PDFinfo" | \
-	    grep -e '^Author:'| sed 's/^Author:\\\s\*//' | \
-	    sed -e 's/[#$%^&_{}~]/\\\&/g');
+	    grep -e '^Author:'| sed 's/^Author:\s*//' | \
+	    sed -e 's/[#$%^&_{}~]/\\&/g');
 	pdfsubj=$(printf "%s" "$PDFinfo" | \
-	    grep -e '^Subject:'| sed 's/^Subject:\\\s\*//' | \
-	    sed -e 's/[#$%^&_{}~]/\\\&/g');
+	    grep -e '^Subject:'| sed 's/^Subject:\s*//' | \
+	    sed -e 's/[#$%^&_{}~]/\\&/g');
 	pdfkeyw=$(printf "%s" "$PDFinfo" | \
-	    grep -e '^Keywords:'| sed 's/^Keywords:\\\s\*//' | \
-	    sed -e 's/[#$%^&_{}~]/\\\&/g');
+	    grep -e '^Keywords:'| sed 's/^Keywords:\s*//' | \
+	    sed -e 's/[#$%^&_{}~]/\\&/g');
     fi
     if test -n "$pdfTitle" ; then
 	pdftitl="$pdfTitle"
