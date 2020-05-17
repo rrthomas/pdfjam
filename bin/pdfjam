@@ -502,6 +502,10 @@ while test -n "${1}${2}"; do
 		    --preamble)
 			preamble="$preamble${2}" ;
 			shift ;;
+		    --enc) # command line encoding
+			enc="${2}"
+			callOptions="$callOptions ${1} ${2}"
+			shift ;;
 		    --*)
                         ##  options for \includepdfmerge
 			argName=$(printf "%s" "${1}" | sed 's/^--//');
@@ -697,23 +701,6 @@ then
     error_exit \
 	"LaTeX package everyshi.sty not installed (see the pdfpages manual)" \
 	$E_UNAVAILABLE
-    if test "$keepinfo" = true ||
-	test -n "$pdfTitle$pdfSubject$pdfAuthor$pdfKeywords"
-    ##  ie, if hyperref is required
-    then
-	(kpsewhich hyperref.sty >/dev/null) || {
-	    prattle "LaTeX package hyperref.sty is not installed, so any"
-	    prattle "--keepinfo, --pdftitle,--pdfauthor, --pdfsubject or" 1
-	    prattle "--pdfkeywords setting will be ignored." 1
-	    hyperref=false
-	    if test "$batch" = true
-	    then
-		export hyperref   ## for use in any secondary calls
-	    fi
-	}
-    else
-	hyperref=false
-    fi
     if test "$geometry" = true
     ##  ie, if the 'geometry' package is needed for paper size
     then
@@ -728,37 +715,31 @@ then
 	}
     fi
 fi
-if test "$hyperref" = false
+if  test "$keepinfo" = true
 then
-    keepinfo=false
-    pdfTitle="" ; pdfAuthor="" ; pdfSubject="" ; pdfKeywords=""
-else
-    if  test "$keepinfo" = true
-    then
-	case "$pdfinfo" in
-	    "not found")
-		if test $PDFJAM_CALL_NUMBER -eq 0
-		then
-		  prattle \
-		  "The pdfinfo utility was not found, so --keepinfo is ignored."
-		fi
-		keepinfo=false
-		;;
-	    pdfinfo)
-		;;
-	    *)  ## $pdfinfo was set in a configuration file
-		if test ! -x "$pdfinfo"
-		then
-		    if test $PDFJAM_CALL_NUMBER -eq 0
-		    then
-			prattle \
-		     "No pdfinfo utility at $pdfinfo, so --keepinfo is ignored."
-			keepinfo=false
-		    fi
-		fi
-		;;
-	esac
-    fi
+    case "$pdfinfo" in
+	"not found")
+	  if test $PDFJAM_CALL_NUMBER -eq 0
+	  then
+	    prattle \
+	      "The pdfinfo utility was not found, so --keepinfo is ignored."
+	  fi
+	  keepinfo=false
+	  ;;
+	pdfinfo)
+	  ;;
+	*)  ## $pdfinfo was set in a configuration file
+	  if test ! -x "$pdfinfo"
+	  then
+	    if test $PDFJAM_CALL_NUMBER -eq 0
+	    then
+	      prattle \
+		"No pdfinfo utility at $pdfinfo, so --keepinfo is ignored."
+	      keepinfo=false
+	    fi
+	  fi
+	  ;;
+    esac
 fi
 ## A function to check if using non-Cygwin "${latex}" from Cygwin
 using_non_cygwin_latex_from_cygwin () {
@@ -964,38 +945,55 @@ filePageList=$(printf "%s" "$filePageList" | \
 ##
 ##  Do the pdfinfo stuff (if relevant)...
 ##
-if  test "$hyperref" != false
-then
-    if test "$keepinfo" = true
-    then
-	prattle "Calling ${pdfinfo}..."  ;
-	PDFinfo=$(pdfinfo "$uniqueName");
-	pdftitl=$(printf "%s" "$PDFinfo" | \
-	    grep -e '^Title:'| sed 's/^Title:\\\s\*//' | \
-	    sed -e 's/[#$%^&_{}~]/\\\&/g');
-	pdfauth=$(printf "%s" "$PDFinfo" | \
-	    grep -e '^Author:'| sed 's/^Author:\\\s\*//' | \
-	    sed -e 's/[#$%^&_{}~]/\\\&/g');
-	pdfsubj=$(printf "%s" "$PDFinfo" | \
-	    grep -e '^Subject:'| sed 's/^Subject:\\\s\*//' | \
-	    sed -e 's/[#$%^&_{}~]/\\\&/g');
-	pdfkeyw=$(printf "%s" "$PDFinfo" | \
-	    grep -e '^Keywords:'| sed 's/^Keywords:\\\s\*//' | \
-	    sed -e 's/[#$%^&_{}~]/\\\&/g');
+select_pdfinfo () {
+    printf '%s' "$2" | \
+    grep -e "^$1:" | \
+    sed -e 's/^'"$1"':\s*//'
+}
+echo_hex_iconv_utf16be () {
+    printf '%s' "$1" | \
+    iconv -f utf8 -t utf16be | \
+    od -An -v -tx1 | \
+    tr -d '[:space:]'
+}
+echo_pdfinfodata () {
+    if [ -n "$2" ]; then
+	TMPA=$(echo_hex_iconv_utf16be "$2")
+	printf '%s' "/$1 <feff${TMPA}>"
     fi
-    if test -n "$pdfTitle" ; then
-	pdftitl="$pdfTitle"
-    fi
-    if test -n "$pdfAuthor" ; then
-	pdfauth="$pdfAuthor"
-    fi
-    if test -n "$pdfSubject" ; then
-	pdfsubj="$pdfSubject"
-    fi
-    if test -n "$pdfKeywords" ; then
-	pdfkeyw="$pdfKeywords"
-    fi
+}
+
+if test "$keepinfo" = true ; then
+    prattle "Calling ${pdfinfo}..."
+    PDFinfo=$(pdfinfo -enc UTF-8 "$uniqueName")
+    pdftitl=$(select_pdfinfo 'Title'    "$PDFinfo")
+    pdfauth=$(select_pdfinfo 'Author'   "$PDFinfo")
+    pdfsubj=$(select_pdfinfo 'Subject'  "$PDFinfo")
+    pdfkeyw=$(select_pdfinfo 'Keywords' "$PDFinfo")
 fi
+echo_iconv_from_enc () {
+    printf '%s' "$2" | \
+    iconv -f "$1" -t utf8
+}
+if test -n "$pdfTitle" ; then
+    pdftitl=$(echo_iconv_from_enc "$enc" "$pdfTitle")
+fi
+if test -n "$pdfAuthor" ; then
+    pdfauth=$(echo_iconv_from_enc "$enc" "$pdfAuthor")
+fi
+if test -n "$pdfSubject" ; then
+    pdfsubj=$(echo_iconv_from_enc "$enc" "$pdfSubject")
+fi
+if test -n "$pdfKeywords" ; then
+    pdfkeyw=$(echo_iconv_from_enc "$enc" "$pdfKeywords")
+fi
+
+## Converting to PDF string
+raw_pdftitl=$(echo_pdfinfodata 'Title'    "$pdftitl")
+raw_pdfauth=$(echo_pdfinfodata 'Author'   "$pdfauth")
+raw_pdfsubj=$(echo_pdfinfodata 'Subject'  "$pdfsubj")
+raw_pdfkeyw=$(echo_pdfinfodata 'Keywords' "$pdfkeyw")
+
 ##
 ##  Now set up the files for latex...
 ##
@@ -1013,20 +1011,23 @@ fi
 \usepackage{color} \definecolor{bgclr}{RGB}{$pagecolor} \pagecolor{bgclr}
 \usepackage[$papersize]{geometry}
 \usepackage[utf8]{inputenc}
-\usepackage{hyperref}
-\hypersetup{pdftitle={$pdftitl}}
-\hypersetup{pdfauthor={$pdfauth}}
-\hypersetup{pdfsubject={$pdfsubj}}
-\hypersetup{pdfkeywords={$pdfkeyw}}
+\ifdefined\luatexversion% LuaLaTeX
+  \protected\def\pdfinfo{\pdfextension info}
+\fi
+\ifdefined\XeTeXversion% XeLaTeX
+  \protected\def\pdfinfo#1{\AtBeginDvi{\special{pdf:docinfo << #1 >>}}}
+\fi
+\ifdefined\pdfinfo%
+  \pdfinfo{%
+    $raw_pdftitl %
+    $raw_pdfauth %
+    $raw_pdfsubj %
+    $raw_pdfkeyw %
+  }%
+\fi
 \usepackage{pdfpages}
 EndTemplate
     )  > "$texFile"
-if test "$hyperref" = false; then  ## we don't need hyperref
-    cp "$texFile" "$tempFile"
-    sed '/\\\usepackage{hyperref}/d' "$tempFile" | \
-	sed '/\\\hypersetup.*/d' > "${texFile}"
-    rm "$tempFile"
-fi
 if test -z "$geometry" ; then geometry=false ; fi
 if test "$geometry" = false; then   ## geometry package is not to be used
     cp "$texFile" "$tempFile"
