@@ -146,6 +146,9 @@ where
      --vanilla
                   Suppress the reading of any site-wide or user-specific
                   configuration files.
+     --enc
+                  Specify a command-line encoding
+                  [Default for you at this site: enc=$enc]
      --KEY VALUE
                   Specify options to '\includepdfmerge', in the LaTeX
                   'pdfpages' package.  Here KEY is the name of any of the
