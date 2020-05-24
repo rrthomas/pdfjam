@@ -174,10 +174,12 @@ prattle "This is pdfjam version ${version}."
 latex=$(command -v pdflatex)
 if [ -z "$latex" ] ; then latex="not found" ; fi
 ##
-##  Likewise for the pdfinfo (only needed for `--keepinfo'):
+##  Likewise for the pdfinfo and iconv (only needed for `--keepinfo'):
 ##
 pdfinfo=$(command -v pdfinfo)
 if [ -z "$pdfinfo" ] ; then pdfinfo="not found"; fi
+iconv=$(command -v iconv)
+if [ -z "$iconv" ] ; then iconv="not found"; fi
 ##
 ##
 ##  Next a permitted location for temporary files on your system:
@@ -740,6 +742,29 @@ then
 	  fi
 	  ;;
     esac
+    case "$iconv" in
+	"not found")
+	  if test $PDFJAM_CALL_NUMBER -eq 0
+	  then
+	    prattle \
+	      "The iconv utility was not found, so --keepinfo is ignored."
+	  fi
+	  keepinfo=false
+	  ;;
+	iconv)
+	  ;;
+	*)  ## $iconv was set in a configuration file
+	  if test ! -x "$iconv"
+	  then
+	    if test $PDFJAM_CALL_NUMBER -eq 0
+	    then
+	      prattle \
+		"No iconv utility at $iconv, so --keepinfo is ignored."
+	      keepinfo=false
+	    fi
+	  fi
+	  ;;
+    esac
 fi
 ## A function to check if using non-Cygwin "${latex}" from Cygwin
 using_non_cygwin_latex_from_cygwin () {
@@ -952,7 +977,7 @@ select_pdfinfo () {
 }
 echo_hex_iconv_utf16be () {
     printf '%s' "$1" | \
-    iconv -f utf8 -t utf16be | \
+    "$iconv" -f utf8 -t utf16be | \
     od -An -v -tx1 | \
     tr -d '[:space:]'
 }
@@ -973,7 +998,7 @@ if test "$keepinfo" = true ; then
 fi
 echo_iconv_from_enc () {
     printf '%s' "$2" | \
-    iconv -f "$1" -t utf8
+    "$iconv" -f "$1" -t utf8
 }
 if test -n "$pdfTitle" ; then
     pdftitl=$(echo_iconv_from_enc "$enc" "$pdfTitle")
