@@ -958,7 +958,7 @@ then
 	prattle "Calling ${pdfinfo}..."  ;
 	PDFinfo=$(pdfinfo "$uniqueName");
 	pdftitl=$(printf "%s" "$PDFinfo" | \
-	    grep -e '^Title:'| 'sed s/^Title:\\\s\*//' | \
+	    grep -e '^Title:'| sed 's/^Title:\\\s\*//' | \
 	    sed -e 's/[#$%^&_{}~]/\\\&/g');
 	pdfauth=$(printf "%s" "$PDFinfo" | \
 	    grep -e '^Author:'| sed 's/^Author:\\\s\*//' | \
