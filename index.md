@@ -6,7 +6,7 @@ layout: default
 
 Releases of pdfjam **up to version 2.08** can be downloaded from here.  (Just in case they are ever needed.)  
 
-For the full version history with release notes, please see the README file at [https://github.com/DavidFirth/pdfjam](https://github.com/DavidFirth/pdfjam).
+For the full version history with release notes, please see the README file at [https://github.com/rrthomas/pdfjam](https://github.com/rrthomas/pdfjam).
 
 - [pdfjam_208.tgz](releases/pdfjam_208.tgz)
 - [pdfjam_207.tgz](releases/pdfjam_207.tgz)
