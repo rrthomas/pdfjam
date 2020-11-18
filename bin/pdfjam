@@ -7,7 +7,7 @@ version=N.NN
 ##                                                                     ##
 ##  Author: David Firth (http://warwick.ac.uk/dfirth)                  ##
 ##                                                                     ##
-##  Usage: see https://github.com/DavidFirth/pdfjam                    ##
+##  Usage: see https://github.com/rrthomas/pdfjam                      ##
 ##         or "pdfjam --help"                                          ##
 ##                                                                     ##
 ##  Relies on:                                                         ##
@@ -163,7 +163,7 @@ prattle "This is pdfjam version ${version}."
 ##  once, the last instance prevails.)
 ##
 ##  An example configuration file can be found at
-##     https://github.com/DavidFirth/pdfjam
+##     https://github.com/rrthomas/pdfjam
 ##
 ##  The path searched for site-wide configuration files can be changed
 ##  by editing the variable 'configpath' at the top of this file.

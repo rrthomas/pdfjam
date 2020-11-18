@@ -177,4 +177,4 @@ necessary.  Any user-specific configuration should be put in a file named
 if the '--vanilla' argument is used.)
 
 For more information, including a sample configuration file, see
-https://github.com/DavidFirth/pdfjam.
+https://github.com/rrthomas/pdfjam.
