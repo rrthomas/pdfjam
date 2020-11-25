@@ -1,0 +1,18 @@
+image:
+  - Ubuntu
+
+version: "{build}"
+
+environment:
+  global:
+    VERBOSE: 1 # Get test logs in output
+
+init:
+  - sudo apt-get -y install texlive-latex-extra shellcheck
+
+build_script:
+  - ./build.sh
+  - cd built_package/pdfjam*
+  - unzip tests.zip
+  - tests/run.sh
+  - shellcheck --exclude=SC1004 bin/pdfjam
