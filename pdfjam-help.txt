@@ -103,9 +103,13 @@ where
                   package.  These options, individually, over-ride --keepinfo.
      --landscape
      --no-landscape
-                  Specify landscape page orientation (or not) in the
-                  output PDF file.
+                  Specify landscape page format orientation (or not) in the
+                  output PDF file. This does not actually rotate the contents,
+                  see --angle for that.
                   [Default for you at this site: landscape=$landscape]
+     --angle INTEGER
+                  Specify the angle for content rotation (0..360 degrees,
+                  counterclockwise). Also see --landscape option.
      --twoside
      --no-twoside
                   Specify (or not) the 'twoside' document class option.
