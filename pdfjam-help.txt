@@ -156,6 +156,8 @@ where
                       --offset '1cm 0.5cm'
                                     (to offset all pages -- note the quotes!)
                       --frame true  (to put a frame round each input page)
+                      --booklet true (to reorder the pages in signatures,
+                                      generally useful with --nup)
                       --trim '1cm 2cm 1cm 2cm' --clip true
                                     (to trim those amounts from left, bottom,
                                      right and top, respectively, of input 
