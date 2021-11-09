@@ -151,9 +151,11 @@ where
                   [Default for you at this site: enc=$enc]
      --KEY VALUE
                   Specify options to '\includepdfmerge', in the LaTeX
-                  'pdfpages' package.  Here KEY is the name of any of the
-                  many options for '\includepdfmerge', and VALUE is a
-                  corresponding value.  Examples are
+                  'pdfpages' package.  See the the pdfpages documentation
+                  (usually 'texdoc pdfpages') for more information.
+                  Here KEY is the name of any of the many options for
+                  '\includepdfmerge', and VALUE is a corresponding value.
+                  Examples:
                       --nup 2x1     (for 2-up side-by-side imposition)
                       --scale 0.7   (to scale all input pages to 70% size)
                       --offset '1cm 0.5cm'
