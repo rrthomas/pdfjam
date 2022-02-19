@@ -163,6 +163,12 @@ where
                       --frame true  (to put a frame round each input page)
                       --booklet true (to reorder the pages in signatures,
                                       generally useful with --nup)
+                      --signature N (specify the signature size, as the 
+                                     number of original pages in a signature
+                                     in the final document. Caveat: booklet
+                                     is a short form for signature, so if 
+                                     you use booklet true, signature will be
+                                     ignored)
                       --trim '1cm 2cm 1cm 2cm' --clip true
                                     (to trim those amounts from left, bottom,
                                      right and top, respectively, of input 
