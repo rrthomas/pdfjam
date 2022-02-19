@@ -173,6 +173,10 @@ where
                                     (to trim those amounts from left, bottom,
                                      right and top, respectively, of input 
                                      pages) 
+                      --angle NNN (The angle of rotation in degrees. Angles 
+                                   that are not either 90, 180 or 270 will
+                                   still create straight rectangular pages,
+                                   only the content will be rotated.)
                   etc., etc.  For more information see the manual for
                   the 'pdfpages' package, at
                   http://www.ctan.org/tex-archive/macros/latex/contrib/pdfpages
