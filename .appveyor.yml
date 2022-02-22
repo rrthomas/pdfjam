@@ -8,6 +8,7 @@ environment:
     VERBOSE: 1 # Get test logs in output
 
 init:
+  - sudo apt-get update
   - sudo apt-get -y install texlive-latex-extra shellcheck
 
 build_script:
