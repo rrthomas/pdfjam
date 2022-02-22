@@ -695,14 +695,13 @@ then
     error_exit \
 	"LaTeX package pdfpages.sty is not installed" \
 	$E_UNAVAILABLE
-    (kpsewhich eso-pic.sty >/dev/null) ||
-    error_exit \
-	"LaTeX package eso-pic.sty not installed (see the pdfpages manual)" \
-	$E_UNAVAILABLE
-    (kpsewhich everyshi.sty >/dev/null) ||
-    error_exit \
-	"LaTeX package everyshi.sty not installed (see the pdfpages manual)" \
-	$E_UNAVAILABLE
+
+    for pack in pdflscape eso-pic everyshi atbegshi ; do
+        (kpsewhich $pack.sty >/dev/null) ||
+        error_exit \
+	    "LaTeX package $pack.sty is not installed (see the pdfpages manual)" \
+	    $E_UNAVAILABLE
+    done
     if test "$geometry" = true
     ##  ie, if the 'geometry' package is needed for paper size
     then
