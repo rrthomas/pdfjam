@@ -101,6 +101,11 @@ where
                   Provide text for the  Title, Author, Subject and Keywords
                   in the output PDF file.  Requires the  LaTeX 'hyperref'
                   package.  These options, individually, over-ride --keepinfo.
+     --longedge
+     --shortedge
+		  Specify the longedge rotation of paper. This is probably
+                  not 100% accurate in all cases, but if every odd page is
+                  rotated 180, flip this switch.
      --landscape
      --no-landscape
                   Specify landscape page orientation (or not) in the

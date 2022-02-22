@@ -194,6 +194,8 @@ outFile="$pwd"           ##  Output to the current working directory
 ##
 ##  A few more default settings for pdfjam:
 ##
+shortedge='true'           ## Default paper is rotated shortedge when doing book
+##
 runs=1                     ## Run latex just once
 ##
 tidy='true'                ##  Delete all temporary files at the end
@@ -406,6 +408,14 @@ while test -n "${1}${2}"; do
 		    --no-tidy)
 			tidy=false ;
 			callOptions="$callOptions --no-tidy" ;
+			;;
+		    --shortedge)
+			shortedge=true ;
+			callOptions="$callOptions --shortedge" ;
+			;;
+		    --longedge)
+			shortedge=false ;
+			callOptions="$callOptions --longedge" ;
 			;;
 		    --keepinfo)
 			keepinfo=true ;
@@ -641,6 +651,12 @@ case $twoside in
 	twoside=twoside ;;
     *)
 	twoside="" ;;
+esac
+case $shortedge in
+    true)
+	shortedge="" ;;
+    *)
+	shortedge='\usepackage{everyshi}\makeatletter\EveryShipout{\ifodd\c@page\pdfpageattr{/Rotate 180}\fi}\makeatother' ;;
 esac
 if test "$geometry" != false
 then
@@ -1065,6 +1081,7 @@ if test -z "$pagecolor"; then   ## color package is not needed
 fi
 (cat <<EndTemplate
 $preamble
+$shortedge
 \begin{document}
 \includepdfmerge[$miscOptions]{$filePageList}
 \end{document}
