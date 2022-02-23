@@ -103,9 +103,9 @@ where
                   package.  These options, individually, over-ride --keepinfo.
      --longedge
      --shortedge
-		  Specify the longedge rotation of paper. This is probably
-                  not 100% accurate in all cases, but if every odd page is
-                  rotated 180, flip this switch.
+		  Specify the direction in which double-sided pages are
+		  flipped. It may not work correctly in all cases, so if every
+		  other page is rotated 180°, flip this switch.
      --landscape
      --no-landscape
                   Specify landscape page orientation (or not) in the
