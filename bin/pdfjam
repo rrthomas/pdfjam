@@ -124,14 +124,14 @@ prattle () { ## second argument here is non-null for continuation lines
 	    if  test $lineCounter -eq 1  &&  test ! -n "${2}" ;
 	    then 
 		if test -w "$PDFJAM_MESSAGES_FILE"
-		then printf "$prefix1$indent %s\n" "$line" 1>/dev/null >> \
+		then printf "$prefix1$indent %s\n" "$line" >> \
                        "$PDFJAM_MESSAGES_FILE"
 		else messages="$messages$prefix1$indent $line$newline"  
                        ## msg file not made yet
 		fi
 	    else 
 		if test -w "$PDFJAM_MESSAGES_FILE"
-		then printf "$prefix2$indent %s\n" "$line" 1>/dev/null >> \
+		then printf "$prefix2$indent %s\n" "$line" >> \
                        "$PDFJAM_MESSAGES_FILE"
 		else messages="$messages$prefix2$indent $line$newline"  
                        ## msg file not made yet
