@@ -784,7 +784,7 @@ fi
 ## A function to check if using non-Cygwin "${latex}" from Cygwin
 using_non_cygwin_latex_from_cygwin () {
     if [ -z "${__cache__using_non_cygwin_latex_from_cygwin}" ]; then
-	if [ x"$(uname -o)" = x"Cygwin" ] \
+	if [ "$(uname -o)" = "Cygwin" ] \
 	    && "${latex}" -version | head -1 | grep -qv Cygwin; then
 	    __cache__using_non_cygwin_latex_from_cygwin=0
 	else
@@ -1153,7 +1153,7 @@ then
 fi
 #fileSize=$(wc -c < "$fileName.pdf" | sed 's/^\ *//')
 ## Avoid explicit output to /dev/stdout.
-if test x"$outFile" = x"/dev/stdout" \
+if test "$outFile" = "/dev/stdout" \
    && cat "$fileName".pdf 2> /dev/null \
    || cat "$fileName".pdf > "$outFile" 2>/dev/null
 then
