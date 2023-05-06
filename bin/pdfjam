@@ -184,7 +184,7 @@ if [ -z "$iconv" ] ; then iconv="not found"; fi
 ##
 ##  Next a permitted location for temporary files on your system:
 ##
-tempfileDir='/var/tmp'   ##  /var/tmp is standard on most unix systems
+tempfileDir=${TMPDIR:-'/tmp'}  ##  /tmp is standard on most unix systems
 ##
 ##
 ##  Default for the output file location:
