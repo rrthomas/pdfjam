@@ -434,6 +434,13 @@ who knows?  The wrapper scripts (**no longer maintained**) can now be found at
  
 ### Version release notes
 
+[**3.04**](https://github.com/rrthomas/pdfjam/releases/tag/v3.04) [2023-05-07]:
+
+- Many documentation improvements.
+- Various minor code fixes.
+- No longer depend on hyperref package.
+- Support TMPDIR.
+
 [**3.03**](https://github.com/rrthomas/pdfjam/releases/tag/v3.03) [2019-11-18]:
 
 - Built package now (again) has tests in a zip archive. (needed for CTAN)
