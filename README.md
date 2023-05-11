@@ -1,4 +1,4 @@
-[![](https://travis-ci.com/rrthomas/pdfjam.svg?branch=master)](https://travis-ci.com/rrthomas/pdfjam)
+![GitHub CI](https://github.com/rrthomas/pdfjam/actions/workflows/ci.yml/badge.svg)
 # pdfjam
 
 _Reuben Thomas_ <https://rrt.sc3d.org/>
