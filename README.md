@@ -93,10 +93,12 @@ For those scripts and for more information on them, please now see
 - A working, up-to-date installation of LaTeX (including at least one of 
   `pdflatex`, `lualatex` or `xelatex`)
 - A working installation of the LaTeX package 
-  [**pdfpages**](http://www.ctan.org/tex-archive/macros/latex/contrib/pdfpages) 
+  [**pdfpages**](https://www.ctan.org/tex-archive/macros/latex/contrib/pdfpages)
   (version 0.4f or later)
   and
-[**geometry**](http://www.ctan.org/tex-archive/macros/latex/contrib/geometry).
+[**geometry**](https://www.ctan.org/tex-archive/macros/latex/contrib/geometry).
+
+With [libpaper](https://github.com/rrthomas/libpaper) version 2 or later installed, `pdfjam` will be able to find your default paper size, which you can configure if desired.
 
 For some years now, **pdfjam** has been included in the _TeX Live_ distribution, 
 which includes all the necessary programs and packages to make `pdfjam` run smoothly.

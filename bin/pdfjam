@@ -212,22 +212,19 @@ suffix='pdfjam'            ##  Default filename suffix to be used when
 ##
 preamble=''                ##  Default LaTeX preamble string.
 ##
-##  Guess default paper size from locale if possible, otherwise A4
+##  Get default paper size from libpaper >= 2 if possible, otherwise guess A4
 ##
-if command -v locale >/dev/null ; then
-    paperheight=$(locale -k LC_PAPER | sed -e '1!d' -e 's/.*=//') ;
-    case $paperheight in
-	297)
-	    paper='a4paper' ;
-	    ;;
-	279)
-	    paper='letterpaper' ;
-	    ;;
-	*)
-	    paper='a4paper' ;
-	    ;;
-    esac
-else paper='a4paper' ;  ## fallback paper size is ISO A4
+if command -v paper >/dev/null ; then
+    paperspec=$(paper)
+    paperdimensions=$(echo "$paperspec" | cut -f 2 -d " ")
+    paperunit=$(echo "$paperspec" | cut -f 3 -d " ")
+    if test "$paperunit" = "pt"; then paperunit=bp; fi
+    paperwidth=$(echo "$paperdimensions" | cut -f 1 -d "x")
+    paperheight=$(echo "$paperdimensions" | cut -f 2 -d "x")
+    papersize="papersize={$paperheight$paperunit,$paperwidth$paperunit}"
+    paper='' ## We might not have a LaTeX-compatible name
+else
+    paper='a4paper'  ## fallback paper size is ISO A4
 fi
 ##
 ##  END OF SETTINGS MADE DIRECTLY WITHIN THE SCRIPT
