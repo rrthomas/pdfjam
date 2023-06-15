@@ -118,15 +118,14 @@ where
      --paper PAPERSPEC  (or simply --PAPERSPEC)
                   Specify a LaTeX paper size, for example
                   '--paper a4paper' or simply '--a4paper' for ISO A4 paper.
-                  If the LaTeX 'geometry' package is installed, a wider range
-                  of paper sizes is available.  For details see documentation
+                  A wide range of paper sizes is available thanks to the
+                  LaTeX 'geometry' package.  For details see documentation
                   for LaTeX and/or the 'geometry' package.
                   [Default for you at this site: paper=$paper]
      --papersize '{WIDTH,HEIGHT}'
                   Specify a custom paper size, e.g.,
                       --papersize '{10in,18cm}'
                   (Note the braces, and the comma!)
-                  If the 'geometry' package is not found, this has no effect.
      --pagecolor RGBSPEC
                   Specify a background colour for the output pages.  The 
                   RGBSPEC must be a comma-separated trio of integers

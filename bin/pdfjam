@@ -469,31 +469,22 @@ while test -n "${1}${2}"; do
 			pagecolor="${2}" ;
 			callOptions="$callOptions ${1} ${2}" ;
 			shift ;;
-                    --a4paper | --a5paper | --b5paper | --letterpaper | \
-                        --executivepaper | --legalpaper)
-			##  standard LaTeX paper sizes
+		    --a0paper | --a1paper | --a2paper | --a3paper | \
+                        --a4paper | --a5paper | --a6paper | \
+                        --b0paper | --b1paper | --b2paper | \
+			--b3paper | --b4paper | --b5paper | --b6paper | \
+                        --c0paper | --c1paper | --c2paper | \
+			--c3paper | --c4paper | --c5paper | --c6paper | \
+                        --b0j | --b1j | --b2j | --b3j | --b4j | --b5j | --b6j | \
+                        --ansiapaper | --ansibpaper | --ansicpaper | \
+                        --ansidpaper | --ansiepaper | \
+                        --letterpaper | --legalpaper | --executivepaper)
 			paper=$(printf "%s" "${1}" | sed 's/^--//') ;
 			callOptions="$callOptions ${1}" ;
 			;;
-		    --a0paper | --a1paper | --a2paper | --a3paper | \
-                        --a6paper | --b0paper | --b1paper | --b2paper | \
-			--b3paper | --b4paper | --b6paper)
-			##  the 'geometry' package is needed
-			if test "$geometry" != false ;
-			then
-			    paper=$(printf "%s" "${1}" | sed 's/^--//') ;
-			    callOptions="$callOptions ${1}" ;
-			    geometry=true ;
-			fi ;
-			;;
 		    --papersize)
-			##  the 'geometry' package is needed
-			if test "$geometry" != false ;
-			then
-			    papersize="papersize=${2}" ;
-			    callOptions="$callOptions ${1} '${2}'" ;
-			    geometry=true ;
-			fi ;
+			papersize="papersize=${2}" ;
+			callOptions="$callOptions ${1} '${2}'" ;
 			shift ;;
 		    --landscape)
 			landscape=true ;
@@ -658,20 +649,6 @@ case $shortedge in
     *)
 	shortedge='\usepackage{everyshi}\makeatletter\EveryShipout{\ifodd\c@page\pdfpageattr{/Rotate 180}\fi}\makeatother' ;;
 esac
-if test "$geometry" != false
-then
-##  we haven't already found that geometry.sty is missing
-    case $paper in
-	a0paper | a1paper | a2paper | a3paper | \
-            a6paper | b0paper | b1paper | b2paper | \
-	    b3paper | b4paper | b6paper)
-	    ##  the 'geometry' package is needed
-	    geometry=true ;
-	    ;;
-	*)
-	    ;;
-    esac
-fi
 documentOptions="$paper","$orientation","$twoside"
 documentOptions=$(printf "%s" "$documentOptions" | sed 's/^,//' | sed 's/,$//')
 ##
@@ -712,25 +689,12 @@ then
 	"LaTeX package pdfpages.sty is not installed" \
 	$E_UNAVAILABLE
 
-    for pack in pdflscape eso-pic everyshi atbegshi ; do
+    for pack in geometry pdflscape eso-pic everyshi atbegshi ; do
         (kpsewhich $pack.sty >/dev/null) ||
         error_exit \
 	    "LaTeX package $pack.sty is not installed (see the pdfpages manual)" \
 	    $E_UNAVAILABLE
     done
-    if test "$geometry" = true
-    ##  ie, if the 'geometry' package is needed for paper size
-    then
-	(kpsewhich geometry.sty >/dev/null) || {
-	    prattle "LaTeX package geometry.sty is not installed, so only the"
-	    prattle "standard LaTeX paper sizes are available." 1
-	    geometry=false
-	    if test "$batch" = true
-	    then
-		export geometry   ## for use in any secondary calls
-	    fi
-	}
-    fi
 fi
 if  test "$keepinfo" = true
 then
@@ -1068,12 +1032,6 @@ fi
 \usepackage{pdfpages}
 EndTemplate
     )  > "$texFile"
-if test -z "$geometry" ; then geometry=false ; fi
-if test "$geometry" = false; then   ## geometry package is not to be used
-    cp "$texFile" "$tempFile"
-    sed '/\\\usepackage.*{geometry}/d' "$tempFile" > "$texFile"
-    rm "$tempFile"
-fi
 if test -z "$pagecolor"; then   ## color package is not needed
     cp "$texFile" "$tempFile"
     sed '/\\\usepackage.*{color}/d' "$tempFile" > "$texFile"

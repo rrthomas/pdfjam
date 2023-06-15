@@ -92,10 +92,8 @@ For those scripts and for more information on them, please now see
 - A working installation of the LaTeX package 
   [**pdfpages**](http://www.ctan.org/tex-archive/macros/latex/contrib/pdfpages) 
   (version 0.4f or later)
-- Some of the options offered by `pdfjam` also require the LaTeX packages 
-  [**geometry**](http://www.ctan.org/tex-archive/macros/latex/contrib/geometry) 
-  and 
-  [**hyperref**](http://www.ctan.org/tex-archive/macros/latex/contrib/hyperref).
+  and
+[**geometry**](http://www.ctan.org/tex-archive/macros/latex/contrib/geometry).
 
 For some years now, **pdfjam** has been included in the _TeX Live_ distribution, 
 which includes all the necessary programs and packages to make `pdfjam` run smoothly.
@@ -399,12 +397,7 @@ Please report any bugs found in `pdfjam`, either
   within pipelines.
 - The `--preamble` option can sometimes clash with other elements of the LaTeX 
   preamble.  Some specific things to watch out for:
-    + If the preamble needs to set further options to the _geometry_ package, 
-	  when the _geometry_ package has already been loaded in order to 
-	  set a special page size, be sure to use the `\geometry{}` command for that.
-    + If the preamble needs to set options to the _hyperref_ package, when 
-	  the _hyperref_ package has already been loaded in order to specify PDF 
-	  document information, be sure to use the `\hypersetup{}` command for that.
+    + If the preamble needs to set further options to the _geometry_ package, be sure to use the `\geometry{}` command for that.
     + If options to the _color_ package are to be specified in the preamble, 
 	  do not at the same time use the `--pagecolor` option to `pdfjam`.
 
