@@ -43,11 +43,14 @@ It seems that it will work also on Windows computers with a suitable
 installation of [Cygwin](http://www.cygwin.com) (with TeX Live 
 installed), but this has not been thoroughly tested.
 
-An alternative set of PDF manipulation tools, which are java-based, is 
-provided by the [Multivalent](http://multivalent.sourceforge.net) project. 
-Yet another alternative set of tools is [PDFsam](https://pdfsam.org). 
-Those alternatives do much the same things as `pdfjam`, and maybe 
-quite a bit more too. 
+Alternatives to `pdfjam` which are widely packaged in GNU/Linux distributions and other free software collections include:
+
+* [PDFtk](https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/) (Java-based)
+* [PDFsam](https://pdfsam.org) (Java-based)
+* [PSPDFUtils](https://pypi.org/project/pspdfutils/) (Python-based, also supports PostScript files)
+
+Those alternatives do many of the same things as `pdfjam`, and maybe
+quite a bit more too.
 
 The **pdfjam** software is made available free, under GPL version 2 (see the 
 file named `COPYING` that is included with the package). 
