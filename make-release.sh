@@ -12,3 +12,4 @@ cd built_package
 tar cvzf $package-$version.tar.gz $package-$version
 zip -r $package-$version.zip $package-$version
 gh release create v$version --title "Release v$version" $package-$version.zip $package-$version.tar.gz
+echo "Now upload the release to CTAN!"
