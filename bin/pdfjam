@@ -221,7 +221,7 @@ if command -v paper >/dev/null ; then
     if test "$paperunit" = "pt"; then paperunit=bp; fi
     paperwidth=$(echo "$paperdimensions" | cut -f 1 -d "x")
     paperheight=$(echo "$paperdimensions" | cut -f 2 -d "x")
-    papersize="papersize={$paperheight$paperunit,$paperwidth$paperunit}"
+    papersize="papersize={$paperwidth$paperunit,$paperheight$paperunit}"
     paper='' ## We might not have a LaTeX-compatible name
 else
     paper='a4paper'  ## fallback paper size is ISO A4
