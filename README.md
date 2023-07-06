@@ -429,50 +429,5 @@ And maybe even someone else will
 want to take on the task of improving and maintaining some of them,
 who knows?  The wrapper scripts (**no longer maintained**) can now be found at 
 <https://github.com/rrthomas/pdfjam-extras>.
- 
-### Version release notes
 
-[**3.04**](https://github.com/rrthomas/pdfjam/releases/tag/v3.04) [2023-05-07]:
-
-- Many documentation improvements.
-- Various minor code fixes.
-- No longer depend on hyperref package.
-- Support TMPDIR.
-
-[**3.03**](https://github.com/rrthomas/pdfjam/releases/tag/v3.03) [2019-11-18]:
-
-- Built package now (again) has tests in a zip archive. (needed for CTAN)
-
-[**3.02**](https://github.com/rrthomas/pdfjam/releases/tag/v3.02) [2019-11-14]: 
-
-- Re-styled the package name to **pdfjam**. (Previously the package --- which then
-  contained several scripts --- was named PDFjam).
-- Moved everything to a new home on the web at 
-  <a href="https://github.com/rrthomas">github.com/rrthomas</a>.
-- Simplified the package by removal of all the 'wrapper' scripts 
-  (`pdfnup`, `pdfjoin`, etc.).
-- Settings specified via `--preamble` are now protected from the normal 
-  tidying of the TeX input file to remove redundant packages.
-- The possibility to use `lualatex` or `xelatex` in place of `pdflatex` is
-  now described explicitly in the README. The specification of which LaTeX
-  engine to use can be made either in a configuration file, or on the command
-  line via option (for example) `--latex /usr/bin/xelatex`.  Thanks to
-  Mircea for suggesting this.
-- Added new `--runs` option, so as to allow for example `--runs 2` in a situation
-  where two runs of `pdflatex` (or `lualatex` or `xelatex`) are needed (typically
-  where the result document is being indexed in some way, so more than one run is 
-  needed).  Thanks to Ferdinand for this suggestion (and patch).
-- Default paper size is now guessed from the locale where possible, with fallback 
-  default size being ISO A4 ('a4paper' in LaTeX). This can still be over-ridden 
-  in a configuration file, or on the command line.  Thanks to Jonathan for this
-  suggestion.
-- Innocuous edits made to make pdfjam work better in Cygwin.  Thanks to Lucas for 
-  sending a helpful patch for this.
-- Included a note in the FAQ about the (sometimes reported) 'Too many open files'
-  error.  Thanks to George for information about this.
-- Tidying of the `pdfjam` script, and better organisation of the `tests` folder.
-  Thanks to Lucas for help with this.
-  
-----------
-
-_Older releases are still available at <https://davidfirth.github.io/pdfjam>._
+_Releases up to version 2.08 are still available at <https://davidfirth.github.io/pdfjam>._
