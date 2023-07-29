@@ -681,17 +681,19 @@ then
 	PATH="$modifyPath:$PATH"
 	export PATH
     fi
-    (kpsewhich pdfpages.sty >/dev/null) ||
-    error_exit \
-	"LaTeX package pdfpages.sty is not installed" \
-	$E_UNAVAILABLE
-
-    for pack in geometry pdflscape eso-pic everyshi atbegshi ; do
-        (kpsewhich $pack.sty >/dev/null) ||
-        error_exit \
-	    "LaTeX package $pack.sty is not installed (see the pdfpages manual)" \
+    if [[ "$latex" != *"tectonic"* ]]; then
+    	(kpsewhich pdfpages.sty >/dev/null) ||
+    	error_exit \
+	    "LaTeX package pdfpages.sty is not installed" \
 	    $E_UNAVAILABLE
-    done
+
+    	for pack in geometry pdflscape eso-pic everyshi atbegshi ; do
+	    (kpsewhich $pack.sty >/dev/null) ||
+            error_exit \
+	        "LaTeX package $pack.sty is not installed (see the pdfpages manual)" \
+	        $E_UNAVAILABLE
+	done
+    fi
 fi
 if  test "$keepinfo" = true
 then
