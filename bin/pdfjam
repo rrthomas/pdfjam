@@ -685,13 +685,6 @@ then
     error_exit \
 	"LaTeX package pdfpages.sty is not installed" \
 	$E_UNAVAILABLE
-
-    for pack in geometry pdflscape eso-pic everyshi atbegshi ; do
-        (kpsewhich $pack.sty >/dev/null) ||
-        error_exit \
-	    "LaTeX package $pack.sty is not installed (see the pdfpages manual)" \
-	    $E_UNAVAILABLE
-    done
 fi
 if  test "$keepinfo" = true
 then
