@@ -681,10 +681,15 @@ then
 	PATH="$modifyPath:$PATH"
 	export PATH
     fi
-    (kpsewhich pdfpages.sty >/dev/null) ||
-    error_exit \
-	"LaTeX package pdfpages.sty is not installed" \
-	$E_UNAVAILABLE
+    case "$latex" in
+        *tectonic*) ;;
+        *)
+    	    (kpsewhich pdfpages.sty >/dev/null) ||
+    	        error_exit \
+	            "LaTeX package pdfpages.sty is not installed" \
+	            $E_UNAVAILABLE
+            ;;
+    esac
 fi
 if  test "$keepinfo" = true
 then
