@@ -681,7 +681,7 @@ then
 	PATH="$modifyPath:$PATH"
 	export PATH
     fi
-    if [[ "$latex" != *"tectonic"* ]]; then
+    if "$latex" != -- *"tectonic"*; then
     	(kpsewhich pdfpages.sty >/dev/null) ||
     	error_exit \
 	    "LaTeX package pdfpages.sty is not installed" \
