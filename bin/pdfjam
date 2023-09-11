@@ -743,7 +743,7 @@ fi
 ## A function to check if using non-Cygwin "${latex}" from Cygwin
 using_non_cygwin_latex_from_cygwin () {
     if [ -z "${__cache__using_non_cygwin_latex_from_cygwin}" ]; then
-	if [ "$(uname -o)" = "Cygwin" ] \
+	if uname | grep -q CYGWIN \
 	    && "${latex}" -version | head -1 | grep -qv Cygwin; then
 	    __cache__using_non_cygwin_latex_from_cygwin=0
 	else
