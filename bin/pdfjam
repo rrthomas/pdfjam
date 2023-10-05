@@ -951,7 +951,7 @@ select_pdfinfo () {
 }
 echo_hex_iconv_utf16be () {
     printf '%s' "$1" | \
-    "$iconv" -f utf8 -t utf16be | \
+    "$iconv" -f UTF-8 -t UTF-16BE | \
     od -An -v -tx1 | \
     tr -d '[:space:]'
 }
@@ -972,7 +972,7 @@ if test "$keepinfo" = true ; then
 fi
 echo_iconv_from_enc () {
     printf '%s' "$2" | \
-    "$iconv" -f "$1" -t utf8
+    "$iconv" -f "$1" -t UTF-8
 }
 if test -n "$pdfTitle" ; then
     pdftitl=$(echo_iconv_from_enc "$enc" "$pdfTitle")
