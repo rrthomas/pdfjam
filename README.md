@@ -33,10 +33,7 @@ one or more PDF files as output. It is useful for joining files together,
 selecting pages, reducing several source pages onto one output page, etc., etc.
 
 A potential drawback of `pdfjam` and other scripts based upon it is that any 
-hyperlinks in the source PDF are lost. On the positive side, there is no 
-appreciable degradation of image quality in processing PDF files with `pdfjam`, 
-unlike some other indirect methods such as `pdf2ps|psnup|ps2pdf` 
-(in the author's experience). 
+hyperlinks in the source PDF are lost. 
 
 `pdfjam` is designed for Unix-like systems, including Linux and Mac OS X. 
 It seems that it will work also on Windows computers with a suitable 
