@@ -559,8 +559,9 @@ while test -n "${1}${2}"; do
 				*) ##  if page spec needed, assume this is it;
 		                   ##  otherwise something is wrong
 				    if test "$pageSpecAwaited" = true  ; then
+					escapedFilePath=$(printf '%s' "$1" | sed -e 's#/#\\/#g')
 					fileSpec=$(printf "%s" "$fileSpec" | \
-					    sed "s/|awaited/|$1/g")
+					    sed "s/|awaited/|${escapedFilePath}/g")
 					pageSpecAwaited=false
 				    else
 					error_exit "no PDF/JPG/PNG file found at ${1}" \
@@ -583,8 +584,9 @@ while test -n "${1}${2}"; do
 			*) ##  if page spec needed, assume this is it;
 		           ##  otherwise something is wrong
 			    if test "$pageSpecAwaited" = true  ; then
+				escapedFilePath=$(printf '%s' "$1" | sed -e 's#/#\\/#g')
 				fileSpec=$(printf "%s" "$fileSpec" | \
-				    sed "s/|awaited/|$1/g")
+				    sed "s/|awaited/|${escapedFilePath}/g")
 				pageSpecAwaited=false
 			    else
 				error_exit "no PDF/JPG/PNG file found at ${1}" \
