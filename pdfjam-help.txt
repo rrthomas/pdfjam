@@ -1,5 +1,5 @@
-pdfjam is a shell-script front end to the LaTeX 'pdfpages' package (for
-which, see http://www.ctan.org/tex-archive/macros/latex/contrib/pdfpages).
+pdfjam is a shell-script front end to the LaTeX 'pdfpages' package; see
+https://www.ctan.org/tex-archive/macros/latex/contrib/pdfpages
 
 Usage: pdfjam [OPTIONS] [--] [FILE1 [SEL1]] [FILE2 [SEL2]]...
 where
@@ -84,8 +84,8 @@ where
                   LaTeX packages and/or to set global options.  If '--preamble'
                   is used more than once in the call, the supplied preamble 
                   strings are simply concatenated.  For a note on avoiding
-                  clashes, see the PDFjam-README file (also available at
-                  http://www.pdfjam.net).
+                  clashes, see the README file, also available at
+                  https://github.com/rrthomas/pdfjam
      --keepinfo
      --no-keepinfo
                   Preserve (or not) Title, Author, Subject and Keywords
@@ -183,7 +183,7 @@ where
                                    only the content will be rotated.)
                   etc., etc.  For more information see the manual for
                   the 'pdfpages' package, at
-                  http://www.ctan.org/tex-archive/macros/latex/contrib/pdfpages
+                  https://www.ctan.org/tex-archive/macros/latex/contrib/pdfpages
 * '--' can be used to signal that there are no more options to come.
 
 Defaults for the options '--suffix', '--keepinfo', '--paper', '--outfile', 

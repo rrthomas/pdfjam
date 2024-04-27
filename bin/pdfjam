@@ -5,7 +5,7 @@ version=N.NN
 ##  pdfjam: A shell-script interface to the "pdfpages" LaTeX package   ##
 ##  ------                                                             ##
 ##                                                                     ##
-##  Author: David Firth (http://warwick.ac.uk/dfirth)                  ##
+##  Author: David Firth (https://warwick.ac.uk/dfirth)                 ##
 ##                                                                     ##
 ##  Usage: see https://github.com/rrthomas/pdfjam                      ##
 ##         or "pdfjam --help"                                          ##

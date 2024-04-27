@@ -26,7 +26,7 @@ in the distributed package.  The most up-to-date version is maintained online at
 
 The **pdfjam** package makes available the `pdfjam` shell script that provides a 
 simple interface to much of the functionality of the excellent 
-[pdfpages](http://www.ctan.org/tex-archive/macros/latex/contrib/pdfpages) 
+[pdfpages](https://www.ctan.org/tex-archive/macros/latex/contrib/pdfpages) 
 package (by Andreas Matthias) for _LaTeX_. The `pdfjam` script takes one 
 or more PDF files (and/or JPG/PNG graphics files) as input, and produces 
 one or more PDF files as output. It is useful for joining files together, 
@@ -37,7 +37,7 @@ hyperlinks in the source PDF are lost.
 
 `pdfjam` is designed for Unix-like systems, including Linux and Mac OS X. 
 It seems that it will work also on Windows computers with a suitable 
-installation of [Cygwin](http://www.cygwin.com) (with TeX Live 
+installation of [Cygwin](https://www.cygwin.com) (with TeX Live 
 installed), but this has not been thoroughly tested.
 
 Alternatives to `pdfjam` which are widely packaged in GNU/Linux distributions and other free software collections include:
@@ -116,7 +116,7 @@ that apply at your installation.  In addition to the arguments that are explicit
 documented there, `pdfjam` provides access to all of the options of the 
 **pdfpages** package: that's a large number of options, and it's a set of options 
 that might change, so users are referred to the current 
-[pdfpages manual (PDF)](http://www.ctan.org/tex-archive/macros/latex/contrib/pdfpages/pdfpages.pdf) to see what's available.
+[pdfpages manual (PDF)](https://www.ctan.org/tex-archive/macros/latex/contrib/pdfpages/pdfpages.pdf) to see what's available.
 
 In case you want to look at the `pdfjam --help` text template online, for example
 before you decide whether to install **pdfjam**, the source is available at
@@ -215,7 +215,7 @@ pdfjam --configpath
 # <a name="using"></a> Using pdfjam
 
 For a full overview of what `pdfjam` can do, the importance of the 
-[pdfpages manual (PDF)](http://www.ctan.org/tex-archive/macros/latex/contrib/pdfpages/pdfpages.pdf) 
+[pdfpages manual (PDF)](https://www.ctan.org/tex-archive/macros/latex/contrib/pdfpages/pdfpages.pdf) 
 cannot be stressed enough! 
 The following examples merely serve as a brief introduction.
 
@@ -315,7 +315,7 @@ an example on this.
 
 To offset the content of double-sided printed pages so that they are 
 suitable for binding with a 
-[Heftstreifen](http://de.wikipedia.org/wiki/Heftstreifen), use 
+[Heftstreifen](https://de.wikipedia.org/wiki/Heftstreifen), use 
 the `--twoside` option:
 
 ```
