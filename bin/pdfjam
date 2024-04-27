@@ -152,7 +152,7 @@ prattle "This is pdfjam version ${version}."
 ##
 ##  CONFIGURATION
 ##
-##  THESE SETTINGS WILL BE OVER-RIDDEN by any found in configuration
+##  THESE SETTINGS WILL BE OVERRIDDEN by any found in configuration
 ##  files.  By default such files are found at any or all of
 ##     /etc/pdfjam.conf
 ##     /usr/share/etc/pdfjam.conf
