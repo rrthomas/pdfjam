@@ -225,6 +225,7 @@ if command -v paper >/dev/null ; then
     paper='' ## We might not have a LaTeX-compatible name
 else
     paper='a4paper'  ## fallback paper size is ISO A4
+    papersize=''     ## clear papersize
 fi
 ##
 ##  END OF SETTINGS MADE DIRECTLY WITHIN THE SCRIPT
@@ -460,6 +461,7 @@ while test -n "${1}${2}"; do
 			shift ;;
 		    --paper)
 			paper="${2}"
+			papersize=''    ## clear papersize
 			callOptions="$callOptions ${1} ${2}" ;
 			shift ;;
 		    --pagecolor)
@@ -477,9 +479,11 @@ while test -n "${1}${2}"; do
                         --ansidpaper | --ansiepaper | \
                         --letterpaper | --legalpaper | --executivepaper)
 			paper=$(printf "%s" "${1}" | sed 's/^--//') ;
+			papersize=''    ## clear papersize
 			callOptions="$callOptions ${1}" ;
 			;;
 		    --papersize)
+			paper=''        ## clear paper
 			papersize="papersize=${2}" ;
 			callOptions="$callOptions ${1} '${2}'" ;
 			shift ;;
