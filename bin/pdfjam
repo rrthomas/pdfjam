@@ -27,18 +27,6 @@ version=N.NN
 ##                                                                     ##
 #########################################################################
 ##
-##  HELP TEXT
-##
-##  Defines the output of 'pdfjam --help'
-##
-helptext="
-insert contents of pdfjam-help.txt here
-"
-##
-##  END OF HELP TEXT
-##
-#########################################################################
-##
 ##  PRELIMINARIES
 ##
 ##  First determine:
@@ -61,10 +49,6 @@ do
 	    ;;
 	--batch)
 	    batch=true ;
-	    ;;
-	--help | -u | -h)
-		printf "%s\n" "$helptext" ;
-		exit 0 ;
 	    ;;
 	--vanilla)
 	    vanilla=true ;
@@ -274,6 +258,34 @@ if [ -n "${pdflatex:-}" ] ; then latex="$pdflatex" ; fi
 ##
 ##  END OF CONFIGURATION BLOCK
 ##
+#########################################################################
+##
+##  HELP TEXT
+##
+##  Defines the output of 'pdfjam --help'
+##
+helptext="
+insert contents of pdfjam-help.txt here
+"
+##
+##  END OF HELP TEXT
+##
+#########################################################################
+#
+# If --help is given, print help and exit. We do this here so that the
+# configuration files have already been read, and default values can be
+# shown in the help
+for arg
+do
+    case $arg in
+	--help | -u | -h)
+		printf "%s\n" "$helptext" ;
+		exit 0 ;
+	    ;;
+	*)
+	    ;;
+    esac
+done
 #########################################################################
 ##
 ##  ERROR CODES
