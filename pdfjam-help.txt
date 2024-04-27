@@ -126,6 +126,7 @@ where
                   Specify a custom paper size, e.g.,
                       --papersize '{10in,18cm}'
                   (Note the braces, and the comma!)
+                  [Default for you at this site: $papersize]
      --pagecolor RGBSPEC
                   Specify a background colour for the output pages.  The 
                   RGBSPEC must be a comma-separated trio of integers
