@@ -121,6 +121,7 @@ where
                   A wide range of paper sizes is available thanks to the
                   LaTeX 'geometry' package.  For details see documentation
                   for LaTeX and/or the 'geometry' package.
+                  In the absence of any other setting, A4 is used.
                   [Default for you at this site: paper=$paper]
      --papersize '{WIDTH,HEIGHT}'
                   Specify a custom paper size, e.g.,
