@@ -648,7 +648,10 @@ callOptions=$(printf "%s" "$callOptions" | sed 's/^ //')
 ##
 case $landscape in
     true)
-	orientation=landscape ;;
+	orientation=landscape
+	if test -n "$papersize"; then
+	    papersize="papersize={$paperheight$paperunit,$paperwidth$paperunit}"
+	fi ;;
     *)
 	orientation="" ;;
 esac
