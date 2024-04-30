@@ -150,8 +150,7 @@ where
                   Run latex N times, for each output document made. 
                   [Default for you at this site: runs=$runs]
      --vanilla
-                  Suppress the reading of any site-wide or user-specific
-                  configuration files.
+                  Suppress the reading of any pdfjam configuration files.
      --enc
                   Specify a command-line encoding
                   [Default for you at this site: enc=$enc]
