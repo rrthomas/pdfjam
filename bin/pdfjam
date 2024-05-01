@@ -196,28 +196,6 @@ suffix='pdfjam'            ##  Default filename suffix to be used when
 ##
 preamble=''                ##  Default LaTeX preamble string.
 ##
-##  Get default paper size from libpaper >= 2 if possible, otherwise guess A4
-##
-paperspec=
-if command -v paper >/dev/null ; then
-    paperspec=$(paper)
-    if echo "$paperspec" | grep -q '^.*: '; then
-	paperdimensions=$(echo "$paperspec" | cut -f 2 -d " ")
-	paperunit=$(echo "$paperspec" | cut -f 3 -d " ")
-	if test "$paperunit" = "pt"; then paperunit=bp; fi
-	paperwidth=$(echo "$paperdimensions" | cut -f 1 -d "x")
-	paperheight=$(echo "$paperdimensions" | cut -f 2 -d "x")
-	papersize="papersize={$paperwidth$paperunit,$paperheight$paperunit}"
-	paper='' ## We might not have a LaTeX-compatible name
-    else
-	echo "The 'paper' program seems not to be working; not using it"
-    fi
-fi
-if test -z "$paperspec"; then
-    paper='a4paper'  ## fallback paper size is ISO A4
-    papersize=''     ## clear papersize
-fi
-##
 ##  END OF SETTINGS MADE DIRECTLY WITHIN THE SCRIPT
 ##
 ##  Now read the site's or user's configuration file(s) if such exist,
@@ -261,6 +239,31 @@ else
 fi
 ## For backwards compatibility, check here for a $pdflatex setting in the config file
 if [ -n "${pdflatex:-}" ] ; then latex="$pdflatex" ; fi
+##
+##  If paper size is not set, get default paper size from libpaper >= 2 if
+##  possible, otherwise guess A4.
+##
+paperspec=
+if test -z "$paper"; then
+    if command -v paper >/dev/null ; then
+	paperspec=$(paper)
+	if echo "$paperspec" | grep -q '^.*: '; then
+	    paperdimensions=$(echo "$paperspec" | cut -f 2 -d " ")
+	    paperunit=$(echo "$paperspec" | cut -f 3 -d " ")
+	    if test "$paperunit" = "pt"; then paperunit=bp; fi
+	    paperwidth=$(echo "$paperdimensions" | cut -f 1 -d "x")
+	    paperheight=$(echo "$paperdimensions" | cut -f 2 -d "x")
+	    papersize="papersize={$paperwidth$paperunit,$paperheight$paperunit}"
+	    paper='' ## We might not have a LaTeX-compatible name
+	else
+	    echo "The 'paper' program seems not to be working; not using it"
+	fi
+    fi
+    if test -z "$paperspec"; then
+	paper='a4paper'  ## fallback paper size is ISO A4
+	papersize=''     ## clear papersize
+    fi
+fi
 ##
 ##  END OF CONFIGURATION BLOCK
 ##
