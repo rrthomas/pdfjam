@@ -121,13 +121,14 @@ where
                   A wide range of paper sizes is available thanks to the
                   LaTeX 'geometry' package.  For details see documentation
                   for LaTeX and/or the 'geometry' package.
-                  In the absence of any other setting, A4 is used.
+                  If no default value is set and libpaper is not available,
+                  A4 is used.
                   [Default for you at this site: paper=$paper]
      --papersize '{WIDTH,HEIGHT}'
                   Specify a custom paper size, e.g.,
                       --papersize '{10in,18cm}'
                   (Note the braces, and the comma!)
-                  [Default for you at this site: $papersize]
+                  [Libpaper default: $papersize]
      --pagecolor RGBSPEC
                   Specify a background colour for the output pages.  The 
                   RGBSPEC must be a comma-separated trio of integers
