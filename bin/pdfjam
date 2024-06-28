@@ -942,7 +942,7 @@ do
 	    then
 		if tty -s ; then
 		    error_exit \
-		 "tty is connected to connected to stdin, no PDF/JPG/PNG file found" \
+		 "tty is connected to stdin, no PDF/JPG/PNG file found" \
 			$E_NOINPUT
 		fi
 		cat > "$uniqueName"
