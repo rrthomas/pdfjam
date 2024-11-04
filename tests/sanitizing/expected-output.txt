@@ -2,7 +2,12 @@
   pdfjam: This is pdfjam version N.NN.
   pdfjam: Called with '--vanilla': no user or site configuration
           files will be read.
-  pdfjam: Effective call for this run of pdfjam:
-          ../../bin/pdfjam --vanilla --picturecommand '\put(20,20){Letters}' --suffix actual-output --outfile . -- ../batch-job/letters.pdf - 
-  pdfjam: Calling /usr/bin/pdflatex...
-  pdfjam: Finished.  Output was written to './letters-actual-output.pdf'.
+  pdfjam: --
+  pdfjam: Processing file 1, '../batch-job/letters.pdf'...
+  pdfjam: Page spec is '-'.
+              ----
+  pdfjam:     This is pdfjam version N.NN.
+  pdfjam:     Effective call for this run of pdfjam:
+              ../../bin/pdfjam --vanilla --picturecommand '\put(20,20){Letters.\quad What'\''s $9\cdot6$?}' --suffix actual-output --outfile . -- ../batch-job/letters.pdf -
+  pdfjam:     Calling /usr/bin/pdflatex...
+  pdfjam:     Finished.  Output was written to './letters-actual-output.pdf'.
