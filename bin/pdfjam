@@ -87,6 +87,10 @@ newline='
 escape_chars () {
     (printf "%s" "${1}" | sed 's/[^a-zA-Z0-9._/\-]/\\&/g')
 }
+## Functionally the same, but more readable where tricky characters are likely
+escape_quote () {
+    (printf "%s" "${1}" | sed "s/'/'\\\\''/g;s/^\\|\$/'/g")
+}
 ##
 ##  Define a function to output verbose comments:
 ##
@@ -483,11 +487,11 @@ while test -n "${1}${2}"; do
 		    --paper)
 			paper="${2}"
 			papersize=''    ## clear papersize
-			callOptions="$callOptions ${1} ${2}" ;
+			callOptions="$callOptions ${1} $(escape_chars "$2")" ;
 			shift ;;
 		    --pagecolor)
 			pagecolor="${2}" ;
-			callOptions="$callOptions ${1} ${2}" ;
+			callOptions="$callOptions ${1} $(escape_chars "$2")" ;
 			shift ;;
 		    --a0paper | --a1paper | --a2paper | --a3paper | \
                         --a4paper | --a5paper | --a6paper | \
@@ -506,7 +510,7 @@ while test -n "${1}${2}"; do
 		    --papersize)
 			paper=''        ## clear paper
 			papersize="papersize=${2}" ;
-			callOptions="$callOptions ${1} '${2}'" ;
+			callOptions="$callOptions ${1} $(escape_chars "$2")" ;
 			shift ;;
 		    --landscape)
 			landscape=true ;
@@ -529,7 +533,7 @@ while test -n "${1}${2}"; do
 			shift ;;
 		    --enc) # command line encoding
 			enc="${2}"
-			callOptions="$callOptions ${1} ${2}"
+			callOptions="$callOptions ${1} $(escape_chars "$2")"
 			shift ;;
 		    --*)
                         ##  options for \includepdfmerge
@@ -543,7 +547,7 @@ while test -n "${1}${2}"; do
 			## saved for possible use in LaTeX file
 			miscOptions=$miscOptions,"$argName=$value" ;
 			## saved for possible use in a further call to pdfjam
-			callOptions="$callOptions ${1} '${2}'" ;
+			callOptions="$callOptions ${1} $(escape_quote "$2")" ;
 			shift ;
 			;;
 		esac ;;
