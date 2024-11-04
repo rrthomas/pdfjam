@@ -534,11 +534,16 @@ while test -n "${1}${2}"; do
 		    --*)
                         ##  options for \includepdfmerge
 			argName=$(printf "%s" "${1}" | sed 's/^--//');
-			value="${2}"
+			# wrap value in {} if necessary and not done yet
+			case "$2" in
+			    \{*\}) value="$2";;
+			    *,* | *\]*) value="{$2}";;
+			    *) value="$2";;
+			esac
+			## saved for possible use in LaTeX file
 			miscOptions=$miscOptions,"$argName=$value" ;
-		        ## saved for possible use in LaTeX file
-			callOptions="$callOptions ${1} '$value'" ;
-		        ## saved for possible use in a further call to pdfjam
+			## saved for possible use in a further call to pdfjam
+			callOptions="$callOptions ${1} '${2}'" ;
 			shift ;
 			;;
 		esac ;;
