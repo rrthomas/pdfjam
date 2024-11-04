@@ -4,7 +4,10 @@ set -o pipefail -o errexit -o nounset
 
 # Entering the parent directory of this script:
 cd $(dirname ${BASH_SOURCE[0]})
-test_dirs=$(find . -mindepth 1 -maxdepth 1 -type d)
+if [ $# -gt 0 ]
+then test_dirs="$@"
+else test_dirs=$(find . -mindepth 1 -maxdepth 1 -type d)
+fi
 for test_dir in $test_dirs; do
     echo Executing test: $test_dir/cmd.sh...
     cd $test_dir
