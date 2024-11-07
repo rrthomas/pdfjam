@@ -1,0 +1,4 @@
+set -e
+pdfjam --batch --nup 2x1 --suffix 2up --landscape file1.pdf file2.pdf
+mv file1-2up.pdf example1.sh.pdf
+mv file2-2up.pdf example1.zz.sh.pdf

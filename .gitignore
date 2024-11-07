@@ -1,3 +1,4 @@
 *~
 /built_package
+/build
 /tests/*/*actual-output*

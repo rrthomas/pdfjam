@@ -1,0 +1,1 @@
+--nup 2x3 --frame true --noautoscale false --delta "0.2cm 0.3cm" --scale 0.95 beamer.pdf

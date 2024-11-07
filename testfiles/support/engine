@@ -1,0 +1,10 @@
+#!/bin/bash
+
+in=${!##\\input }
+out="$(basename -s.jam "$in").pdf"
+if [[ "${in%.sh.jam}" = "${in}" ]]; then
+	eval "./pdfjam --no-tidy -o '$out' $(< "$in")"
+else
+	bash "$in" # must create $out = *.sh.pdf
+fi
+sed -i 's+/tmp/pdfjam-....../+/tmp/pdfjam-RANDOM/+' "$out"
