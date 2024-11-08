@@ -21,7 +21,7 @@ mkdir built_package built_package/sources
 ## Copy everything that will be needed
 ##
 cp -r bin man1 tests COPYING VERSION pdfjam.conf README.md pdfjam-help.txt built_package/sources
-cd built_package  
+cd built_package
 ##
 ## Put the current version number in the pdfjam script
 ##
