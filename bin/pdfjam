@@ -69,7 +69,7 @@ pwd=$(pwd)
 ##
 ##  Trap interrupts so that they kill everything:
 ##
-trap 'IFS=$OIFS; exit 1' 1 2 15
+trap 'IFS=$OIFS; exit 1' HUP INT TERM
 ##
 ##  The following will be useful for readability of the script:
 ##
@@ -791,11 +791,11 @@ if test "$PDFJAM_CALL_NUMBER" = 0; then ## don't repeat this work for secondary 
 		'IFS="$OIFS"
 		if test $tidy != false; then cd "$pwd"; rm -rf "$PDFJAM_TEMP_DIR"; fi
 		exit 1' \
-		1 2 15
+		HUP INT TERM
 	trap \
 		'IFS="$OIFS"
 		if test $tidy != false ; then cd "$pwd"; rm -rf "$PDFJAM_TEMP_DIR"; fi' \
-		0
+		EXIT
 	{
 		PDFJAM_TEMP_DIR=$( (umask 077 && mktemp -d "$tempfileDir/pdfjam-XXXXXX") 2>/dev/null) \
 			&& test -n "$PDFJAM_TEMP_DIR" && test -d "$PDFJAM_TEMP_DIR"
