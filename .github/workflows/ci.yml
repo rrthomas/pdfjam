@@ -12,6 +12,7 @@ jobs:
     - name: Build
       run: |
         PATH="$PATH:." l3build check
+        for i in build/test/*.diff; do echo; echo "$i"; cat "$i"; done
         ./build.sh
         cd built_package/pdfjam*
         unzip tests.zip
