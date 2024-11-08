@@ -11,10 +11,10 @@ jobs:
       run: sudo apt-get update && sudo apt-get -y install texlive-latex-extra shellcheck devscripts
     - name: Build
       run: |
+        l3build check
         ./build.sh
         cd built_package/pdfjam*
         unzip tests.zip
         tests/run.sh
         shellcheck bin/pdfjam
         checkbashisms -xp bin/pdfjam
-        l3build check
