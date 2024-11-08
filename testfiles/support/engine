@@ -2,8 +2,9 @@
 
 in=${!##\\input }
 out="$(basename -s.jam "$in").pdf"
+if [[ -n "$NO_TIDY" ]]; then notidy='--no-tidy '; else notidy=; fi
 if [[ "${in%.sh.jam}" = "${in}" ]]; then
-	eval "./pdfjam --no-tidy -o '$out' $(< "$in")"
+	eval "./pdfjam $notidy--outfile '$out' $(< "$in")"
 else
 	bash "$in" # must create $out = *.sh.pdf
 fi

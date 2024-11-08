@@ -6,6 +6,7 @@ version=N.NN
 ##  ------                                                             ##
 ##                                                                     ##
 ##  Author: David Firth (https://warwick.ac.uk/dfirth)                 ##
+##  Maintainer: Markus Kurtz                                           ##
 ##                                                                     ##
 ##  Usage: see https://github.com/rrthomas/pdfjam                      ##
 ##         or "pdfjam --help"                                          ##
@@ -30,39 +31,32 @@ version=N.NN
 ##  PRELIMINARIES
 ##
 ##  First determine:
-##    --- whether verbose commentary should be provided (not if --quiet 
-#         or --configpath was specified); 
-##    --- whether this call to pdfjam is a "batch" call; 
-##    --- whether just the help text is required; 
+##    --- whether verbose commentary should be provided (not if --quiet
+##        or --configpath was specified);
+##    --- whether this call to pdfjam is a "batch" call;
+##    --- whether just the help text is required;
 ##    --- or whether all configuration files should be ignored.
 ##
 verbose=true
-for arg
-do
-    case $arg in
+for arg; do
+	case $arg in
 	--quiet | -q | --configpath)
-	    verbose=false ;
-	    ;;
+		verbose=false;;
 	--version | -V)
-	    echo "$version"
-	    exit 0 ;
-	    ;;
+		echo "$version"
+		exit 0;;
 	--batch)
-	    batch=true ;
-	    ;;
+		batch=true;;
 	--vanilla)
-	    vanilla=true ;
-	    ;;
-	*)
-	    ;;
-    esac
+		vanilla=true;;
+	*) ;;
+	esac
 done
 ##
 ##  Check to see whether this is a "secondary" call to pdfjam:
 ##
-if test -z "$PDFJAM_CALL_NUMBER"  ## not a secondary call
-then
-    PDFJAM_CALL_NUMBER=0
+if test -z "$PDFJAM_CALL_NUMBER"; then ## not a secondary call
+	PDFJAM_CALL_NUMBER=0
 fi
 ##
 ##  Keep a copy of the internal file separator, so we can change it safely
@@ -84,51 +78,49 @@ newline='
 ##
 ##  Define a function to escape tricky characters in file names etc:
 ##
-escape_chars () {
-    (printf "%s" "${1}" | sed 's/[^a-zA-Z0-9._/\-]/\\&/g')
+escape_chars() {
+	(printf "%s" "${1}" | sed 's/[^a-zA-Z0-9._/\-]/\\&/g')
 }
 ## Functionally the same, but more readable where tricky characters are likely
-escape_quote () {
-    (printf "%s" "${1}" | sed "s/'/'\\\\''/g;s/^\\|\$/'/g")
+escape_quote() {
+	(printf "%s" "${1}" | sed "s/'/'\\\\''/g;s/^\\|\$/'/g")
 }
 ##
 ##  Define a function to output verbose comments:
 ##
-prattle () { ## second argument here is non-null for continuation lines
-    if test $verbose = true; then
-	prefix1="  pdfjam:" ;
-	prefix2=$(printf "%s" "$prefix1" | sed 's/pdfjam:/       /') ;
-	indent="" ;
-	if test "$PDFJAM_CALL_NUMBER" -gt 0  &&
-	    test "$batch" != true
-	then
-	    indent="    "
+prattle() { ## second argument here is non-null for continuation lines
+	if test $verbose = true; then
+		prefix1="  pdfjam:"
+		prefix2=$(printf "%s" "$prefix1" | sed 's/pdfjam:/       /')
+		indent=""
+		if test "$PDFJAM_CALL_NUMBER" -gt 0 && test "$batch" != true; then
+			indent="    "
+		fi
+		IFS="$newline"
+		lineCounter=0
+		for line in ${1}; do
+			lineCounter=$((lineCounter + 1))
+			if test $lineCounter -eq 1 && test ! -n "${2}"; then
+				if test -w "$PDFJAM_MESSAGES_FILE"; then
+					printf "$prefix1$indent %s\n" "$line" >> \
+						"$PDFJAM_MESSAGES_FILE"
+				else
+					messages="$messages$prefix1$indent $line$newline"
+					## msg file not made yet
+				fi
+			else
+				if test -w "$PDFJAM_MESSAGES_FILE"; then
+					printf "$prefix2$indent %s\n" "$line" >> \
+						"$PDFJAM_MESSAGES_FILE"
+				else
+					messages="$messages$prefix2$indent $line$newline"
+					## msg file not made yet
+				fi
+			fi
+		done
+		IFS="$OIFS"
 	fi
-	IFS="$newline" ;
-	lineCounter=0 ;
-	for line in ${1}
-	do
-	    lineCounter=$((lineCounter + 1)) ;
-	    if  test $lineCounter -eq 1  &&  test ! -n "${2}" ;
-	    then 
-		if test -w "$PDFJAM_MESSAGES_FILE"
-		then printf "$prefix1$indent %s\n" "$line" >> \
-                       "$PDFJAM_MESSAGES_FILE"
-		else messages="$messages$prefix1$indent $line$newline"  
-                       ## msg file not made yet
-		fi
-	    else 
-		if test -w "$PDFJAM_MESSAGES_FILE"
-		then printf "$prefix2$indent %s\n" "$line" >> \
-                       "$PDFJAM_MESSAGES_FILE"
-		else messages="$messages$prefix2$indent $line$newline"  
-                       ## msg file not made yet
-		fi
-	    fi ;
-	done ;
-	IFS="$OIFS" ;
-    fi ;
-    return ;
+	return
 }
 ##
 ##  And here's the first piece of verbose commentary:
@@ -160,14 +152,14 @@ prattle "This is pdfjam version ${version}."
 ##  First get the full path (if it exists) to pdflatex:
 ##
 latex=$(command -v pdflatex)
-if [ -z "$latex" ] ; then latex="not found" ; fi
+if [ -z "$latex" ]; then latex="not found"; fi
 ##
 ##  Likewise for the pdfinfo and iconv (only needed for `--keepinfo'):
 ##
 pdfinfo=$(command -v pdfinfo)
-if [ -z "$pdfinfo" ] ; then pdfinfo="not found"; fi
+if [ -z "$pdfinfo" ]; then pdfinfo="not found"; fi
 iconv=$(command -v iconv)
-if [ -z "$iconv" ] ; then iconv="not found"; fi
+if [ -z "$iconv" ]; then iconv="not found"; fi
 ##
 ##
 ##  Next a permitted location for temporary files on your system:
@@ -177,96 +169,91 @@ tempfileDir=${TMPDIR:-'/tmp'}  ##  /tmp is standard on most unix systems
 ##
 ##  Default for the output file location:
 ##
-outFile="$pwd"           ##  Output to the current working directory
+outFile="$pwd"      ##  Output to the current working directory
 ##
 ##
 ##  A few more default settings for pdfjam:
 ##
-shortedge='true'           ## Default paper is rotated shortedge when doing book
+shortedge='true'    ##  Default paper is rotated shortedge when doing book
 ##
-runs=1                     ## Run latex just once
+runs=1              ##  Run latex just once
 ##
-tidy='true'                ##  Delete all temporary files at the end
+tidy='true'         ##  Delete all temporary files at the end
 ##
-keepinfo='false'           ##  Don't try to preserve "pdfinfo" data
+keepinfo='false'    ##  Don't try to preserve "pdfinfo" data
 ##
-checkfiles='false'         ##  Don't use the Unix 'file -Lb' utility to
-##                           identify PDF files from their contents;
-##                           rely on the .pdf or .PDF extension instead.
+checkfiles='false'  ##  Don't use the Unix 'file -Lb' utility to
+##                      identify PDF files from their contents;
+##                      rely on the .pdf or .PDF extension instead.
 ##
-suffix='pdfjam'            ##  Default filename suffix to be used when 
-##                           --outfile is either (a) a directory, or (b) 
-##                           not specified in a --batch call.
+suffix='pdfjam'     ##  Default filename suffix to be used when
+##                      --outfile is either (a) a directory, or (b)
+##                      not specified in a --batch call.
 ##
-preamble=''                ##  Default LaTeX preamble string.
+preamble=''         ##  Default LaTeX preamble string.
 ##
 ##  END OF SETTINGS MADE DIRECTLY WITHIN THE SCRIPT
 ##
 ##  Now read the site's or user's configuration file(s) if such exist,
 ##  unless '--vanilla' was specified.
 ##
-if test "$vanilla" != true
-then
-    if test "$PDFJAM_CALL_NUMBER" = 0   ## not a secondary call to pdfjam
-    then
-	configFiles=$(printf "%s" "$configpath" | \
-	    sed 's/:/\/pdfjam.conf:/g; s/$/\/pdfjam.conf/')
-	configFiles="${configFiles}:$HOME/.pdfjam.conf"
-	PDFJAM_CONFIG=""
-	prattle "Reading any site-wide or user-specific defaults..."
-	IFS=':'
-	for d in $configFiles
-	do
-	    if test -f "$d"; then
-		change=$(sed '/^ *#.*/d ; s/ *#.*//; s/^ *//' "$d")
-		comment="## ${newline}## From ${d}: ${newline}##"
-		PDFJAM_CONFIG="$PDFJAM_CONFIG$comment$newline$change$newline"
-	    fi
-	done
-	IFS="$OIFS"
-	PDFJAM_CONFIG=$(printf "%s" "$PDFJAM_CONFIG" | sed 's/^/    /')
-	if test "$batch" = true ; then export PDFJAM_CONFIG ; fi
-	if test -z "$PDFJAM_CONFIG"
-	then
-	    prattle "(none found)" 1
-	else
-	    prattle "$PDFJAM_CONFIG" 1
+if test "$vanilla" != true; then
+	if test "$PDFJAM_CALL_NUMBER" = 0; then ## not a secondary call to pdfjam
+		configFiles=$(printf "%s" "$configpath" |
+			sed 's/:/\/pdfjam.conf:/g; s/$/\/pdfjam.conf/')
+		configFiles="${configFiles}:$HOME/.pdfjam.conf"
+		PDFJAM_CONFIG=""
+		prattle "Reading any site-wide or user-specific defaults..."
+		IFS=':'
+		for d in $configFiles; do
+			if test -f "$d"; then
+				change=$(sed '/^ *#.*/d ; s/ *#.*//; s/^ *//' "$d")
+				comment="## ${newline}## From ${d}: ${newline}##"
+				PDFJAM_CONFIG="$PDFJAM_CONFIG$comment$newline$change$newline"
+			fi
+		done
+		IFS="$OIFS"
+		PDFJAM_CONFIG=$(printf "%s" "$PDFJAM_CONFIG" | sed 's/^/    /')
+		if test "$batch" = true; then export PDFJAM_CONFIG; fi
+		if test -z "$PDFJAM_CONFIG"; then
+			prattle "(none found)" 1
+		else
+			prattle "$PDFJAM_CONFIG" 1
+		fi
 	fi
-    fi
-    if test -n "$PDFJAM_CONFIG" ; then eval "$PDFJAM_CONFIG" ; fi
+	if test -n "$PDFJAM_CONFIG"; then eval "$PDFJAM_CONFIG"; fi
 else
-    if test $PDFJAM_CALL_NUMBER -eq 0
-    then
-	prattle "Called with '--vanilla': no user or site configuration"
-	prattle "files will be read." 1
-    fi
+	if test "$PDFJAM_CALL_NUMBER" -eq 0; then
+		prattle "Called with '--vanilla': no user or site configuration"
+		prattle "files will be read." 1
+	fi
 fi
 ## For backwards compatibility, check here for a $pdflatex setting in the config file
-if [ -n "${pdflatex:-}" ] ; then latex="$pdflatex" ; fi
+if [ -n "${pdflatex:-}" ]; then latex="$pdflatex"; fi
 ##
 ##  If paper size is not set, get default paper size from libpaper >= 2 if
 ##  possible, otherwise guess A4.
 ##
 paperspec=
 if test -z "$paper"; then
-    if command -v paper >/dev/null ; then
-	paperspec=$(paper)
-	if echo "$paperspec" | grep -q '^.*: '; then
-	    paperdimensions=$(echo "$paperspec" | cut -f 2 -d " ")
-	    paperunit=$(echo "$paperspec" | cut -f 3 -d " ")
-	    if test "$paperunit" = "pt"; then paperunit=bp; fi
-	    paperwidth=$(echo "$paperdimensions" | cut -f 1 -d "x")
-	    paperheight=$(echo "$paperdimensions" | cut -f 2 -d "x")
-	    papersize="papersize={$paperwidth$paperunit,$paperheight$paperunit}"
-	    paper='' ## We might not have a LaTeX-compatible name
-	else
-	    echo "The 'paper' program seems not to be working; not using it"
+	if command -v paper >/dev/null; then
+		paperspec=$(paper)
+		if echo "$paperspec" | grep -q '^.*: '; then
+			paperdimensions=$(echo "$paperspec" | cut -f 2 -d " ")
+			paperunit=$(echo "$paperspec" | cut -f 3 -d " ")
+			if test "$paperunit" = "pt"; then paperunit=bp; fi
+			paperwidth=$(echo "$paperdimensions" | cut -f 1 -d "x")
+			paperheight=$(echo "$paperdimensions" | cut -f 2 -d "x")
+			papersize="papersize={$paperwidth$paperunit,$paperheight$paperunit}"
+			paper='' ## We might not have a LaTeX-compatible name
+		else
+			echo "The 'paper' program seems not to be working; not using it"
+		fi
 	fi
-    fi
-    if test -z "$paperspec"; then
-	paper='a4paper'  ## fallback paper size is ISO A4
-	papersize=''     ## clear papersize
-    fi
+	if test -z "$paperspec"; then
+		paper='a4paper' ## fallback paper size is ISO A4
+		papersize=''    ## clear papersize
+	fi
 fi
 ##
 ##  END OF CONFIGURATION BLOCK
@@ -288,16 +275,13 @@ insert contents of pdfjam-help.txt here
 # If --help is given, print help and exit. We do this here so that the
 # configuration files have already been read, and default values can be
 # shown in the help
-for arg
-do
-    case $arg in
+for arg; do
+	case $arg in
 	--help | -u | -h)
-		printf "%s\n" "$helptext" ;
-		exit 0 ;
-	    ;;
-	*)
-	    ;;
-    esac
+		printf "%s\n" "$helptext"
+		exit 0;;
+	*) ;;
+	esac
 done
 #########################################################################
 ##
@@ -313,13 +297,14 @@ E_CONFIG=78          #  configuration error
 ##
 ##  Define a function to print an error message and exit:
 ##
-error_exit () {
-    if [ -r "$PDFJAM_MESSAGES_FILE" ]
-    then cat "$PDFJAM_MESSAGES_FILE" >&2
-    else printf "%s" "$messages" 1>&2
-    fi
-    printf "  pdfjam ERROR: %s\n" "$1" 1>&2 ;
-    exit "$2" ;
+error_exit() {
+	if [ -r "$PDFJAM_MESSAGES_FILE" ]; then
+		cat "$PDFJAM_MESSAGES_FILE" >&2
+	else
+		printf "%s" "$messages" 1>&2
+	fi
+	printf "  pdfjam ERROR: %s\n" "$1" 1>&2
+	exit "$2"
 }
 ##
 #########################################################################
@@ -328,10 +313,9 @@ error_exit () {
 ##
 ##  In case of NO argument supplied, mention 'pdfjam --help':
 ##
-if  test $# -eq 0
-then
-    prattle "No arguments supplied; continuing anyway. (See"
-    prattle "'pdfjam --help' for information on usage.)"  1
+if test $# -eq 0; then
+	prattle "No arguments supplied; continuing anyway. (See"
+	prattle "'pdfjam --help' for information on usage.)" 1
 fi
 ##
 ##  Now do the argument loop.
@@ -343,296 +327,297 @@ optionsFinished=""
 ##
 ##  First note any '--checkfiles' or '--no-checkfiles' option
 ##
-for arg 
-do
-    case $arg in
+for arg; do
+	case $arg in
 	--checkfiles)
-	    checkfiles=true ;
-	    callOptions="$callOptions --checkfiles" ;
-	    ;;
+		checkfiles=true
+		callOptions="$callOptions --checkfiles";;
 	--no-checkfiles)
-	    checkfiles=false ;
-	    callOptions="$callOptions --no-checkfiles" ;
-	    ;;
-    esac
+		checkfiles=false
+		callOptions="$callOptions --no-checkfiles";;
+	esac
 done
 while test -n "${1}${2}"; do
-    argUnmatched=""
-    if test "$optionsFinished" != true
-    then
-	case ${1} in
-	    --) ## signals end of command-line options
-		optionsFinished=true ;
-		shift ;
-		continue ;
-		;;
-	    --configpath)
-		printf "%s\n" "$configpath" ;
-		exit 0;;
-	    --* | -q | -o)
-		if test "$pageSpecAwaited" = true ; then
-		## fill in any missing page specs before continuing
-		    fileSpec=$(printf "%s" "$fileSpec" | sed 's/|awaited/|-/g')
-		    pageSpecAwaited=false
-		fi
+	argUnmatched=""
+	if test "$optionsFinished" != true; then
 		case ${1} in
-		    --latex)
-			latex="${2}" ;
-			callOptions="$callOptions --latex ${2}" ;
-			shift ;;
-		    --batch)
-			batch=true ;
+		--) ## signals end of command-line options
+			optionsFinished=true
+			shift
+			continue
 			;;
-		    --vanilla)
-			callOptions="$callOptions ${1}" ;
+		--configpath)
+			printf "%s\n" "$configpath"
+			exit 0
 			;;
-		    --quiet | -q)
-			verbose=false ;
-			callOptions="$callOptions ${1}" ;
-			;;
-		    --outfile | -o)
-			outFile="${2}" ;
-			if test "$batch" = true
-			then
-			    outFile=$(escape_chars "$outFile")
-			fi
-			callOptions="$callOptions --outfile $outFile" ;
-  			shift ;;
-		    --suffix)
-			if test -n "${2}"
-			then
-			    suffix="${2}" ;
-			    if test "$batch" = true
-			    then
-				suffix=$(escape_chars "$suffix")
-			    fi
-			    callOptions="$callOptions --suffix $suffix"
-			    shift
-			else
-			    error_exit \
-				"'--suffix' string has zero length" \
-				$E_USAGE ;
-			fi
-			;;
-		    --runs)
-			runs="${2}" ;
-			## check if the argument is a number > 0
-                        if [ "$runs" -lt 1 ] 2> /dev/null; then
-                          error_exit \
-                                "'--runs' number must be at least 1" \
-                                $E_USAGE ;
-                        fi
-                        callOptions="$callOptions --runs ${2}" ;
-                        shift ;;
-		    --tidy)
-			tidy=true ;
-			callOptions="$callOptions --tidy" ;
-			;;
-		    --no-tidy)
-			tidy=false ;
-			callOptions="$callOptions --no-tidy" ;
-			;;
-		    --shortedge)
-			shortedge=true ;
-			callOptions="$callOptions --shortedge" ;
-			;;
-		    --longedge)
-			shortedge=false ;
-			callOptions="$callOptions --longedge" ;
-			;;
-		    --keepinfo)
-			keepinfo=true ;
-			callOptions="$callOptions --keepinfo" ;
-			;;
-		    --no-keepinfo)
-			keepinfo=false ;
-			callOptions="$callOptions --no-keepinfo" ;
-			;; 
-		    --checkfiles)
-			;; ## already done above
-		    --no-checkfiles)
-			;; ## already done above
-		    --pdftitle)
-			pdfTitle="${2}" ;
-			if test "$batch" = true
-			then
-			    pdfTitle=$(escape_chars "$pdfTitle")
-			fi
-			callOptions="$callOptions --pdftitle $pdfTitle" ;
-			shift ;;
-		    --pdfauthor)
-			pdfAuthor="${2}" ;
-			if test "$batch" = true
-			then
-			    pdfAuthor=$(escape_chars "$pdfAuthor")
-			fi
-			callOptions="$callOptions --pdfauthor $pdfAuthor" ;
-			shift ;;
-		    --pdfsubject)
-			pdfSubject="${2}" ;
-			if test "$batch" = true
-			then
-			    pdfSubject=$(escape_chars "$pdfSubject")
-			fi
-			callOptions="$callOptions --pdfsubject $pdfSubject" ;
-			shift ;;
-		    --pdfkeywords)
-			pdfKeywords="${2}" ;
-			if test "$batch" = true
-			then
-			    pdfKeywords=$(escape_chars "$pdfKeywords")
-			fi
-			callOptions="$callOptions --pdfkeywords $pdfKeywords" ;
-			shift ;;
-		    --paper)
-			paper="${2}"
-			papersize=''    ## clear papersize
-			callOptions="$callOptions ${1} $(escape_chars "$2")" ;
-			shift ;;
-		    --pagecolor)
-			pagecolor="${2}" ;
-			callOptions="$callOptions ${1} $(escape_chars "$2")" ;
-			shift ;;
-		    --a0paper | --a1paper | --a2paper | --a3paper | \
-                        --a4paper | --a5paper | --a6paper | \
-                        --b0paper | --b1paper | --b2paper | \
-			--b3paper | --b4paper | --b5paper | --b6paper | \
-                        --c0paper | --c1paper | --c2paper | \
-			--c3paper | --c4paper | --c5paper | --c6paper | \
-                        --b0j | --b1j | --b2j | --b3j | --b4j | --b5j | --b6j | \
-                        --ansiapaper | --ansibpaper | --ansicpaper | \
-                        --ansidpaper | --ansiepaper | \
-                        --letterpaper | --legalpaper | --executivepaper)
-			paper=$(printf "%s" "${1}" | sed 's/^--//') ;
-			papersize=''    ## clear papersize
-			callOptions="$callOptions ${1}" ;
-			;;
-		    --papersize)
-			paper=''        ## clear paper
-			papersize="papersize=${2}" ;
-			callOptions="$callOptions ${1} $(escape_chars "$2")" ;
-			shift ;;
-		    --landscape)
-			landscape=true ;
-			callOptions="$callOptions --landscape" ;
-			;;
-		    --no-landscape)
-			landscape=false ;
-			callOptions="$callOptions --no-landscape" ;
-			;;
-		    --twoside)
-			twoside=true ;
-			callOptions="$callOptions --twoside" ;
-			;;
-		    --no-twoside)
-			twoside=false ;
-			callOptions="$callOptions --no-twoside" ;
-			;;
-		    --preamble)
-			preamble="$preamble${2}" ;
-			shift ;;
-		    --enc) # command line encoding
-			enc="${2}"
-			callOptions="$callOptions ${1} $(escape_chars "$2")"
-			shift ;;
-		    --*)
-                        ##  options for \includepdfmerge
-			argName=$(printf "%s" "${1}" | sed 's/^--//');
-			# wrap value in {} if necessary and not done yet
-			case "$2" in
-			    \{*\}) value="$2";;
-			    *,* | *\]*) value="{$2}";;
-			    *) value="$2";;
-			esac
-			## saved for possible use in LaTeX file
-			miscOptions=$miscOptions,"$argName=$value" ;
-			## saved for possible use in a further call to pdfjam
-			callOptions="$callOptions ${1} $(escape_quote "$2")" ;
-			shift ;
-			;;
-		esac ;;
-	    '' | *)
-		argUnmatched=true
-		;;
-	esac
-    fi
-    if test "$optionsFinished" = true  ||  test "$argUnmatched" = true
-    then
-	case ${1} in
-	    "" | /dev/stdin)
-		fileSpec="${fileSpec}${newline}/dev/stdin|awaited"
-		pageSpecAwaited=true
-		inputFromStdin=true ;;
-	    -)
-		if test "$pageSpecAwaited" = true  ; then
-		    fileSpec=$(printf "%s" "$fileSpec" | \
-			sed 's/|awaited/|-/g')
-		    pageSpecAwaited=false
-		else
-		    error_exit "no PDF/JPG/PNG file found at ${1}" \
-			$E_NOINPUT
-		fi ;;
-	    *)  ##  All other args should be PDF (or JPG/PNG) 
-                ##  source files and page selections; if not, we'll quit
-		if test "$checkfiles" = true ;  ## not always available
-		then
-		    case $(file -Lb "${1}") in
-			"PDF document"*|"JPEG image data"*|"PNG image"*)   
-                            ##  it's a PDF file (or JPG/PNG) as expected
-			    fileSpec="$fileSpec${newline}${1}|awaited"
-			    pageSpecAwaited=true
-			    ;;
-			*)
-			    case ${1} in
-				*.[pP][dD][fF] | *.[jJ][pP][eE][gG] | \
-				    *.[jJ][pP][gG] | *.[pP][nN][gG]) 
-                                    ## should be PDF/JPG/PNG file, but isn't
-				    error_exit "no PDF/JPG/PNG file found at ${1}" \
-					$E_NOINPUT
-				    ;;
-				*) ##  if page spec needed, assume this is it;
-		                   ##  otherwise something is wrong
-				    if test "$pageSpecAwaited" = true  ; then
-					escapedFilePath=$(printf '%s' "$1" | sed -e 's#/#\\/#g')
-					fileSpec=$(printf "%s" "$fileSpec" | \
-					    sed "s/|awaited/|${escapedFilePath}/g")
-					pageSpecAwaited=false
-				    else
-					error_exit "no PDF/JPG/PNG file found at ${1}" \
-					    $E_NOINPUT
-				    fi
-				    ;;
-			    esac
-			    ;;
-		    esac
-		else  ## no checking of file contents; rely on .pdf extension
-		    case ${1} in
-			*.[pP][dD][fF] | *.[jJ][pP][eE][gG] \
-			    | *.[jJ][pP][gG] | *.[pP][nN][gG])  
-                            ## assume it's a PDF/JPG/PNG file
-			    test -f "${1}" || error_exit \
-				"${1} not found" $E_NOINPUT
-			    fileSpec="$fileSpec"$newline${1}"|"awaited
-			    pageSpecAwaited=true
-			    ;;
-			*) ##  if page spec needed, assume this is it;
-		           ##  otherwise something is wrong
-			    if test "$pageSpecAwaited" = true  ; then
-				escapedFilePath=$(printf '%s' "$1" | sed -e 's#/#\\/#g')
-				fileSpec=$(printf "%s" "$fileSpec" | \
-				    sed "s/|awaited/|${escapedFilePath}/g")
+		--* | -q | -o)
+			if test "$pageSpecAwaited" = true; then
+				## fill in any missing page specs before continuing
+				fileSpec=$(printf "%s" "$fileSpec" | sed 's/|awaited/|-/g')
 				pageSpecAwaited=false
-			    else
+			fi
+			case ${1} in
+			--latex)
+				latex="${2}"
+				callOptions="$callOptions --latex ${2}"
+				shift
+				;;
+			--batch)
+				batch=true
+				;;
+			--vanilla)
+				callOptions="$callOptions ${1}"
+				;;
+			--quiet | -q)
+				verbose=false
+				callOptions="$callOptions ${1}"
+				;;
+			--outfile | -o)
+				outFile="${2}"
+				if test "$batch" = true; then
+					outFile=$(escape_chars "$outFile")
+				fi
+				callOptions="$callOptions --outfile $outFile"
+				shift
+				;;
+			--suffix)
+				if test -n "${2}"; then
+					suffix="${2}"
+					if test "$batch" = true; then
+						suffix=$(escape_chars "$suffix")
+					fi
+					callOptions="$callOptions --suffix $suffix"
+					shift
+				else
+					error_exit \
+						"'--suffix' string has zero length" \
+						$E_USAGE
+				fi
+				;;
+			--runs)
+				runs="${2}"
+				## check if the argument is a number > 0
+				if [ "$runs" -lt 1 ] 2>/dev/null; then
+					error_exit \
+						"'--runs' number must be at least 1" \
+						$E_USAGE
+				fi
+				callOptions="$callOptions --runs ${2}"
+				shift
+				;;
+			--tidy)
+				tidy=true
+				callOptions="$callOptions --tidy"
+				;;
+			--no-tidy)
+				tidy=false
+				callOptions="$callOptions --no-tidy"
+				;;
+			--shortedge)
+				shortedge=true
+				callOptions="$callOptions --shortedge"
+				;;
+			--longedge)
+				shortedge=false
+				callOptions="$callOptions --longedge"
+				;;
+			--keepinfo)
+				keepinfo=true
+				callOptions="$callOptions --keepinfo"
+				;;
+			--no-keepinfo)
+				keepinfo=false
+				callOptions="$callOptions --no-keepinfo"
+				;;
+			--checkfiles) ;;    ## already done above
+			--no-checkfiles) ;; ## already done above
+			--pdftitle)
+				pdfTitle="${2}"
+				if test "$batch" = true; then
+					pdfTitle=$(escape_chars "$pdfTitle")
+				fi
+				callOptions="$callOptions --pdftitle $pdfTitle"
+				shift
+				;;
+			--pdfauthor)
+				pdfAuthor="${2}"
+				if test "$batch" = true; then
+					pdfAuthor=$(escape_chars "$pdfAuthor")
+				fi
+				callOptions="$callOptions --pdfauthor $pdfAuthor"
+				shift
+				;;
+			--pdfsubject)
+				pdfSubject="${2}"
+				if test "$batch" = true; then
+					pdfSubject=$(escape_chars "$pdfSubject")
+				fi
+				callOptions="$callOptions --pdfsubject $pdfSubject"
+				shift
+				;;
+			--pdfkeywords)
+				pdfKeywords="${2}"
+				if test "$batch" = true; then
+					pdfKeywords=$(escape_chars "$pdfKeywords")
+				fi
+				callOptions="$callOptions --pdfkeywords $pdfKeywords"
+				shift
+				;;
+			--paper)
+				paper="${2}"
+				papersize='' ## clear papersize
+				callOptions="$callOptions ${1} $(escape_chars "$2")"
+				shift
+				;;
+			--pagecolor)
+				pagecolor="${2}"
+				callOptions="$callOptions ${1} $(escape_chars "$2")"
+				shift
+				;;
+			--a0paper | --a1paper | --a2paper | --a3paper | \
+				--a4paper | --a5paper | --a6paper | \
+				--b0paper | --b1paper | --b2paper | \
+				--b3paper | --b4paper | --b5paper | --b6paper | \
+				--c0paper | --c1paper | --c2paper | \
+				--c3paper | --c4paper | --c5paper | --c6paper | \
+				--b0j | --b1j | --b2j | --b3j | --b4j | --b5j | --b6j | \
+				--ansiapaper | --ansibpaper | --ansicpaper | \
+				--ansidpaper | --ansiepaper | \
+				--letterpaper | --legalpaper | --executivepaper)
+				paper=$(printf "%s" "${1}" | sed 's/^--//')
+				papersize='' ## clear papersize
+				callOptions="$callOptions ${1}"
+				;;
+			--papersize)
+				paper='' ## clear paper
+				papersize="papersize=${2}"
+				callOptions="$callOptions ${1} $(escape_chars "$2")"
+				shift
+				;;
+			--landscape)
+				landscape=true
+				callOptions="$callOptions --landscape"
+				;;
+			--no-landscape)
+				landscape=false
+				callOptions="$callOptions --no-landscape"
+				;;
+			--twoside)
+				twoside=true
+				callOptions="$callOptions --twoside"
+				;;
+			--no-twoside)
+				twoside=false
+				callOptions="$callOptions --no-twoside"
+				;;
+			--preamble)
+				preamble="$preamble${2}"
+				shift
+				;;
+			--enc) # command line encoding
+				enc="${2}"
+				callOptions="$callOptions ${1} $(escape_chars "$2")"
+				shift
+				;;
+			--*)
+				##  options for \includepdfmerge
+				argName=$(printf "%s" "${1}" | sed 's/^--//')
+				# wrap value in {} if necessary and not done yet
+				case "$2" in
+				\{*\}) value="$2" ;;
+				*,* | *\]*) value="{$2}" ;;
+				*) value="$2" ;;
+				esac
+				## saved for possible use in LaTeX file
+				miscOptions=$miscOptions,"$argName=$value"
+				## saved for possible use in a further call to pdfjam
+				callOptions="$callOptions ${1} $(escape_quote "$2")"
+				shift
+				;;
+			esac
+			;;
+		'' | *)
+			argUnmatched=true
+			;;
+		esac
+	fi
+	if test "$optionsFinished" = true || test "$argUnmatched" = true; then
+		case ${1} in
+		"" | /dev/stdin)
+			fileSpec="${fileSpec}${newline}/dev/stdin|awaited"
+			pageSpecAwaited=true
+			inputFromStdin=true
+			;;
+		-)
+			if test "$pageSpecAwaited" = true; then
+				fileSpec=$(printf "%s" "$fileSpec" \
+					| sed 's/|awaited/|-/g')
+				pageSpecAwaited=false
+			else
 				error_exit "no PDF/JPG/PNG file found at ${1}" \
-				    $E_NOINPUT
-			    fi
-			    ;;
-		    esac
-		fi
-		;;
-	esac
-    fi
-    shift
+					$E_NOINPUT
+			fi
+			;;
+		*) ##  All other args should be PDF (or JPG/PNG)
+			##  source files and page selections; if not, we'll quit
+			if test "$checkfiles" = true; then ## not always available
+				case $(file -Lb "${1}") in
+				"PDF document"* | "JPEG image data"* | "PNG image"*)
+					##  it's a PDF file (or JPG/PNG) as expected
+					fileSpec="$fileSpec${newline}${1}|awaited"
+					pageSpecAwaited=true
+					;;
+				*)
+					case ${1} in
+					*.[pP][dD][fF] | *.[jJ][pP][eE][gG] | \
+						*.[jJ][pP][gG] | *.[pP][nN][gG])
+						## should be PDF/JPG/PNG file, but isn't
+						error_exit "no PDF/JPG/PNG file found at ${1}" \
+							$E_NOINPUT
+						;;
+					*) ##  if page spec needed, assume this is it;
+						##  otherwise something is wrong
+						if test "$pageSpecAwaited" = true; then
+							escapedFilePath=$(printf '%s' "$1" | sed -e 's#/#\\/#g')
+							fileSpec=$(printf "%s" "$fileSpec" \
+								| sed "s/|awaited/|${escapedFilePath}/g")
+							pageSpecAwaited=false
+						else
+							error_exit "no PDF/JPG/PNG file found at ${1}" \
+								$E_NOINPUT
+						fi
+						;;
+					esac
+					;;
+				esac
+			else ## no checking of file contents; rely on .pdf extension
+				case ${1} in
+				*.[pP][dD][fF] | *.[jJ][pP][eE][gG] | \
+					*.[jJ][pP][gG] | *.[pP][nN][gG])
+					## assume it's a PDF/JPG/PNG file
+					test -f "${1}" || error_exit \
+						"${1} not found" $E_NOINPUT
+					fileSpec="$fileSpec"$newline${1}"|"awaited
+					pageSpecAwaited=true
+					;;
+				*) ##  if page spec needed, assume this is it;
+					##  otherwise something is wrong
+					if test "$pageSpecAwaited" = true; then
+						escapedFilePath=$(printf '%s' "$1" | sed -e 's#/#\\/#g')
+						fileSpec=$(printf "%s" "$fileSpec" \
+							| sed "s/|awaited/|${escapedFilePath}/g")
+						pageSpecAwaited=false
+					else
+						error_exit "no PDF/JPG/PNG file found at ${1}" \
+							$E_NOINPUT
+					fi
+					;;
+				esac
+			fi
+			;;
+		esac
+	fi
+	shift
 done
 ##
 ##  Use the default page spec for any that remain unspecified:
@@ -640,23 +625,22 @@ done
 fileSpec=$(printf "%s" "$fileSpec" | sed '/^$/d; s/^ //; s/|awaited$/|-/')
 ##
 ##  Check whether input from stdin should be used by default:
-if  test $PDFJAM_CALL_NUMBER -eq 0  &&  test "$inputFromStdin" != true
-then
-    ## the special argument '/dev/stdin' was not used
-    if test -z "$fileSpec" ; then
-    ## no argument specifying a PDF source was given
-	inputFromStdin=true
-	fileSpec="/dev/stdin|-"
-	prattle "No PDF/JPG/PNG source specified: input is from stdin."
-    fi
+if test "$PDFJAM_CALL_NUMBER" -eq 0 && test "$inputFromStdin" != true; then
+	## the special argument '/dev/stdin' was not used
+	if test -z "$fileSpec"; then
+		## no argument specifying a PDF source was given
+		inputFromStdin=true
+		fileSpec="/dev/stdin|-"
+		prattle "No PDF/JPG/PNG source specified: input is from stdin."
+	fi
 fi
 ##
 ##  Delete leading comma from $miscOptions:
 ##
 miscOptions=$(printf "%s" "$miscOptions" | sed 's/^,//')
 ##
-if test -n "$preamble"
-then callOptions="$callOptions --preamble '$preamble'"
+if test -n "$preamble"; then
+	callOptions="$callOptions --preamble '$preamble'"
 fi
 ##  Delete leading space from $callOptions:
 ##
@@ -665,25 +649,31 @@ callOptions=$(printf "%s" "$callOptions" | sed 's/^ //')
 ##  Set up a document options variable:
 ##
 case $landscape in
-    true)
+true)
 	orientation=landscape
 	if test -n "$papersize"; then
-	    papersize="papersize={$paperheight$paperunit,$paperwidth$paperunit}"
-	fi ;;
-    *)
-	orientation="" ;;
+		papersize="papersize={$paperheight$paperunit,$paperwidth$paperunit}"
+	fi
+	;;
+*)
+	orientation=""
+	;;
 esac
 case $twoside in
-    true)
-	twoside=twoside ;;
-    *)
-	twoside="" ;;
+true)
+	twoside=twoside
+	;;
+*)
+	twoside=""
+	;;
 esac
 case $shortedge in
-    true)
-	shortedge="" ;;
-    *)
-	shortedge='\usepackage{everyshi}\makeatletter\EveryShipout{\ifodd\c@page\pdfpageattr{/Rotate 180}\fi}\makeatother' ;;
+true)
+	shortedge=""
+	;;
+*)
+	shortedge='\usepackage{everyshi}\makeatletter\EveryShipout{\ifodd\c@page\pdfpageattr{/Rotate 180}\fi}\makeatother'
+	;;
 esac
 documentOptions="$paper","$orientation","$twoside"
 documentOptions=$(printf "%s" "$documentOptions" | sed 's/^,//' | sed 's/,$//')
@@ -696,100 +686,89 @@ documentOptions=$(printf "%s" "$documentOptions" | sed 's/^,//' | sed 's/,$//')
 ##
 ##  These checks are not repeated in secondary calls.
 ##
-if test $PDFJAM_CALL_NUMBER -eq 0  ## not a secondary call
-then
-    ##  Check whether there's a suitable latex to use:
-    case "$latex" in
+if test "$PDFJAM_CALL_NUMBER" -eq 0; then ## not a secondary call
+	##  Check whether there's a suitable latex to use:
+	case "$latex" in
 	"not found")
-	    error_exit "can't find pdflatex!" $E_UNAVAILABLE
-	    ;;
-	*)  ## 
-	    if test ! -x "$latex"
-	    then
-		error_exit \
-		    "configuration error, $latex is not an executable file" \
-		    $E_CONFIG
-	    fi
-	    ;;
-    esac
-    ##
-    ##  Check that necessary LaTeX packages are installed:
-    ##
-    modifyPath=$(printf "%s" "$latex" | sed 's/\/[^\/]*$//')
-    if [ -n "$modifyPath" ] ; then
-	PATH="$modifyPath:$PATH"
-	export PATH
-    fi
-    case "$latex" in
-        *tectonic*) ;;
-        *)
-    	    (kpsewhich pdfpages.sty >/dev/null) ||
-    	        error_exit \
-	            "LaTeX package pdfpages.sty is not installed" \
-	            $E_UNAVAILABLE
-            ;;
-    esac
+		error_exit "can't find pdflatex!" $E_UNAVAILABLE
+		;;
+	*) ##
+		if test ! -x "$latex"; then
+			error_exit \
+				"configuration error, $latex is not an executable file" \
+				$E_CONFIG
+		fi
+		;;
+	esac
+	##
+	##  Check that necessary LaTeX packages are installed:
+	##
+	modifyPath=$(printf "%s" "$latex" | sed 's/\/[^\/]*$//')
+	if [ -n "$modifyPath" ]; then
+		PATH="$modifyPath:$PATH"
+		export PATH
+	fi
+	case "$latex" in
+	*tectonic*) ;;
+	*)
+		(kpsewhich pdfpages.sty >/dev/null) \
+			|| error_exit \
+				"LaTeX package pdfpages.sty is not installed" \
+				$E_UNAVAILABLE
+		;;
+	esac
 fi
-if  test "$keepinfo" = true
-then
-    case "$pdfinfo" in
+if test "$keepinfo" = true; then
+	case "$pdfinfo" in
 	"not found")
-	  if test $PDFJAM_CALL_NUMBER -eq 0
-	  then
-	    prattle \
-	      "The pdfinfo utility was not found, so --keepinfo is ignored."
-	  fi
-	  keepinfo=false
-	  ;;
-	pdfinfo)
-	  ;;
-	*)  ## $pdfinfo was set in a configuration file
-	  if test ! -x "$pdfinfo"
-	  then
-	    if test $PDFJAM_CALL_NUMBER -eq 0
-	    then
-	      prattle \
-		"No pdfinfo utility at $pdfinfo, so --keepinfo is ignored."
-	      keepinfo=false
-	    fi
-	  fi
-	  ;;
-    esac
-    case "$iconv" in
+		if test "$PDFJAM_CALL_NUMBER" -eq 0; then
+			prattle \
+				"The pdfinfo utility was not found, so --keepinfo is ignored."
+		fi
+		keepinfo=false
+		;;
+	pdfinfo) ;;
+	*) ## $pdfinfo was set in a configuration file
+		if test ! -x "$pdfinfo"; then
+			if test "$PDFJAM_CALL_NUMBER" -eq 0; then
+				prattle \
+					"No pdfinfo utility at $pdfinfo, so --keepinfo is ignored."
+				keepinfo=false
+			fi
+		fi
+		;;
+	esac
+	case "$iconv" in
 	"not found")
-	  if test $PDFJAM_CALL_NUMBER -eq 0
-	  then
-	    prattle \
-	      "The iconv utility was not found, so --keepinfo is ignored."
-	  fi
-	  keepinfo=false
-	  ;;
-	iconv)
-	  ;;
-	*)  ## $iconv was set in a configuration file
-	  if test ! -x "$iconv"
-	  then
-	    if test $PDFJAM_CALL_NUMBER -eq 0
-	    then
-	      prattle \
-		"No iconv utility at $iconv, so --keepinfo is ignored."
-	      keepinfo=false
-	    fi
-	  fi
-	  ;;
-    esac
+		if test "$PDFJAM_CALL_NUMBER" -eq 0; then
+			prattle \
+				"The iconv utility was not found, so --keepinfo is ignored."
+		fi
+		keepinfo=false
+		;;
+	iconv) ;;
+	*) ## $iconv was set in a configuration file
+		if test ! -x "$iconv"; then
+			if test "$PDFJAM_CALL_NUMBER" -eq 0; then
+				prattle \
+					"No iconv utility at $iconv, so --keepinfo is ignored."
+				keepinfo=false
+			fi
+		fi
+		;;
+	esac
 fi
 ## A function to check if using non-Cygwin "${latex}" from Cygwin
-using_non_cygwin_latex_from_cygwin () {
-    if [ -z "${__cache__using_non_cygwin_latex_from_cygwin}" ]; then
-	if uname | grep -q CYGWIN \
-	    && "${latex}" -version | head -1 | grep -qv Cygwin; then
-	    __cache__using_non_cygwin_latex_from_cygwin=0
-	else
-	    __cache__using_non_cygwin_latex_from_cygwin=1
+using_non_cygwin_latex_from_cygwin() {
+	if [ -z "${__cache__using_non_cygwin_latex_from_cygwin}" ]; then
+		if uname | grep -q CYGWIN \
+			&& "${latex}" -version | head -1 | grep -qv Cygwin; then
+			__cache__using_non_cygwin_latex_from_cygwin=0
+		else
+			__cache__using_non_cygwin_latex_from_cygwin=1
+		fi
 	fi
-    fi
-    return "${__cache__using_non_cygwin_latex_from_cygwin}"
+	return "${__cache__using_non_cygwin_latex_from_cygwin}"
 }
 ##
 ##  END OF CHECKING THE SETUP
@@ -806,42 +785,45 @@ using_non_cygwin_latex_from_cygwin () {
 ##
 original_umask=$(umask)
 umask 177
-if test $PDFJAM_CALL_NUMBER = 0  ## don't repeat this work for secondary calls
-then
-    PDFJAM_TEMP_DIR=''
-    trap 'IFS="$OIFS"; \
-  if test $tidy != false ; then cd "$pwd"; rm -rf "$PDFJAM_TEMP_DIR"; fi; exit 1' \
-	1 2 15
-    trap 'IFS="$OIFS"; \
-  if test $tidy != false ; then cd "$pwd"; rm -rf "$PDFJAM_TEMP_DIR"; fi' 0
-    {
-	PDFJAM_TEMP_DIR=$( (umask 077 && mktemp -d "$tempfileDir/pdfjam-XXXXXX") 2>/dev/null) &&
-	test -n "$PDFJAM_TEMP_DIR" && test -d "$PDFJAM_TEMP_DIR"
-    } || {
-    ##  We'll use awk to make random number, for portability
-	random=$(awk 'END { srand(); printf ("%d\n", rand()*1000000); }' /dev/null)
-	PDFJAM_TEMP_DIR="$tempfileDir"/pdfjam"$$"-"$random"
-	(umask 077 && mkdir "$PDFJAM_TEMP_DIR")
-    } || exit $?
-##
-    export PDFJAM_TEMP_DIR    ##  so that same dir is used in secondary calls
-    if test $tidy = false ; then
-	prattle "Temporary directory for this job is
+if test "$PDFJAM_CALL_NUMBER" = 0; then ## don't repeat this work for secondary calls
+	PDFJAM_TEMP_DIR=''
+	trap \
+		'IFS="$OIFS"
+		if test $tidy != false; then cd "$pwd"; rm -rf "$PDFJAM_TEMP_DIR"; fi
+		exit 1' \
+		1 2 15
+	trap \
+		'IFS="$OIFS"
+		if test $tidy != false ; then cd "$pwd"; rm -rf "$PDFJAM_TEMP_DIR"; fi' \
+		0
+	{
+		PDFJAM_TEMP_DIR=$( (umask 077 && mktemp -d "$tempfileDir/pdfjam-XXXXXX") 2>/dev/null) \
+			&& test -n "$PDFJAM_TEMP_DIR" && test -d "$PDFJAM_TEMP_DIR"
+	} || {
+		##  We'll use awk to make random number, for portability
+		random=$(awk 'END { srand(); printf ("%d\n", rand()*1000000); }' /dev/null)
+		PDFJAM_TEMP_DIR="$tempfileDir"/pdfjam"$$"-"$random"
+		(umask 077 && mkdir "$PDFJAM_TEMP_DIR")
+	} || exit $?
+	##
+	export PDFJAM_TEMP_DIR ##  so that same dir is used in secondary calls
+	if test $tidy = false; then
+		prattle "Temporary directory for this job is
           $PDFJAM_TEMP_DIR"
-    fi
-    PDFJAM_MESSAGES_FILE="$PDFJAM_TEMP_DIR"/messages.txt
-    export PDFJAM_MESSAGES_FILE  
-        ## so that secondary calls can write messages there as well
-    printf "%s" "$messages" > "$PDFJAM_MESSAGES_FILE"  ## initial file contents
-    messages=""  ## we won't be using this variable again!
+	fi
+	PDFJAM_MESSAGES_FILE="$PDFJAM_TEMP_DIR"/messages.txt
+	export PDFJAM_MESSAGES_FILE
+	## so that secondary calls can write messages there as well
+	printf "%s" "$messages" >"$PDFJAM_MESSAGES_FILE" ## initial file contents
+	messages=""                                      ## we won't be using this variable again!
 else
-    PDFJAM_TEMP_DIR="$PDFJAM_TEMP_DIR/file$PDFJAM_CALL_NUMBER"
-    (umask 077 && mkdir "$PDFJAM_TEMP_DIR")
+	PDFJAM_TEMP_DIR="$PDFJAM_TEMP_DIR/file$PDFJAM_CALL_NUMBER"
+	(umask 077 && mkdir "$PDFJAM_TEMP_DIR")
 fi
 umask "$original_umask"
 ## Next is from the Cygwin patch contributed by Lucas
 if using_non_cygwin_latex_from_cygwin; then
-    PDFJAM_TEMP_DIR=$(cygpath -w "$PDFJAM_TEMP_DIR")
+	PDFJAM_TEMP_DIR=$(cygpath -w "$PDFJAM_TEMP_DIR")
 fi
 ##
 ##  TEMPORARY DIRECTORY ALL DONE
@@ -853,34 +835,34 @@ fi
 ##  If --batch was used, we'll call pdfjam separately on each input
 ##  file.
 ##
-if test "$batch" = true ; then
-    if test "$fileSpec" = "" ; then
-	error_exit "--batch was used, but no PDF/JPG/PNG source file(s) specified" \
-	    $E_USAGE
-    fi
-    if test "$inputFromStdin" = true ; then
-	error_exit "--batch cannot be used with input from stdin" \
-	    $E_USAGE
-    fi
-    IFS="$newline"
-    for k in $fileSpec ; do
-	sourcePath=$(printf "%s" "$k" | sed 's/|[^|]*$//')
-	pageSpec=$(printf "%s" $k | sed 's/.*|//')
-	callNumber=$((PDFJAM_CALL_NUMBER + 1))
-	prattle "--"
-	prattle "Processing file ${callNumber}, '$sourcePath'..."
-	prattle "Page spec is '$pageSpec'."
-	sourcePath=$(escape_chars "$sourcePath")
-	PDFJAM_EFFECTIVE_CALL="$0 $callOptions -- $sourcePath $pageSpec"
-	export PDFJAM_EFFECTIVE_CALL
-	PDFJAM_CALL_NUMBER=$callNumber
-	export PDFJAM_CALL_NUMBER
-	eval "$PDFJAM_EFFECTIVE_CALL"
-        ## i.e., call pdfjam again with one input file
-    done
-    if [ "$verbose" = "true" ]; then cat "$PDFJAM_MESSAGES_FILE" >&2 ; fi
-    IFS=$OIFS
-    exit 0
+if test "$batch" = true; then
+	if test "$fileSpec" = ""; then
+		error_exit "--batch was used, but no PDF/JPG/PNG source file(s) specified" \
+			$E_USAGE
+	fi
+	if test "$inputFromStdin" = true; then
+		error_exit "--batch cannot be used with input from stdin" \
+			$E_USAGE
+	fi
+	IFS="$newline"
+	for k in $fileSpec; do
+		sourcePath=$(printf "%s" "$k" | sed 's/|[^|]*$//')
+		pageSpec=$(printf "%s" "$k" | sed 's/.*|//')
+		callNumber=$((PDFJAM_CALL_NUMBER + 1))
+		prattle "--"
+		prattle "Processing file ${callNumber}, '$sourcePath'..."
+		prattle "Page spec is '$pageSpec'."
+		sourcePath=$(escape_chars "$sourcePath")
+		PDFJAM_EFFECTIVE_CALL="$0 $callOptions -- $sourcePath $pageSpec"
+		export PDFJAM_EFFECTIVE_CALL
+		PDFJAM_CALL_NUMBER=$callNumber
+		export PDFJAM_CALL_NUMBER
+		eval "$PDFJAM_EFFECTIVE_CALL"
+		## i.e., call pdfjam again with one input file
+	done
+	if [ "$verbose" = "true" ]; then cat "$PDFJAM_MESSAGES_FILE" >&2; fi
+	IFS=$OIFS
+	exit 0
 fi
 ##
 ##  END OF THE '--batch' PROCESSING
@@ -895,24 +877,23 @@ fi
 ##  For secondary calls, the effective call text is already made;
 ##  otherwise we make it here.
 ##
-if test "$PDFJAM_CALL_NUMBER" -gt 0
-then
-    theCall="$PDFJAM_EFFECTIVE_CALL"
+if test "$PDFJAM_CALL_NUMBER" -gt 0; then
+	theCall="$PDFJAM_EFFECTIVE_CALL"
 else
-    filePageSpec=""
-    IFS="$newline"
-    for k in $fileSpec ; do
-	##  Last substitution on next line is needed for silly characters in
-	##  file names...
-	sourcePath=$(printf "%s" $k | sed 's/|[^|]*$//')
-	sourcePath=$(escape_chars "$sourcePath")
-	pageSpec=$(printf "%s" $k | sed 's/.*|//')
-	filePageSpec="$filePageSpec$sourcePath $pageSpec "
-    done
-    IFS="$OIFS"
-    theCall="$0 $callOptions -- $filePageSpec"
+	filePageSpec=""
+	IFS="$newline"
+	for k in $fileSpec; do
+		##  Last substitution on next line is needed for silly characters in
+		##  file names...
+		sourcePath=$(printf "%s" "$k" | sed 's/|[^|]*$//')
+		sourcePath=$(escape_chars "$sourcePath")
+		pageSpec=$(printf "%s" "$k" | sed 's/.*|//')
+		filePageSpec="$filePageSpec$sourcePath $pageSpec "
+	done
+	IFS="$OIFS"
+	theCall="$0 $callOptions -- $filePageSpec"
 fi
-printf "%s\n%s\n" "cd $pwd" "$theCall" > "$PDFJAM_TEMP_DIR"/call.txt
+printf "%s\n%s\n" "cd $pwd" "$theCall" >"$PDFJAM_TEMP_DIR"/call.txt
 prattle "Effective call for this run of pdfjam:"
 prattle "$theCall" 1
 ##
@@ -928,102 +909,98 @@ counter=0
 ##
 stdinUnread=true
 IFS="$newline"
-for k in ${fileSpec}
-do
-    counter=$((counter + 1))
-    sourcePath=$(printf "%s" "$k" | sed 's/|[^|]*$//')
-    pageSpec=$(printf "%s" $k | sed 's/.*|//')
-    ##  Check, though not exhaustively, for problems with the
-    ##  page spec: leading or trailing comma, double comma or
-    ##  double dash, alphabetic characters other than the word "last",
-    ##  braces not paired as {} with nothing inbetween.  A fully
-    ##  specified pattern for valid \includepdfmerge page spec would
-    ##  be better here; but life is too short...
-    if printf "%s" "$pageSpec" | sed 's/last/99/g' | \
-	grep  '^,.*\|,$\|,,\|--\|[A-Za-z]\|{[^}]\|[^{]}' 1>/dev/null
-    then
-	error_exit "invalid page spec $pageSpec" $E_USAGE
-    fi
-    case $sourcePath in
+for k in ${fileSpec}; do
+	counter=$((counter + 1))
+	sourcePath=$(printf "%s" "$k" | sed 's/|[^|]*$//')
+	pageSpec=$(printf "%s" "$k" | sed 's/.*|//')
+	##  Check, though not exhaustively, for problems with the
+	##  page spec: leading or trailing comma, double comma or
+	##  double dash, alphabetic characters other than the word "last",
+	##  braces not paired as {} with nothing inbetween.  A fully
+	##  specified pattern for valid \includepdfmerge page spec would
+	##  be better here; but life is too short...
+	if printf "%s" "$pageSpec" | sed 's/last/99/g' \
+		| grep '^,.*\|,$\|,,\|--\|[A-Za-z]\|{[^}]\|[^{]}' 1>/dev/null; then
+		error_exit "invalid page spec $pageSpec" $E_USAGE
+	fi
+	case $sourcePath in
 	/dev/stdin)
-	    uniqueName="$PDFJAM_TEMP_DIR"/stdin.pdf
-	    if test "$stdinUnread" = true
-	    then
-		if tty -s ; then
-		    error_exit \
-		 "tty is connected to stdin, no PDF/JPG/PNG file found" \
-			$E_NOINPUT
+		uniqueName="$PDFJAM_TEMP_DIR"/stdin.pdf
+		if test "$stdinUnread" = true; then
+			if tty -s; then
+				error_exit \
+					"tty is connected to stdin, no PDF/JPG/PNG file found" \
+					$E_NOINPUT
+			fi
+			cat >"$uniqueName"
+			stdinUnread=false
 		fi
-		cat > "$uniqueName"
-		stdinUnread=false
-	    fi
-	    ;;
+		;;
 	*)
-	    pdfName=$(basename "$sourcePath")
-	    sourceDir=$(dirname "$sourcePath") ## zsh on Mac OS 10.5 chokes here
-	    cd "$sourceDir" || exit 1   ##  just to get the full path
-	    sourceDir=$(pwd)
-	    cd "$pwd" || exit 1
-	    sourceFullPath="$sourceDir"/"$pdfName"
-	    uniqueName="source-$counter.pdf"
-	    uniqueName="$PDFJAM_TEMP_DIR"/"$uniqueName"
-	    ## Next is from the Cygwin patch contributed by Lucas
-	    if using_non_cygwin_latex_from_cygwin; then
-		cp "$sourceFullPath" "$uniqueName"
-	    else
-		ln -s "$sourceFullPath" "$uniqueName"
-	    fi
-	    ;;
-    esac
-    filePageList="$filePageList","$uniqueName","$pageSpec"
+		pdfName=$(basename "$sourcePath")
+		sourceDir=$(dirname "$sourcePath") ## zsh on Mac OS 10.5 chokes here
+		cd "$sourceDir" || exit 1  ##  just to get the full path
+		sourceDir=$(pwd)
+		cd "$pwd" || exit 1
+		sourceFullPath="$sourceDir"/"$pdfName"
+		uniqueName="source-$counter.pdf"
+		uniqueName="$PDFJAM_TEMP_DIR"/"$uniqueName"
+		## Next is from the Cygwin patch contributed by Lucas
+		if using_non_cygwin_latex_from_cygwin; then
+			cp "$sourceFullPath" "$uniqueName"
+		else
+			ln -s "$sourceFullPath" "$uniqueName"
+		fi
+		;;
+	esac
+	filePageList="$filePageList","$uniqueName","$pageSpec"
 done
 IFS="$OIFS"
-filePageList=$(printf "%s" "$filePageList" | \
-    sed 's/^,//')  ## remove leading comma
+filePageList=$(printf "%s" "$filePageList" \
+	| sed 's/^,//')  ## remove leading comma
 ##
 ##  Do the pdfinfo stuff (if relevant)...
 ##
-select_pdfinfo () {
-    printf '%s' "$2" | \
-    grep -e "^$1:" | \
-    sed -e 's/^'"$1"':\s*//'
+select_pdfinfo() {
+	printf '%s' "$2" \
+		| grep -e "^$1:" \
+		| sed -e 's/^'"$1"':\s*//'
 }
-echo_hex_iconv_utf16be () {
-    printf '%s' "$1" | \
-    "$iconv" -f UTF-8 -t UTF-16BE | \
-    od -An -v -tx1 | \
-    tr -d '[:space:]'
+echo_hex_iconv_utf16be() {
+	printf '%s' "$1" \
+		| "$iconv" -f UTF-8 -t UTF-16BE \
+		| od -An -v -tx1 \
+		| tr -d '[:space:]'
 }
-echo_pdfinfodata () {
-    if [ -n "$2" ]; then
-	TMPA=$(echo_hex_iconv_utf16be "$2")
-	printf '%s' "/$1 <feff${TMPA}>"
-    fi
+echo_pdfinfodata() {
+	if [ -n "$2" ]; then
+		TMPA=$(echo_hex_iconv_utf16be "$2")
+		printf '%s' "/$1 <feff${TMPA}>"
+	fi
 }
 
-if test "$keepinfo" = true ; then
-    prattle "Calling ${pdfinfo}..."
-    PDFinfo=$(pdfinfo -enc UTF-8 "$uniqueName")
-    pdftitl=$(select_pdfinfo 'Title'    "$PDFinfo")
-    pdfauth=$(select_pdfinfo 'Author'   "$PDFinfo")
-    pdfsubj=$(select_pdfinfo 'Subject'  "$PDFinfo")
-    pdfkeyw=$(select_pdfinfo 'Keywords' "$PDFinfo")
+if test "$keepinfo" = true; then
+	prattle "Calling ${pdfinfo}..."
+	PDFinfo=$(pdfinfo -enc UTF-8 "$uniqueName")
+	pdftitl=$(select_pdfinfo 'Title'    "$PDFinfo")
+	pdfauth=$(select_pdfinfo 'Author'   "$PDFinfo")
+	pdfsubj=$(select_pdfinfo 'Subject'  "$PDFinfo")
+	pdfkeyw=$(select_pdfinfo 'Keywords' "$PDFinfo")
 fi
-echo_iconv_from_enc () {
-    printf '%s' "$2" | \
-    "$iconv" -f "$1" -t UTF-8
+echo_iconv_from_enc() {
+	printf '%s' "$2" | "$iconv" -f "$1" -t UTF-8
 }
-if test -n "$pdfTitle" ; then
-    pdftitl=$(echo_iconv_from_enc "$enc" "$pdfTitle")
+if test -n "$pdfTitle"; then
+	pdftitl=$(echo_iconv_from_enc "$enc" "$pdfTitle")
 fi
-if test -n "$pdfAuthor" ; then
-    pdfauth=$(echo_iconv_from_enc "$enc" "$pdfAuthor")
+if test -n "$pdfAuthor"; then
+	pdfauth=$(echo_iconv_from_enc "$enc" "$pdfAuthor")
 fi
-if test -n "$pdfSubject" ; then
-    pdfsubj=$(echo_iconv_from_enc "$enc" "$pdfSubject")
+if test -n "$pdfSubject"; then
+	pdfsubj=$(echo_iconv_from_enc "$enc" "$pdfSubject")
 fi
-if test -n "$pdfKeywords" ; then
-    pdfkeyw=$(echo_iconv_from_enc "$enc" "$pdfKeywords")
+if test -n "$pdfKeywords"; then
+	pdfkeyw=$(echo_iconv_from_enc "$enc" "$pdfKeywords")
 fi
 
 ## Converting to PDF string
@@ -1041,7 +1018,7 @@ msgFile="$fileName".msgs
 tempFile="$PDFJAM_TEMP_DIR"/temp.tex
 ## Next is adapted from the Cygwin patch sent by Lucas
 if using_non_cygwin_latex_from_cygwin; then
-    filePageList=$(echo "$filePageList" | sed 's~\\~/~g')
+	filePageList=$(echo "$filePageList" | sed 's~\\~/~g')
 fi
 (cat <<EndTemplate
 \batchmode
@@ -1065,11 +1042,11 @@ fi
 \fi
 \usepackage{pdfpages}
 EndTemplate
-    )  > "$texFile"
-if test -z "$pagecolor"; then   ## color package is not needed
-    cp "$texFile" "$tempFile"
-    sed '/\\\usepackage.*{color}/d' "$tempFile" > "$texFile"
-    rm "$tempFile"
+) >"$texFile"
+if test -z "$pagecolor"; then ## color package is not needed
+	cp "$texFile" "$tempFile"
+	sed '/\\\usepackage.*{color}/d' "$tempFile" >"$texFile"
+	rm "$tempFile"
 fi
 (cat <<EndTemplate
 $preamble
@@ -1078,13 +1055,13 @@ $shortedge
 \includepdfmerge[$miscOptions]{$filePageList}
 \end{document}
 EndTemplate
-    )  >> "$texFile"
+) >>"$texFile"
 ##
 ##  INPUT FILES ARE ALL READY
 ##
 #########################################################################
 ##
-##  RUN LATEX AND COPY THE RESULTING PDF FILE 
+##  RUN LATEX AND COPY THE RESULTING PDF FILE
 ##
 if [ "$runs" -eq 1 ] ;
 then prattle "Calling ${latex}..."
@@ -1099,62 +1076,54 @@ log file at
         $fileName.log
 to try to diagnose the problem."
 i=1
-while [ "$i" -le "$runs" ] ; do
-    "$latex" "$texFile" > "$msgFile" || {
-        prattle "$failureText"
-        error_exit "Run $i: Output file not written" $E_SOFTWARE
-    }
-    i=$((i + 1))
+while [ "$i" -le "$runs" ]; do
+	"$latex" "$texFile" >"$msgFile" || {
+		prattle "$failureText"
+		error_exit "Run $i: Output file not written" $E_SOFTWARE
+	}
+	i=$((i + 1))
 done
 cd "$pwd" || exit 1
-if test -f "$fileName".pdf  ## if LaTeX didn't choke
-then
-    ##  Checks on output file path:
-    if test -d "$outFile"  ## outfile is a directory
-    then
-	if test "$sourcePath" = /dev/stdin 
-	then
-	    error_exit \
-		"--outfile cannot be a directory when input is stdin" \
-		$E_USAGE
+if test -f "$fileName".pdf; then ## if LaTeX didn't choke
+	##  Checks on output file path:
+	if test -d "$outFile"; then ## outfile is a directory
+		if test "$sourcePath" = /dev/stdin; then
+			error_exit \
+				"--outfile cannot be a directory when input is stdin" \
+				$E_USAGE
+		fi
+		if test ! -w "$outFile"; then
+			error_exit \
+				"FAILED: no write permission on ${outFile}." \
+				$E_OSFILE
+		fi
+		separator="-"
+		if test "$pageSpec" != "-"; then
+			separator=-"$pageSpec"-
+		fi
+		outFile=$(printf "%s" "$outFile" | sed 's/\/$//')
+		## (delete any trailing slash)
+		pdfName=$(basename "$sourcePath")
+		pdfName=$(printf "%s" "$pdfName" |
+			sed 's/\.[pP][dD][fF]$//') ## strip extension
+		pdfName="$pdfName$separator$suffix".pdf
+		outFile="$outFile"/"$pdfName"
 	fi
-	if test ! -w "$outFile"
-	then
-	    error_exit \
-        "FAILED: no write permission on ${outFile}." \
-	    $E_OSFILE
-	fi
-        separator="-"
-	if test "$pageSpec" != "-"
-	then
-	    separator=-"$pageSpec"-
-	fi
-	outFile=$(printf "%s" "$outFile" | sed 's/\/$//')
-                ## (delete any trailing slash)
-	pdfName=$(basename "$sourcePath")
-	pdfName=$(printf "%s" "$pdfName" | \
-	    sed 's/\.[pP][dD][fF]$//')       ## strip extension
-	pdfName="$pdfName$separator$suffix".pdf
-	outFile="$outFile"/"$pdfName"
-    fi		
 fi
-if  test -f "$outFile"  &&  test ! -w "$outFile"
-    ## file exists and we can't over-write it
-then
-    error_exit "no write permission at ${outFile}" $E_CANTCREATE
+if test -f "$outFile" && test ! -w "$outFile"; then
+	## file exists and we can't over-write it
+	error_exit "no write permission at ${outFile}" $E_CANTCREATE
 fi
 #fileSize=$(wc -c < "$fileName.pdf" | sed 's/^\ *//')
 ## Avoid explicit output to /dev/stdout.
 if test "$outFile" = "/dev/stdout" \
-   && cat "$fileName".pdf 2> /dev/null \
-   || cat "$fileName".pdf > "$outFile" 2>/dev/null
-then
-    prattle "Finished.  Output was written to '${outFile}'."
-else
-    error_exit "cannot write output at ${outFile}" $E_CANTCREATE
+	&& cat "$fileName".pdf 2> /dev/null \
+	|| cat "$fileName".pdf > "$outFile" 2>/dev/null
+then prattle "Finished.  Output was written to '${outFile}'."
+else error_exit "cannot write output at ${outFile}" $E_CANTCREATE
 fi
-if [ "$PDFJAM_CALL_NUMBER" = "0" ] && [ "$verbose" = "true" ]
-then cat "$PDFJAM_MESSAGES_FILE" >&2
+if [ "$PDFJAM_CALL_NUMBER" = "0" ] && [ "$verbose" = "true" ]; then
+	cat "$PDFJAM_MESSAGES_FILE" >&2
 fi
 exit 0
 ##
