@@ -1025,15 +1025,17 @@ if using_non_cygwin_latex_from_cygwin; then
 	filePageList=$(echo "$filePageList" | sed 's~\\~/~g')
 fi
 if [ -n "$pagecolor" ]; then
-	colorcode='\usepackage{color} \definecolor{bgclr}{RGB}'\
-		"{$pagecolor} \\pagecolor{bgclr}"
+	colorcode="
+\\usepackage{color}
+\\definecolor{bgclr}{RGB}{$pagecolor}
+\\pagecolor{bgclr}"
 else
 	colorcode=
 fi
 (cat <<EndTemplate
 \batchmode
-\documentclass[$documentOptions]{article}
-$colorcode\usepackage[$papersize]{geometry}
+\documentclass[$documentOptions]{article}$colorcode
+\usepackage[$papersize]{geometry}
 \usepackage[utf8]{inputenc}
 \ifdefined\luatexversion% LuaLaTeX
   \protected\def\pdfinfo{\pdfextension info}
