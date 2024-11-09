@@ -1089,11 +1089,6 @@ cd "$pwd" || exit 1
 if test -f "$fileName".pdf; then ## if LaTeX didn't choke
 	##  Checks on output file path:
 	if test -d "$outFile"; then ## outfile is a directory
-		if test "$sourcePath" = /dev/stdin; then
-			error_exit \
-				"--outfile cannot be a directory when input is stdin" \
-				$E_USAGE
-		fi
 		if test ! -w "$outFile"; then
 			error_exit \
 				"FAILED: no write permission on ${outFile}." \
@@ -1103,8 +1098,7 @@ if test -f "$fileName".pdf; then ## if LaTeX didn't choke
 		if test "$pageSpec" != "-"; then
 			separator=-"$pageSpec"-
 		fi
-		outFile=$(printf "%s" "$outFile" | sed 's/\/$//')
-		## (delete any trailing slash)
+		outFile=$(printf "%s" "$outFile" | sed 's/\/$//') ## delete any trailing slash
 		pdfName=$(basename "$sourcePath")
 		pdfName=$(printf "%s" "$pdfName" |
 			sed 's/\.[pP][dD][fF]$//') ## strip extension
