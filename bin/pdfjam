@@ -1025,9 +1025,10 @@ if using_non_cygwin_latex_from_cygwin; then
 	filePageList=$(echo "$filePageList" | sed 's~\\~/~g')
 fi
 if [ -n "$pagecolor" ]; then
-colorcode='\usepackage{color} \definecolor{bgclr}{RGB}{$pagecolor} \pagecolor{bgclr}
-'
-else colorcode=
+	colorcode='\usepackage{color} \definecolor{bgclr}{RGB}'\
+		"{$pagecolor} \\pagecolor{bgclr}"
+else
+	colorcode=
 fi
 (cat <<EndTemplate
 \batchmode
