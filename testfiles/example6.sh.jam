@@ -1,1 +1,1 @@
-pdfjam file1.pdf --trim '1cm 2cm 1cm 2cm' --clip true --outfile /dev/stdout | pdfjam --nup 2x1 --frame true --outfile example6.sh.pdf
+./pdfjam file1.pdf --trim '1cm 2cm 1cm 2cm' --clip true --outfile /dev/stdout | eval "$pdfjam --nup 2x1 --frame true --outfile '$out'"

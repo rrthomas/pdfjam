@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# TODO Lengths do not fit.
+# Either do more normalizing, rely on log tests or use some utterly different tool to compare pdf files.
+
 in=${!##\\input }
 out="$(basename -s.jam "$in").pdf"
 if [[ -n "$NO_TIDY" ]]; then notidy='--no-tidy '; else notidy=; fi
@@ -8,4 +11,6 @@ if [[ "${in%.sh.jam}" = "${in}" ]]; then
 else
 	bash "$in" # must create $out = *.sh.pdf
 fi
-sed -i 's+/tmp/pdfjam-....../+/tmp/pdfjam-RANDOM/+' "$out"
+sed -i 's+/tmp/pdfjam-....../+/tmp/pdfjam-RANDOM/+
+s+^/Producer (pdfTeX-.*)$+/Producer (pdfTeX-0.00.00)+
+s+^/PTEX.Fullbanner (This is pdfTeX, Version 3.141592653.*)$+/PTEX.Fullbanner (This is pdfTeX, Version 3.141592653-BUILD INFO)+' "$out"

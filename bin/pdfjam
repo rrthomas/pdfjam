@@ -63,7 +63,7 @@ fi
 ##
 OIFS="$IFS"
 ##
-##  Record the full filename of the current working diractory
+##  Record the full filename of the current working directory
 ##
 pwd=$(pwd)
 ##
@@ -177,6 +177,8 @@ outFile="$pwd"      ##  Output to the current working directory
 shortedge='true'    ##  Default paper is rotated shortedge when doing book
 ##
 runs=1              ##  Run latex just once
+##
+build_dir=''        ##  Directory to use instead of temporary one
 ##
 tidy='true'         ##  Delete all temporary files at the end
 ##
@@ -403,6 +405,11 @@ while test -n "${1}${2}"; do
 						$E_USAGE
 				fi
 				callOptions="$callOptions --runs ${2}"
+				shift
+				;;
+			--build-dir)
+				build_dir="$2"
+				callOptions="$callOptions $1 $(escape_chars "$2")"
 				shift
 				;;
 			--tidy)
@@ -640,7 +647,7 @@ fi
 miscOptions=$(printf "%s" "$miscOptions" | sed 's/^,//')
 ##
 if test -n "$preamble"; then
-	callOptions="$callOptions --preamble '$preamble'"
+	callOptions="$callOptions --preamble $(escape_quote "$preamble")"
 fi
 ##  Delete leading space from $callOptions:
 ##
@@ -783,44 +790,48 @@ using_non_cygwin_latex_from_cygwin() {
 ##  Use mktemp if possible; otherwise fall back on mkdir,
 ##  with random name to make file collisions less likely.
 ##
-original_umask=$(umask)
-umask 177
 if test "$PDFJAM_CALL_NUMBER" = 0; then ## don't repeat this work for secondary calls
-	PDFJAM_TEMP_DIR=''
-	trap \
-		'IFS="$OIFS"
-		if test $tidy != false; then cd "$pwd"; rm -rf "$PDFJAM_TEMP_DIR"; fi
-		exit 1' \
-		HUP INT TERM
-	trap \
-		'IFS="$OIFS"
-		if test $tidy != false ; then cd "$pwd"; rm -rf "$PDFJAM_TEMP_DIR"; fi' \
-		EXIT
-	{
-		PDFJAM_TEMP_DIR=$( (umask 077 && mktemp -d "$tempfileDir/pdfjam-XXXXXX") 2>/dev/null) \
-			&& test -n "$PDFJAM_TEMP_DIR" && test -d "$PDFJAM_TEMP_DIR"
-	} || {
-		##  We'll use awk to make random number, for portability
-		random=$(awk 'END { srand(); printf ("%d\n", rand()*1000000); }' /dev/null)
-		PDFJAM_TEMP_DIR="$tempfileDir"/pdfjam"$$"-"$random"
-		(umask 077 && mkdir "$PDFJAM_TEMP_DIR")
-	} || exit $?
-	##
-	export PDFJAM_TEMP_DIR ##  so that same dir is used in secondary calls
-	if test $tidy = false; then
-		prattle "Temporary directory for this job is
+	if test -z "$build_dir"; then
+		PDFJAM_TEMP_DIR=''
+		trap \
+			'IFS="$OIFS"
+			if test $tidy != false; then cd "$pwd"; rm -rf "$PDFJAM_TEMP_DIR"; fi
+			exit 1' \
+			HUP INT TERM
+		trap \
+			'IFS="$OIFS"
+			if test $tidy != false ; then cd "$pwd"; rm -rf "$PDFJAM_TEMP_DIR"; fi' \
+			EXIT
+		{
+			PDFJAM_TEMP_DIR=$( (umask 077 && mktemp -d "$tempfileDir/pdfjam-XXXXXX") 2>/dev/null) \
+				&& test -d "$PDFJAM_TEMP_DIR"
+		} || {
+			##  We'll use awk to make random number, for portability
+			random=$(awk 'END { srand(); printf ("%d\n", rand()*1000000); }' /dev/null)
+			PDFJAM_TEMP_DIR="$tempfileDir"/pdfjam"$$"-"$random"
+			(umask 077 && mkdir "$PDFJAM_TEMP_DIR")
+		} || exit $?
+		if test $tidy = false; then
+			prattle "Temporary directory for this job is
           $PDFJAM_TEMP_DIR"
+		fi
+	else
+		(umask 077 && mkdir -p "$build_dir") || error_exit \
+			"Cannot create build directory '$build_dir'." $E_USAGE
+		PDFJAM_TEMP_DIR="$(realpath -- "$build_dir")"
 	fi
+	export PDFJAM_TEMP_DIR ##  so that same dir is used in secondary calls
 	PDFJAM_MESSAGES_FILE="$PDFJAM_TEMP_DIR"/messages.txt
 	export PDFJAM_MESSAGES_FILE
 	## so that secondary calls can write messages there as well
 	printf "%s" "$messages" >"$PDFJAM_MESSAGES_FILE" ## initial file contents
 	messages=""                                      ## we won't be using this variable again!
 else
+	[ -d "$PDFJAM_TEMP_DIR" ] || error_exit \
+		"Temporary directory $PDFJAM_TEMP_DIR missing." $E_SOFTWARE
 	PDFJAM_TEMP_DIR="$PDFJAM_TEMP_DIR/file$PDFJAM_CALL_NUMBER"
-	(umask 077 && mkdir "$PDFJAM_TEMP_DIR")
+	(umask 077 && mkdir -p "$PDFJAM_TEMP_DIR")
 fi
-umask "$original_umask"
 ## Next is from the Cygwin patch contributed by Lucas
 if using_non_cygwin_latex_from_cygwin; then
 	PDFJAM_TEMP_DIR=$(cygpath -w "$PDFJAM_TEMP_DIR")
@@ -1012,19 +1023,21 @@ raw_pdfkeyw=$(echo_pdfinfodata 'Keywords' "$pdfkeyw")
 ##
 ##  Now set up the files for latex...
 ##
-fileName="$PDFJAM_TEMP_DIR"/a
-texFile="$fileName".tex
-msgFile="$fileName".msgs
-tempFile="$PDFJAM_TEMP_DIR"/temp.tex
+cd "$PDFJAM_TEMP_DIR" || exit 1
+fileName="$(pwd)/a"
 ## Next is adapted from the Cygwin patch sent by Lucas
 if using_non_cygwin_latex_from_cygwin; then
 	filePageList=$(echo "$filePageList" | sed 's~\\~/~g')
 fi
+if [ -n "$pagecolor" ]; then
+colorcode='\usepackage{color} \definecolor{bgclr}{RGB}{$pagecolor} \pagecolor{bgclr}
+'
+else colorcode=
+fi
 (cat <<EndTemplate
 \batchmode
 \documentclass[$documentOptions]{article}
-\usepackage{color} \definecolor{bgclr}{RGB}{$pagecolor} \pagecolor{bgclr}
-\usepackage[$papersize]{geometry}
+$colorcode\usepackage[$papersize]{geometry}
 \usepackage[utf8]{inputenc}
 \ifdefined\luatexversion% LuaLaTeX
   \protected\def\pdfinfo{\pdfextension info}
@@ -1041,21 +1054,13 @@ fi
   }%
 \fi
 \usepackage{pdfpages}
-EndTemplate
-) >"$texFile"
-if test -z "$pagecolor"; then ## color package is not needed
-	cp "$texFile" "$tempFile"
-	sed '/\\\usepackage.*{color}/d' "$tempFile" >"$texFile"
-	rm "$tempFile"
-fi
-(cat <<EndTemplate
 $preamble
 $shortedge
 \begin{document}
 \includepdfmerge[$miscOptions]{$filePageList}
 \end{document}
 EndTemplate
-) >>"$texFile"
+) >"$fileName.tex"
 ##
 ##  INPUT FILES ARE ALL READY
 ##
@@ -1067,7 +1072,6 @@ if [ "$runs" -eq 1 ] ;
 then prattle "Calling ${latex}..."
 else prattle "Calling ${latex} $runs times..."
 fi
-cd "$PDFJAM_TEMP_DIR" || exit 1
 failureText=\
 "FAILED.
 The call to $latex resulted in an error.
@@ -1077,7 +1081,7 @@ log file at
 to try to diagnose the problem."
 i=1
 while [ "$i" -le "$runs" ]; do
-	"$latex" "$texFile" >"$msgFile" || {
+	"$latex" "$fileName.tex" >"$fileName.msgs" || {
 		prattle "$failureText"
 		error_exit "Run $i: Output file not written" $E_SOFTWARE
 	}

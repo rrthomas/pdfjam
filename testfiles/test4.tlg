@@ -1,0 +1,123 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+<../source-1.pdf, id=1, 421.575pt x 597.23125pt>
+File: /home/markus/src/pdfjam/build/test/test4.d/source-1.pdf Graphic file (type pdf)
+<use /home/markus/src/pdfjam/build/test/test4.d/source-1.pdf>
+Package pdftex.def Info: /home/markus/src/pdfjam/build/test/test4.d/source-1.pdf  used on input line ....
+(pdftex.def)             Requested size: 421.57396pt x 597.22978pt.
+File: /home/markus/src/pdfjam/build/test/test4.d/source-1.pdf Graphic file (type pdf)
+<use /home/markus/src/pdfjam/build/test/test4.d/source-1.pdf>
+Package pdftex.def Info: /home/markus/src/pdfjam/build/test/test4.d/source-1.pdf  used on input line ....
+(pdftex.def)             Requested size: 421.57396pt x 597.22978pt.
+<../source-1.pdf, id=4, page=1, 421.575pt x 597.23125pt>
+File: /home/markus/src/pdfjam/build/test/test4.d/source-1.pdf Graphic file (type pdf)
+<use /home/markus/src/pdfjam/build/test/test4.d/source-1.pdf, page 1>
+Package pdftex.def Info: /home/markus/src/pdfjam/build/test/test4.d/source-1.pdf , page1 used on input line ....
+(pdftex.def)             Requested size: 421.57396pt x 597.22978pt.
+File: /home/markus/src/pdfjam/build/test/test4.d/source-1.pdf Graphic file (type pdf)
+<use /home/markus/src/pdfjam/build/test/test4.d/source-1.pdf, page 1>
+Package pdftex.def Info: /home/markus/src/pdfjam/build/test/test4.d/source-1.pdf , page1 used on input line ....
+(pdftex.def)             Requested size: 297.35835pt x 421.25768pt.
+File: /home/markus/src/pdfjam/build/test/test4.d/source-1.pdf Graphic file (type pdf)
+<use /home/markus/src/pdfjam/build/test/test4.d/source-1.pdf, page 1>
+Package pdftex.def Info: /home/markus/src/pdfjam/build/test/test4.d/source-1.pdf , page1 used on input line ....
+(pdftex.def)             Requested size: 297.35835pt x 421.25768pt.
+File: /home/markus/src/pdfjam/build/test/test4.d/source-1.pdf Graphic file (type pdf)
+<use /home/markus/src/pdfjam/build/test/test4.d/source-1.pdf, page 1>
+Package pdftex.def Info: /home/markus/src/pdfjam/build/test/test4.d/source-1.pdf , page1 used on input line ....
+(pdftex.def)             Requested size: 297.35835pt x 421.25768pt.
+File: /home/markus/src/pdfjam/build/test/test4.d/source-1.pdf Graphic file (type pdf)
+<use /home/markus/src/pdfjam/build/test/test4.d/source-1.pdf, page 1>
+Package pdftex.def Info: /home/markus/src/pdfjam/build/test/test4.d/source-1.pdf , page1 used on input line ....
+(pdftex.def)             Requested size: 297.35835pt x 421.25768pt.
+Completed box being shipped out [1]
+\vbox(303.03186+0.0)x435.61078
+.\hbox(0.0+0.0)x0.0
+..\kern -72.26999
+..\vbox(0.0+0.0)x0.0, glue set 72.26999fil
+...\kern -72.26999
+...\hbox(0.0+0.0)x0.0
+....\hbox(421.17923+0.07845)x0.0, shifted 421.10078
+.....\kern 0.0
+.....\hbox(421.25768+0.0)x0.0, glue set - 447.4331fil, shifted 0.07845
+......\kern 150.07475
+......\hbox(421.25768+0.0)x297.35835
+.......\hbox(421.25768+0.0)x297.35835
+........\hbox(0.0+0.0)x0.0, shifted -421.25768
+........\hbox(421.25768+0.0)x297.35835
+.........\hbox(421.25768+0.0)x297.35835
+..........\kern 0.0
+..........\hbox(421.25768+0.0)x297.35835
+...........\hbox(421.25768+0.0)x297.35835
+............\hbox(421.25768+0.0)x297.35835
+.............\hbox(421.25768+0.0)x297.35835
+..............\kern 0.0
+..............\hbox(421.25768+0.0)x297.35835
+...............\hbox(421.25768+0.0)x297.35835
+................\hbox(421.25768+0.0)x297.35835
+.................\hbox(421.25768+0.0)x297.35835
+..................\hbox(421.25768+0.0)x0.0
+...................\hbox(421.25768+0.0)x0.0, glue set - 297.35835fil
+....................\hbox(421.25768+0.0)x297.35835
+.....................\hbox(421.25768+0.0)x297.35835
+......................\hbox(421.25871+0.0)x297.35909
+.......................\hbox(421.25871+0.0)x297.35909
+........................\hbox(421.25871+0.0)x0.0
+.........................\pdfsave
+.........................\pdfsetmatrix{.70535 0 0 .70535}
+.........................\hbox(597.23125+0.0)x0.0, glue set - 421.575fil
+..........................\hbox(597.23125+0.0)x421.575
+...........................\pdfrefximage(597.23125+0.0)x421.575
+..........................\glue 0.0 plus 1.0fil minus 1.0fil
+.........................\pdfrestore
+........................\kern 297.35909
+........................\glue 0.0 plus 1.0fil minus 1.0fil
+....................\glue 0.0 plus 1.0fil minus 1.0fil
+..................\kern 297.35835
+..................\glue 0.0 plus 1.0fil minus 1.0fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+....\glue 0.0 plus 1.0fil minus 1.0fil
+...\glue 0.0 plus 1.0fil minus 1.0fil
+.\glue -58.7374
+.\vbox(361.76926+0.0)x418.25368, shifted 17.3571
+..\vbox(12.0+0.0)x418.25368, glue set 12.0fil
+...\glue 0.0 plus 1.0fil
+...\hbox(0.0+0.0)x418.25368
+....\pdfcolorstack 0 push {0 g 0 G}
+....\hbox(0.0+0.0)x418.25368
+....\pdfcolorstack 0 pop
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(294.76926+0.0)x418.25368, glue set 284.73885fil
+...\write-{}
+...\pdfcolorstack 0 push {0 g 0 G}
+...\write-{}
+...\glue(\topskip) 10.0
+...\hbox(0.0+0.0)x418.25368, glue set 403.25368fil
+....\hbox(0.0+0.0)x15.0
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\glue 0.0 plus 1.0fil
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 30.0
+..\hbox(0.0+0.0)x418.25368
+...\pdfcolorstack 0 push {0 g 0 G}
+...\hbox(0.0+0.0)x418.25368
+...\pdfcolorstack 0 pop
+.\kern -303.03186
+.\hbox(0.0+0.0)x0.0
+..\kern -72.26999
+..\vbox(0.0+0.0)x0.0, glue set 72.26999fil
+...\kern -72.26999
+...\hbox(0.0+0.0)x0.0
+....\hbox(0.0+0.0)x0.0, shifted 421.10078
+.....\kern 0.0
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+....\glue 0.0 plus 1.0fil minus 1.0fil
+...\glue 0.0 plus 1.0fil minus 1.0fil
+.\kern 303.03186
+.\kern 0.0
+ <../source-1.pdf> (a.aux)

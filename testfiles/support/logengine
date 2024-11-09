@@ -1,0 +1,13 @@
+#!/bin/bash
+
+in=${!##\\input }
+job="$(basename -s.jam "$in")"
+out="$job.pdf"
+pdfjam="./pdfjam --build-dir '$job.d' --preamble '"'\input{regression-test.tex}\AtBeginDocument{\START\showoutput}'\'
+if [[ "${in%.sh.jam}" = "${in}" ]]; then
+	eval "$pdfjam --outfile '$out' $(< "$in")"
+	cp "$job.d/a.log" "$job.log"
+else
+	source "$in" # must create $out and $job.d/a.log
+	cp "$job.d/a.log" "$job.log"
+fi
