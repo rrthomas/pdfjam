@@ -85,6 +85,22 @@ escape_chars() {
 escape_quote() {
 	(printf "%s" "${1}" | sed "s/'/'\\\\''/g;s/^\\|\$/'/g")
 }
+##  Put argument in {} if necessary for parsing inside a key value list
+embrace() {
+	value="$1"
+	case "$value" in
+	\{*\}) ;;
+	*,* | *\]*) value="{$value}" ;;
+	esac
+	printf %s "$value"
+}
+unbrace() {
+	value="$1"
+	case "$value" in
+		\{*\}) value="${value#\{}"; value="${value%\}}"
+	esac
+	printf %s "$value"
+}
 ##
 ##  Define a function to output verbose comments:
 ##
@@ -241,7 +257,7 @@ if test -z "$paper"; then
 			if test "$paperunit" = "pt"; then paperunit=bp; fi
 			paperwidth=$(echo "$paperdimensions" | cut -f 1 -d "x")
 			paperheight=$(echo "$paperdimensions" | cut -f 2 -d "x")
-			papersize="papersize={$paperwidth$paperunit,$paperheight$paperunit}"
+			papersize="$paperwidth$paperunit,$paperheight$paperunit"
 			paper='' ## We might not have a LaTeX-compatible name
 		else
 			echo "The 'paper' program seems not to be working; not using it"
@@ -467,7 +483,7 @@ while test -n "${1}${2}"; do
 				;;
 			--paper)
 				paper="${2}"
-				papersize='' ## clear papersize
+				papersize=''
 				callOptions="$callOptions ${1} $(escape_chars "$2")"
 				shift
 				;;
@@ -486,30 +502,30 @@ while test -n "${1}${2}"; do
 				--ansiapaper | --ansibpaper | --ansicpaper | \
 				--ansidpaper | --ansiepaper | \
 				--letterpaper | --legalpaper | --executivepaper)
-				paper=$(printf "%s" "${1}" | sed 's/^--//')
-				papersize='' ## clear papersize
+				paper="${1#--}"
+				papersize=''
 				callOptions="$callOptions ${1}"
 				;;
 			--papersize)
-				paper='' ## clear paper
-				papersize="papersize=${2}"
-				callOptions="$callOptions ${1} $(escape_chars "$2")"
+				paper=''
+				papersize=$(unbrace "$2")
+				callOptions="$callOptions ${1} $(escape_chars "$papersize")"
 				shift
 				;;
 			--landscape)
-				landscape=true
+				orientation=landscape
 				callOptions="$callOptions --landscape"
 				;;
 			--no-landscape)
-				landscape=false
+				orientation=
 				callOptions="$callOptions --no-landscape"
 				;;
 			--twoside)
-				twoside=true
+				twoside=twoside
 				callOptions="$callOptions --twoside"
 				;;
 			--no-twoside)
-				twoside=false
+				twoside=
 				callOptions="$callOptions --no-twoside"
 				;;
 			--preamble)
@@ -521,18 +537,8 @@ while test -n "${1}${2}"; do
 				callOptions="$callOptions ${1} $(escape_chars "$2")"
 				shift
 				;;
-			--*)
-				##  options for \includepdfmerge
-				argName=$(printf "%s" "${1}" | sed 's/^--//')
-				# wrap value in {} if necessary and not done yet
-				case "$2" in
-				\{*\}) value="$2" ;;
-				*,* | *\]*) value="{$2}" ;;
-				*) value="$2" ;;
-				esac
-				## saved for possible use in LaTeX file
-				miscOptions=$miscOptions,"$argName=$value"
-				## saved for possible use in a further call to pdfjam
+			--*) ##  miscellaneous options for \includepdfmerge
+				miscOptions="$miscOptions,${1#--}=$(embrace "$2")"
 				callOptions="$callOptions ${1} $(escape_quote "$2")"
 				shift
 				;;
@@ -636,49 +642,35 @@ if test "$PDFJAM_CALL_NUMBER" -eq 0 && test "$inputFromStdin" != true; then
 		prattle "No PDF/JPG/PNG source specified: input is from stdin."
 	fi
 fi
-##
-##  Delete leading comma from $miscOptions:
-##
-miscOptions=$(printf "%s" "$miscOptions" | sed 's/^,//')
-##
+## Massage options
+[ "${paper:+set}" = "${papersize:+set}" ] && error_exit "Exactly one of \
+\$paper='$paper' and \$papersize='$papersize' must be set." $E_SOFTWARE
+miscOptions="${miscOptions#,}"
 if test -n "$preamble"; then
 	callOptions="$callOptions --preamble $(escape_quote "$preamble")"
 fi
-##  Delete leading space from $callOptions:
-##
-callOptions=$(printf "%s" "$callOptions" | sed 's/^ //')
-##
-##  Set up a document options variable:
-##
-case $landscape in
-true)
-	orientation=landscape
-	if test -n "$papersize"; then
-		papersize="papersize={$paperheight$paperunit,$paperwidth$paperunit}"
-	fi
-	;;
-*)
-	orientation=""
-	;;
-esac
-case $twoside in
-true)
-	twoside=twoside
-	;;
-*)
-	twoside=""
-	;;
-esac
+callOptions="${callOptions# }"
 case $shortedge in
 true)
 	shortedge=""
 	;;
 *)
-	shortedge='{\makeatletter\AddToHook{shipout/before}{\ifodd\c@page\pdfpageattr{/Rotate 180}\fi}}'
+	shortedge='
+{\makeatletter\AddToHook{shipout/before}{\ifodd\c@page\pdfpageattr{/Rotate 180}\fi}}'
 	;;
 esac
-documentOptions="$paper","$orientation","$twoside"
-documentOptions=$(printf "%s" "$documentOptions" | sed 's/^,//' | sed 's/,$//')
+if [ -n "$papersize" ]; then
+	if [ "$orientation" = landscape ]; then
+		## geometry package ignores landscape, thus swap x,y → y,x manually
+		papersize="${papersize#*,},${papersize%%,*}"
+	fi
+	papersize="papersize={$papersize}"
+fi
+
+documentOptions=
+for i in "$paper" "$orientation" "$twoside"; do
+	[ -n "$i" ] && documentOptions="$documentOptions$i,"
+done
 ##
 ##  END OF ARGUMENT PROCESSING
 ##
@@ -958,17 +950,25 @@ for k in ${fileSpec}; do
 		sourceFullPath="$sourceDir"/"$pdfName"
 		uniqueName="source-$counter.pdf"
 		if using_non_cygwin_latex_from_cygwin; then
-			cp "$sourceFullPath" "$PDFJAM_TEMP_DIR/$uniqueName"
+			cp -f "$sourceFullPath" "$PDFJAM_TEMP_DIR/$uniqueName"
 		else
-			ln -s "$sourceFullPath" "$PDFJAM_TEMP_DIR/$uniqueName"
+			ln -fs "$sourceFullPath" "$PDFJAM_TEMP_DIR/$uniqueName"
 		fi
 		;;
 	esac
 	filePageList="$filePageList","$uniqueName","$pageSpec"
 done
 IFS="$OIFS"
-filePageList=$(printf "%s" "$filePageList" \
-	| sed 's/^,//')  ## remove leading comma
+filePageList="${filePageList#,}"
+if using_non_cygwin_latex_from_cygwin; then
+	filePageList=$(printf %s "$filePageList" | tr \\\\ /)
+fi
+
+##
+##  Finally enter build directory
+##
+cd "$PDFJAM_TEMP_DIR" || exit 1
+
 ##
 ##  Do the pdfinfo stuff (if relevant)...
 ##
@@ -977,18 +977,6 @@ select_pdfinfo() {
 		| grep -e "^$1:" \
 		| sed -e 's/^'"$1"':\s*//'
 }
-echo_hex_iconv_utf16be() {
-	printf '%s' "$1" \
-		| "$iconv" -f UTF-8 -t UTF-16BE \
-		| od -An -v -tx1 \
-		| tr -d '[:space:]'
-}
-echo_pdfinfodata() {
-	if [ -n "$2" ]; then
-		printf '%s' "/$1 <feff$(echo_hex_iconv_utf16be "$2")>"
-	fi
-}
-
 if test "$keepinfo" = true; then
 	prattle "Calling ${pdfinfo}..."
 	PDFinfo=$(pdfinfo -enc UTF-8 "$uniqueName")
@@ -997,6 +985,7 @@ if test "$keepinfo" = true; then
 	pdfsubj=$(select_pdfinfo 'Subject'  "$PDFinfo")
 	pdfkeyw=$(select_pdfinfo 'Keywords' "$PDFinfo")
 fi
+
 echo_iconv_from_enc() {
 	printf '%s' "$2" | "$iconv" -f "$1" -t UTF-8
 }
@@ -1013,20 +1002,39 @@ if test -n "$pdfKeywords"; then
 	pdfkeyw=$(echo_iconv_from_enc "$enc" "$pdfKeywords")
 fi
 
-## Converting to PDF string
-raw_pdftitl=$(echo_pdfinfodata 'Title'    "$pdftitl")
-raw_pdfauth=$(echo_pdfinfodata 'Author'   "$pdfauth")
-raw_pdfsubj=$(echo_pdfinfodata 'Subject'  "$pdfsubj")
-raw_pdfkeyw=$(echo_pdfinfodata 'Keywords' "$pdfkeyw")
-
-##
-##  Now set up the files for latex...
-##
-cd "$PDFJAM_TEMP_DIR" || exit 1
-fileName="$(pwd)/a"
-if using_non_cygwin_latex_from_cygwin; then
-	filePageList=$(echo "$filePageList" | sed 's~\\~/~g')
+echo_hex_iconv_utf16be() {
+	printf '%s' "$1" \
+		| "$iconv" -f UTF-8 -t UTF-16BE \
+		| od -An -v -tx1 \
+		| tr -d '[:space:]'
+}
+addto_pdfinfo() {
+	if [ -n "$2" ]; then
+		## Convert to PDF string and append
+		raw_pdfinfo="$raw_pdfinfo
+    /$1 <feff$(echo_hex_iconv_utf16be "$2")> %"
+	fi
+}
+raw_pdfinfo=
+addto_pdfinfo Title    "$pdftitl"
+addto_pdfinfo Author   "$pdfauth"
+addto_pdfinfo Subject  "$pdfsubj"
+addto_pdfinfo Keywords "$pdfkeyw"
+if [ -n "$raw_pdfinfo" ]; then
+	raw_pdfinfo='
+\ifdefined\luatexversion% LuaLaTeX
+  \protected\def\pdfinfo{\pdfextension info}
+\fi
+\ifdefined\XeTeXversion% XeLaTeX
+  \protected\def\pdfinfo#1{\AddToHook{shipout/firstpage}{\special{pdf:docinfo << #1 >>}}}
+\fi
+\ifdefined\pdfinfo%
+  \pdfinfo{%'"$raw_pdfinfo"'
+  }%
+\fi'
 fi
+
+## Apply $pagecolor if set
 if [ -n "$pagecolor" ]; then
 	colorcode="
 \\usepackage{color}
@@ -1035,28 +1043,17 @@ if [ -n "$pagecolor" ]; then
 else
 	colorcode=
 fi
+##
+##  Now set up the LaTeX file
+##
+fileName="$(pwd)/a"
 (cat <<EndTemplate
 \batchmode
 \documentclass[$documentOptions]{article}$colorcode
 \usepackage[$papersize]{geometry}
-\usepackage[utf8]{inputenc}
-\ifdefined\luatexversion% LuaLaTeX
-  \protected\def\pdfinfo{\pdfextension info}
-\fi
-\ifdefined\XeTeXversion% XeLaTeX
-  \protected\def\pdfinfo#1{\AtBeginDvi{\special{pdf:docinfo << #1 >>}}}
-\fi
-\ifdefined\pdfinfo%
-  \pdfinfo{%
-    $raw_pdftitl %
-    $raw_pdfauth %
-    $raw_pdfsubj %
-    $raw_pdfkeyw %
-  }%
-\fi
+\usepackage[utf8]{inputenc}$raw_pdfinfo
 \usepackage{pdfpages}
-$preamble
-$shortedge
+$preamble$shortedge
 \begin{document}
 \includepdfmerge[$miscOptions]{$filePageList}
 \end{document}
