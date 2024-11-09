@@ -3,11 +3,11 @@ https://www.ctan.org/tex-archive/macros/latex/contrib/pdfpages
 
 Usage: pdfjam [OPTIONS] [--] [FILE1 [SEL1]] [FILE2 [SEL2]]...
 where
-* 'FILE1' etc. are PDF files (JPG and PNG files are also allowed).  For 
-   input from /dev/stdin, use the special name '/dev/stdin' in place of any 
-   of FILE1, FILE2, etc: this can be mixed with 'real' files as needed, to 
-   allow input through a pipe (note that if /dev/stdin is connected to tty, 
-   an error results).  If 'FILE1' is absent, pdfjam will use '/dev/stdin' 
+* 'FILE1' etc. are PDF files (JPG and PNG files are also allowed).  For
+   input from /dev/stdin, use the special name '/dev/stdin' in place of any
+   of FILE1, FILE2, etc: this can be mixed with 'real' files as needed, to
+   allow input through a pipe (note that if /dev/stdin is connected to tty,
+   an error results).  If 'FILE1' is absent, pdfjam will use '/dev/stdin'
    (and will use '-' for the page selection -- see next item).
 * 'SEL1' is a page selection for FILE1, etc.
    To select all pages (the default) use '-'.  See the pdfpages manual for
@@ -21,8 +21,8 @@ where
           ... file1 file2 2- file3 1-7 ...
    would apply the page selection '2-' to file1 and file2, and '1-7'
    to file3.  A page selection applies to all the files *immediately*
-   preceding it in the argument list.  A missing page selection defaults to 
-   '-'; this includes the case where 'FILE1' is absent and so /dev/stdin gets 
+   preceding it in the argument list.  A missing page selection defaults to
+   '-'; this includes the case where 'FILE1' is absent and so /dev/stdin gets
    used by default.
 * 'options' are pdfpages specifications in the form '--KEY VALUE' (see
    below), or
@@ -49,9 +49,9 @@ where
                   existing directory, pdfjam will attempt to write its
                   output PDF file(s) there, with name(s) derived from the
                   input file name(s) and the --suffix option (see below).
-                  Otherwise the output file will be PATH.  If '/dev/stdin' 
+                  Otherwise the output file will be PATH.  If '/dev/stdin'
                   is the only or last input file, PATH cannot be a directory.
-                  Your current default PATH for output is: 
+                  Your current default PATH for output is:
                   $outFile
      --suffix STRING
                   Specifies a suffix for output file names, to be used when
@@ -80,9 +80,9 @@ where
                   line.  An example:
                       pdfjam --nup 2x2 myfile.pdf -o myfile-4up.pdf \\
                           --preamble '\usepackage{fancyhdr} \pagestyle{fancy}'
-                  The '--preamble' option can be used, for example, to load 
+                  The '--preamble' option can be used, for example, to load
                   LaTeX packages and/or to set global options.  If '--preamble'
-                  is used more than once in the call, the supplied preamble 
+                  is used more than once in the call, the supplied preamble
                   strings are simply concatenated.  For a note on avoiding
                   clashes, see the README file, also available at
                   https://github.com/rrthomas/pdfjam
@@ -103,9 +103,9 @@ where
                   package.  These options, individually, over-ride --keepinfo.
      --longedge
      --shortedge
-		  Specify the direction in which double-sided pages are
-		  flipped. It may not work correctly in all cases, so if every
-		  other page is rotated 180°, flip this switch.
+                  Specify the direction in which double-sided pages are
+                  flipped. It may not work correctly in all cases, so if every
+                  other page is rotated 180°, flip this switch.
      --landscape
      --no-landscape
                   Specify landscape page orientation (or not) in the
@@ -130,7 +130,7 @@ where
                   (Note the braces, and the comma!)
                   [Libpaper default: $papersize]
      --pagecolor RGBSPEC
-                  Specify a background colour for the output pages.  The 
+                  Specify a background colour for the output pages.  The
                   RGBSPEC must be a comma-separated trio of integers
                   between 0 and 255.  An example:
                          --pagecolor 150,200,150
@@ -143,12 +143,12 @@ where
                   [Default for you at this site: tidy=$tidy]
      --latex PATHTOLATEX
                   Specify the LaTeX engine to be used (one of pdflatex,
-		  xelatex, lualatex).  The PATHTOLATEX string must be
-		  the full path to a suitable LaTeX executable (for example
-		  /usr/bin/xelatex on many unix systems).
-		  [Default for you at this site: latex=$latex]
+                  xelatex, lualatex).  The PATHTOLATEX string must be
+                  the full path to a suitable LaTeX executable (for example
+                  /usr/bin/xelatex on many unix systems).
+                  [Default for you at this site: latex=$latex]
      --runs N
-                  Run latex N times, for each output document made. 
+                  Run latex N times, for each output document made.
                   [Default for you at this site: runs=$runs]
      --vanilla
                   Suppress the reading of any pdfjam configuration files.
@@ -169,17 +169,17 @@ where
                       --frame true  (to put a frame round each input page)
                       --booklet true (to reorder the pages in signatures,
                                       generally useful with --nup)
-                      --signature N (specify the signature size, as the 
+                      --signature N (specify the signature size, as the
                                      number of original pages in a signature
                                      in the final document. Caveat: booklet
-                                     is a short form for signature, so if 
+                                     is a short form for signature, so if
                                      you use booklet true, signature will be
                                      ignored)
                       --trim '1cm 2cm 1cm 2cm' --clip true
                                     (to trim those amounts from left, bottom,
-                                     right and top, respectively, of input 
-                                     pages) 
-                      --angle NNN (The angle of rotation in degrees. Angles 
+                                     right and top, respectively, of input
+                                     pages)
+                      --angle NNN (The angle of rotation in degrees. Angles
                                    that are not either 90, 180 or 270 will
                                    still create straight rectangular pages,
                                    only the content will be rotated.)
@@ -188,7 +188,7 @@ where
                   https://www.ctan.org/tex-archive/macros/latex/contrib/pdfpages
 * '--' can be used to signal that there are no more options to come.
 
-Defaults for the options '--suffix', '--keepinfo', '--paper', '--outfile', 
+Defaults for the options '--suffix', '--keepinfo', '--paper', '--outfile',
 '--landscape', '--twoside', '--tidy', '--latex', '--runs', '--checkfiles'
 and '--preamble' can be set in site-wide or user-specific configuration files.
 The path that is searched for site-wide configuration files (named pdfjam.conf)

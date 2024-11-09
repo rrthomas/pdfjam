@@ -40,7 +40,7 @@ Should produce A4 (from default as shown above).
 ```
 $ ./bin/pdfjam --landscape ../../test.pdf
 ```
-Should produce landscape A4. 
+Should produce landscape A4.
 
 ### Check whether `--fitpaper true` works as expected:
 ```
@@ -115,12 +115,12 @@ $ ./bin/pdfjam ../../test.pdf
           ----
   pdfjam: This is pdfjam version x.yy.
   pdfjam: Reading any site-wide or user-specific defaults...
-              ## 
-              ## From /home/david/.pdfjam.conf: 
+              ##
+              ## From /home/david/.pdfjam.conf:
               ##
               paper='letterpaper'
   pdfjam: Effective call for this run of pdfjam:
-          ./bin/pdfjam  -- ../../test.pdf - 
+          ./bin/pdfjam  -- ../../test.pdf -
   pdfjam: Calling /usr/bin/pdflatex...
   pdfjam: Finished.  Output was written to '/home/david/pdfjam-x.yy/test-pdfjam.pdf'.
 ```
@@ -133,12 +133,12 @@ $ ./bin/pdfjam --landscape ../../test.pdf
           ----
   pdfjam: This is pdfjam version x.yy.
   pdfjam: Reading any site-wide or user-specific defaults...
-              ## 
-              ## From /home/david/.pdfjam.conf: 
+              ##
+              ## From /home/david/.pdfjam.conf:
               ##
               paper='letterpaper'
   pdfjam: Effective call for this run of pdfjam:
-          ./bin/pdfjam --landscape -- ../../test.pdf - 
+          ./bin/pdfjam --landscape -- ../../test.pdf -
   pdfjam: Calling /usr/bin/pdflatex...
   pdfjam: Finished.  Output was written to '/home/david/pdfjam-x.yy/test-pdfjam.pdf'.
 ```
@@ -151,12 +151,12 @@ $ ./bin/pdfjam --fitpaper true ../../test.pdf
           ----
   pdfjam: This is pdfjam version x.yy.
   pdfjam: Reading any site-wide or user-specific defaults...
-              ## 
-              ## From /home/david/.pdfjam.conf: 
+              ##
+              ## From /home/david/.pdfjam.conf:
               ##
               paper='letterpaper'
   pdfjam: Effective call for this run of pdfjam:
-          ./bin/pdfjam --fitpaper 'true' -- ../../test.pdf - 
+          ./bin/pdfjam --fitpaper 'true' -- ../../test.pdf -
   pdfjam: Calling /usr/bin/pdflatex...
   pdfjam: Finished.  Output was written to '/home/david/pdfjam-x.yy/test-pdfjam.pdf'.
 ```
@@ -169,12 +169,12 @@ $ ./bin/pdfjam --letterpaper ../../test.pdf
           ----
   pdfjam: This is pdfjam version x.yy.
   pdfjam: Reading any site-wide or user-specific defaults...
-              ## 
-              ## From /home/david/.pdfjam.conf: 
+              ##
+              ## From /home/david/.pdfjam.conf:
               ##
               paper='letterpaper'
   pdfjam: Effective call for this run of pdfjam:
-          ./bin/pdfjam --letterpaper -- ../../test.pdf - 
+          ./bin/pdfjam --letterpaper -- ../../test.pdf -
   pdfjam: Calling /usr/bin/pdflatex...
   pdfjam: Finished.  Output was written to '/home/david/pdfjam-x.yy/test-pdfjam.pdf'.
 ```
@@ -186,12 +186,12 @@ $ ./bin/pdfjam --a5paper ../../test.pdf
           ----
   pdfjam: This is pdfjam version x.yy.
   pdfjam: Reading any site-wide or user-specific defaults...
-              ## 
-              ## From /home/david/.pdfjam.conf: 
+              ##
+              ## From /home/david/.pdfjam.conf:
               ##
               paper='letterpaper'
   pdfjam: Effective call for this run of pdfjam:
-          ./bin/pdfjam --a5paper -- ../../test.pdf - 
+          ./bin/pdfjam --a5paper -- ../../test.pdf -
   pdfjam: Calling /usr/bin/pdflatex...
   pdfjam: Finished.  Output was written to '/home/david/pdfjam-x.yy/test-pdfjam.pdf'.
 ```
@@ -202,12 +202,12 @@ $ ./bin/pdfjam --landscape --a5paper ../../test.pdf
           ----
   pdfjam: This is pdfjam version x.yy.
   pdfjam: Reading any site-wide or user-specific defaults...
-              ## 
-              ## From /home/david/.pdfjam.conf: 
+              ##
+              ## From /home/david/.pdfjam.conf:
               ##
               paper='letterpaper'
   pdfjam: Effective call for this run of pdfjam:
-          ./bin/pdfjam --landscape --a5paper -- ../../test.pdf - 
+          ./bin/pdfjam --landscape --a5paper -- ../../test.pdf -
   pdfjam: Calling /usr/bin/pdflatex...
   pdfjam: Finished.  Output was written to '/home/david/pdfjam-x.yy/test-pdfjam.pdf'.
 ```
@@ -222,12 +222,12 @@ $ ./bin/pdfjam ../../test.pdf
           ----
   pdfjam: This is pdfjam version x.yy.
   pdfjam: Reading any site-wide or user-specific defaults...
-              ## 
-              ## From /home/david/.pdfjam.conf: 
+              ##
+              ## From /home/david/.pdfjam.conf:
               ##
               paper='letterpaper'
   pdfjam: Effective call for this run of pdfjam:
-          ./bin/pdfjam  -- ../../test.pdf - 
+          ./bin/pdfjam  -- ../../test.pdf -
   pdfjam: Calling /usr/bin/pdflatex...
   pdfjam: Finished.  Output was written to '/home/david/pdfjam-x.yy/test-pdfjam.pdf'.
 ```

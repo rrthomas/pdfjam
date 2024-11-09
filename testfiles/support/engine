@@ -1,10 +1,12 @@
 #!/bin/bash
 
 in=${!##\\input }
-out="$(basename -s.jam "$in").pdf"
+job="$(basename -s.jam "$in")"
+out="$job.pdf"
+pdfjam="./pdfjam --build-dir '$job.d' --preamble '"'\input{regression-test.tex}\AtBeginDocument{\START}'\'
 if [[ "${in%.sh.jam}" = "${in}" ]]; then
-	eval "./pdfjam --no-tidy -o '$out' $(< "$in")"
+	eval "$pdfjam --outfile '$out' $(< "$in")"
 else
-	bash "$in" # must create $out = *.sh.pdf
+	source "$in" # must create $out and $job.d/a.log
 fi
-sed -i 's+/tmp/pdfjam-....../+/tmp/pdfjam-RANDOM/+' "$out"
+awk '/^ *\[[0-9]*$/{ORS=""} /\]/{ORS="\n"} //' <"$job.d/a.log" >"$job.log"
