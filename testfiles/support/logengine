@@ -6,8 +6,7 @@ out="$job.pdf"
 pdfjam="./pdfjam --build-dir '$job.d' --preamble '"'\input{regression-test.tex}\AtBeginDocument{\START}'\'
 if [[ "${in%.sh.jam}" = "${in}" ]]; then
 	eval "$pdfjam --outfile '$out' $(< "$in")"
-	cp "$job.d/a.log" "$job.log"
 else
 	source "$in" # must create $out and $job.d/a.log
-	cp "$job.d/a.log" "$job.log"
 fi
+awk '/^ *(\[[0-9]*)?$/{ORS=""} {print;ORS="\n"}' <"$job.d/a.log" >"$job.log"

@@ -30,5 +30,4 @@ File: source-1.pdf Graphic file (type pdf)
 <use source-1.pdf, page 1>
 Package pdftex.def Info: source-1.pdf , page1 used on input line ....
 (pdftex.def)             Requested size: 421.73477pt x 597.4576pt.
-[1
- <./source-1.pdf>] (a.aux)
+[1 <./source-1.pdf>] (a.aux)

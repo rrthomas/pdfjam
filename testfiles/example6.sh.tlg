@@ -43,8 +43,7 @@ File: stdin.pdf Graphic file (type pdf)
 <use stdin.pdf, page 2>
 Package pdftex.def Info: stdin.pdf , page2 used on input line ....
 (pdftex.def)             Requested size: 298.15167pt x 421.6715pt.
-[1
- <./stdin.pdf> <./stdin.pdf>]
+[1 <./stdin.pdf> <./stdin.pdf>]
 <stdin.pdf, id=32, page=3, 597.50829pt x 845.0471pt>
 File: stdin.pdf Graphic file (type pdf)
 <use stdin.pdf, page 3>
@@ -71,8 +70,7 @@ File: stdin.pdf Graphic file (type pdf)
 <use stdin.pdf, page 4>
 Package pdftex.def Info: stdin.pdf , page4 used on input line ....
 (pdftex.def)             Requested size: 298.15167pt x 421.6715pt.
-[2
- <./stdin.pdf> <./stdin.pdf>]
+[2 <./stdin.pdf> <./stdin.pdf>]
 <stdin.pdf, id=43, page=5, 597.50829pt x 845.0471pt>
 File: stdin.pdf Graphic file (type pdf)
 <use stdin.pdf, page 5>
@@ -99,8 +97,7 @@ File: stdin.pdf Graphic file (type pdf)
 <use stdin.pdf, page 6>
 Package pdftex.def Info: stdin.pdf , page6 used on input line ....
 (pdftex.def)             Requested size: 298.15167pt x 421.6715pt.
-[3
- <./stdin.pdf> <./stdin.pdf>]
+[3 <./stdin.pdf> <./stdin.pdf>]
 <stdin.pdf, id=54, page=7, 597.50829pt x 845.0471pt>
 File: stdin.pdf Graphic file (type pdf)
 <use stdin.pdf, page 7>
@@ -127,8 +124,7 @@ File: stdin.pdf Graphic file (type pdf)
 <use stdin.pdf, page 8>
 Package pdftex.def Info: stdin.pdf , page8 used on input line ....
 (pdftex.def)             Requested size: 298.15167pt x 421.6715pt.
-[4
- <./stdin.pdf> <./stdin.pdf>]
+[4 <./stdin.pdf> <./stdin.pdf>]
 <stdin.pdf, id=72, page=9, 597.50829pt x 845.0471pt>
 File: stdin.pdf Graphic file (type pdf)
 <use stdin.pdf, page 9>
@@ -155,8 +151,7 @@ File: stdin.pdf Graphic file (type pdf)
 <use stdin.pdf, page 10>
 Package pdftex.def Info: stdin.pdf , page10 used on input line ....
 (pdftex.def)             Requested size: 298.15167pt x 421.6715pt.
-[5
- <./stdin.pdf> <./stdin.pdf>]
+[5 <./stdin.pdf> <./stdin.pdf>]
 <stdin.pdf, id=83, page=11, 597.50829pt x 845.0471pt>
 File: stdin.pdf Graphic file (type pdf)
 <use stdin.pdf, page 11>
@@ -183,8 +178,7 @@ File: stdin.pdf Graphic file (type pdf)
 <use stdin.pdf, page 12>
 Package pdftex.def Info: stdin.pdf , page12 used on input line ....
 (pdftex.def)             Requested size: 298.15167pt x 421.6715pt.
-[6
- <./stdin.pdf> <./stdin.pdf>]
+[6 <./stdin.pdf> <./stdin.pdf>]
 <stdin.pdf, id=94, page=13, 597.50829pt x 845.0471pt>
 File: stdin.pdf Graphic file (type pdf)
 <use stdin.pdf, page 13>
@@ -211,8 +205,7 @@ File: stdin.pdf Graphic file (type pdf)
 <use stdin.pdf, page 14>
 Package pdftex.def Info: stdin.pdf , page14 used on input line ....
 (pdftex.def)             Requested size: 298.15167pt x 421.6715pt.
-[7
- <./stdin.pdf> <./stdin.pdf>]
+[7 <./stdin.pdf> <./stdin.pdf>]
 <stdin.pdf, id=106, page=15, 597.50829pt x 845.0471pt>
 File: stdin.pdf Graphic file (type pdf)
 <use stdin.pdf, page 15>
@@ -234,5 +227,4 @@ File: stdin.pdf Graphic file (type pdf)
 <use stdin.pdf, page 15>
 Package pdftex.def Info: stdin.pdf , page15 used on input line ....
 (pdftex.def)             Requested size: 298.15167pt x 421.6715pt.
-[8
- <./stdin.pdf>] (a.aux)
+[8 <./stdin.pdf>] (a.aux)
