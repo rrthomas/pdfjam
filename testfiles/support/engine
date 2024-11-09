@@ -1,16 +1,12 @@
 #!/bin/bash
 
-# TODO Lengths do not fit.
-# Either do more normalizing, rely on log tests or use some utterly different tool to compare pdf files.
-
 in=${!##\\input }
-out="$(basename -s.jam "$in").pdf"
-if [[ -n "$NO_TIDY" ]]; then notidy='--no-tidy '; else notidy=; fi
+job="$(basename -s.jam "$in")"
+out="$job.pdf"
+pdfjam="./pdfjam --build-dir '$job.d' --preamble '"'\input{regression-test.tex}\AtBeginDocument{\START}'\'
 if [[ "${in%.sh.jam}" = "${in}" ]]; then
-	eval "./pdfjam $notidy--outfile '$out' $(< "$in")"
+	eval "$pdfjam --outfile '$out' $(< "$in")"
 else
-	bash "$in" # must create $out = *.sh.pdf
+	source "$in" # must create $out and $job.d/a.log
 fi
-sed -i 's+/tmp/pdfjam-....../+/tmp/pdfjam-RANDOM/+
-s+^/Producer (pdfTeX-.*)$+/Producer (pdfTeX-0.00.00)+
-s+^/PTEX.Fullbanner (This is pdfTeX, Version 3.141592653.*)$+/PTEX.Fullbanner (This is pdfTeX, Version 3.141592653-BUILD INFO)+' "$out"
+awk '/^ *\[[0-9]*$/{ORS=""} /\]/{ORS="\n"} //' <"$job.d/a.log" >"$job.log"

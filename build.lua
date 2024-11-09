@@ -3,7 +3,7 @@ module = "pdfjam"
 scriptfiles = {"bin/*"}
 scriptmanfiles = {"man/*"}
 
-checkengines = {"logengine"}
+checkengines = {"engine"}
 lvtext = ".jam"
 
 uploadconfig = {
