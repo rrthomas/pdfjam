@@ -138,9 +138,12 @@ where
      --tidy
      --no-tidy
                   Specify whether the temporary directory created by
-                  pdfjam should be deleted.  Use '--no-tidy' to help debug
-                  most errors.
+                  pdfjam should be deleted.  Use '--no-tidy' or '--build-dir'
+                  below to help debug most errors.
                   [Default for you at this site: tidy=$tidy]
+     --build-dir PATH
+                  Specifies a build directory to be used in place of a
+                  temporary one. Existing files inside will be overwritten.
      --latex PATHTOLATEX
                   Specify the LaTeX engine to be used (one of pdflatex,
                   xelatex, lualatex).  The PATHTOLATEX string must be
