@@ -679,7 +679,7 @@ true)
 	shortedge=""
 	;;
 *)
-	shortedge='\usepackage{everyshi}\makeatletter\EveryShipout{\ifodd\c@page\pdfpageattr{/Rotate 180}\fi}\makeatother'
+	shortedge='{\makeatletter\AddToHook{shipout/before}{\ifodd\c@page\pdfpageattr{/Rotate 180}\fi}}'
 	;;
 esac
 documentOptions="$paper","$orientation","$twoside"
