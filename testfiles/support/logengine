@@ -3,7 +3,7 @@
 in=${!##\\input }
 job="$(basename -s.jam "$in")"
 out="$job.pdf"
-pdfjam="./pdfjam --build-dir '$job.d' --preamble '"'\input{regression-test.tex}\AtBeginDocument{\START\showoutput}'\'
+pdfjam="./pdfjam --build-dir '$job.d' --preamble '"'\input{regression-test.tex}\AtBeginDocument{\START}'\'
 if [[ "${in%.sh.jam}" = "${in}" ]]; then
 	eval "$pdfjam --outfile '$out' $(< "$in")"
 	cp "$job.d/a.log" "$job.log"

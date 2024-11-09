@@ -941,7 +941,7 @@ for k in ${fileSpec}; do
 					"tty is connected to stdin, no PDF/JPG/PNG file found" \
 					$E_NOINPUT
 			fi
-			cat >"$uniqueName"
+			cat >"$PDFJAM_TEMP_DIR/$uniqueName"
 			stdinUnread=false
 		fi
 		;;
