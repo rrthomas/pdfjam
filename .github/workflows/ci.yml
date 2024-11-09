@@ -9,9 +9,10 @@ jobs:
     - uses: actions/checkout@v4
     - name: Install dependencies
       run: sudo apt-get update && sudo apt-get -y install texlive-latex-extra shellcheck devscripts
+    - name: l3build check
+      run: PATH="$PATH:." l3build check || { cat build/test/*.diff; false; }
     - name: Build
       run: |
-        PATH="$PATH:." l3build check
         ./build.sh
         cd built_package/pdfjam*
         unzip tests.zip

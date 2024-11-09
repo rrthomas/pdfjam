@@ -4,7 +4,7 @@ scriptfiles = {"bin/*"}
 scriptmanfiles = {"man/*"}
 
 checkengines = {"engine"}
-pvtext = ".jam"
+lvtext = ".jam"
 
 uploadconfig = {
 	pkg = "pdfjam",
