@@ -117,17 +117,19 @@ where
                   [Default for you at this site: twoside=$twoside]
      --paper PAPERSPEC  (or simply --PAPERSPEC)
                   Specify a LaTeX paper size, for example
-                  '--paper a4paper' or simply '--a4paper' for ISO A4 paper.
+                  '--paper a4' or simply '--a4paper' for ISO A4 paper.
                   A wide range of paper sizes is available thanks to the
                   LaTeX 'geometry' package.  For details see documentation
                   for LaTeX and/or the 'geometry' package.
                   If no default value is set and libpaper is not available,
                   A4 is used.
                   [Default for you at this site: paper=$paper]
-     --papersize '{WIDTH,HEIGHT}'
-                  Specify a custom paper size, e.g.,
-                      --papersize '{10in,18cm}'
-                  (Note the braces, and the comma!)
+     --papersize 'WIDTH,HEIGHT'
+                  Specify a custom paper size in points = 1/72 inch (known as
+                  bp in LaTeX and as pt in other software), e.g.
+                      --papersize 612,792
+                  Units may also be specified explicitly, e.g.
+                      --papersize 10in,18cm
                   [Libpaper default: $papersize]
      --pagecolor RGBSPEC
                   Specify a background colour for the output pages.  The

@@ -76,12 +76,13 @@ trap 'IFS=$OIFS; exit 1' HUP INT TERM
 newline='
 '
 ##
-##  Define a function to escape tricky characters in file names etc:
+##  Functions to massage input
 ##
+##  Escape tricky characters
 escape_chars() {
 	(printf "%s" "${1}" | sed 's/[^a-zA-Z0-9._/\-]/\\&/g')
 }
-## Functionally the same, but more readable where tricky characters are likely
+##  Functionally the same, but more readable where tricky characters are likely
 escape_quote() {
 	(printf "%s" "${1}" | sed "s/'/'\\\\''/g;s/^\\|\$/'/g")
 }
@@ -94,12 +95,13 @@ embrace() {
 	esac
 	printf %s "$value"
 }
-unbrace() {
+##  Strip legacy surrounding {}; add bp if no units given
+to_papersize() {
 	value="$1"
 	case "$value" in
 		\{*\}) value="${value#\{}"; value="${value%\}}"
 	esac
-	printf %s "$value"
+	printf %s "$value" | sed -E 's/([0-9]{1,}\.{0,1}[0-9]*)(,|$)/\1bp\2/g'
 }
 ##
 ##  Define a function to output verbose comments:
@@ -244,26 +246,45 @@ fi
 ## For backwards compatibility, check here for a $pdflatex setting in the config file
 if [ -n "${pdflatex:-}" ]; then latex="$pdflatex"; fi
 ##
-##  If paper size is not set, get default paper size from libpaper >= 2 if
+##  If paper size is not set, get default paper size from libpaper if
 ##  possible, otherwise guess A4.
 ##
+paperformats=:a0:a1:a2:a3:a4:a5:a6:b0:b1:b2:b3:b4:b5:b6:c0:c1:c2:c3:c4:c5:c6\
+:ansia:ansib:ansic:ansid:ansie:letter:legal:executive:b0j:b1j:b2j:b3j:b4j:b5j:b6j:
+to_paper() {
+	printf %s "$1"|grep -q '^[A-Za-z0-9]*$' || return 2 # make sure input is harmless
+	paper=$(echo "$1" | tr A-Z a-z)
+	paper=${paper%paper}
+	echo $paperformats|grep -q ":$paper:" || return 1
+	case $paper in
+	b?j) ;;
+	*) paper="$paper"paper
+	esac
+	echo "$paper"
+}
 paperspec=
 if test -z "$paper"; then
-	if command -v paper >/dev/null; then
+	if command -v paper >/dev/null; then  ## provided by libpaper>=2
 		paperspec=$(paper)
-		if echo "$paperspec" | grep -q '^.*: '; then
-			paperdimensions=$(echo "$paperspec" | cut -f 2 -d " ")
-			paperunit=$(echo "$paperspec" | cut -f 3 -d " ")
-			if test "$paperunit" = "pt"; then paperunit=bp; fi
-			paperwidth=$(echo "$paperdimensions" | cut -f 1 -d "x")
-			paperheight=$(echo "$paperdimensions" | cut -f 2 -d "x")
-			papersize="$paperwidth$paperunit,$paperheight$paperunit"
-			paper='' ## We might not have a LaTeX-compatible name
+		if echo "$paperspec" | grep -q ': '; then
+			if ! paper=$(to_paper "${paperspec%%: *}"); then
+				paperdimensions=$(echo "$paperspec" | cut -f 2 -d " ")
+				paperunit=$(echo "$paperspec" | cut -f 3 -d " ")
+				if test "$paperunit" = "pt"; then paperunit=bp; fi
+				paperwidth=$(echo "$paperdimensions" | cut -f 1 -d "x")
+				paperheight=$(echo "$paperdimensions" | cut -f 2 -d "x")
+				papersize="$paperwidth$paperunit,$paperheight$paperunit"
+			fi
 		else
 			echo "The 'paper' program seems not to be working; not using it"
 		fi
 	fi
-	if test -z "$paperspec"; then
+	if command -v paperconf >/dev/null; then  ## provided by libpaper>=1
+		if ! paper=$(to_paper "$(paperconf)"); then
+			papersize=$(paperconf -s|sed -E 's/(.*) (.*)/\1bp,\2bp/')
+		fi
+	fi
+	if test -z "$paper$papersize"; then
 		paper='a4paper' ## fallback paper size is ISO A4
 		papersize=''    ## clear papersize
 	fi
@@ -481,35 +502,32 @@ while test -n "${1}${2}"; do
 				callOptions="$callOptions --pdfkeywords $pdfKeywords"
 				shift
 				;;
-			--paper)
-				paper="${2}"
-				papersize=''
-				callOptions="$callOptions ${1} $(escape_chars "$2")"
-				shift
-				;;
 			--pagecolor)
 				pagecolor="${2}"
 				callOptions="$callOptions ${1} $(escape_chars "$2")"
 				shift
 				;;
-			--a0paper | --a1paper | --a2paper | --a3paper | \
-				--a4paper | --a5paper | --a6paper | \
-				--b0paper | --b1paper | --b2paper | \
-				--b3paper | --b4paper | --b5paper | --b6paper | \
-				--c0paper | --c1paper | --c2paper | \
-				--c3paper | --c4paper | --c5paper | --c6paper | \
-				--b0j | --b1j | --b2j | --b3j | --b4j | --b5j | --b6j | \
-				--ansiapaper | --ansibpaper | --ansicpaper | \
-				--ansidpaper | --ansiepaper | \
-				--letterpaper | --legalpaper | --executivepaper)
-				paper="${1#--}"
+			--paper)
+				if ! paper=$(to_paper "$2"); then
+					paper="$2"
+					prattle "Paper '$paper' unknown to pdfjam."
+				fi
 				papersize=''
-				callOptions="$callOptions ${1}"
+				callOptions="$callOptions $1 $(escape_chars "$paper")"
+				shift
+				;;
+			--a?paper | --b?paper | --c?paper | --ansi?paper | \
+			--letterpaper | --legalpaper | --executivepaper | \
+			--b0j | --b1j | --b2j | --b3j | --b4j | --b5j | --b6j)
+				paper=$(to_paper "${1#--}") \
+					|| error_exit "Bad paper option '$1'." $E_USAGE
+				papersize=''
+				callOptions="$callOptions $1"
 				;;
 			--papersize)
 				paper=''
-				papersize=$(unbrace "$2")
-				callOptions="$callOptions ${1} $(escape_chars "$papersize")"
+				papersize=$(to_papersize "$2")
+				callOptions="$callOptions $1 $(escape_chars "$papersize")"
 				shift
 				;;
 			--landscape)
@@ -781,12 +799,12 @@ if test "$PDFJAM_CALL_NUMBER" = 0; then ## don't repeat this work for secondary 
 		PDFJAM_TEMP_DIR=''
 		trap \
 			'IFS="$OIFS"
-			if test $tidy != false; then cd "$pwd"; rm -rf "$PDFJAM_TEMP_DIR"; fi
+			if test "$tidy" != false; then cd "$pwd"; rm -rf "$PDFJAM_TEMP_DIR"; fi
 			exit 1' \
 			HUP INT TERM
 		trap \
 			'IFS="$OIFS"
-			if test $tidy != false ; then cd "$pwd"; rm -rf "$PDFJAM_TEMP_DIR"; fi' \
+			if test "$tidy" != false ; then cd "$pwd"; rm -rf "$PDFJAM_TEMP_DIR"; fi' \
 			EXIT
 		get_tempfile_dir() {
 			for i in "$TMPDIR" "$TMP" /tmp /var/tmp .; do
@@ -806,11 +824,12 @@ if test "$PDFJAM_CALL_NUMBER" = 0; then ## don't repeat this work for secondary 
 			PDFJAM_TEMP_DIR="$tempfileDir"/pdfjam"$$"-"$random"
 			(umask 077 && mkdir "$PDFJAM_TEMP_DIR")
 		} || exit $?
-		if test $tidy = false; then
+		if test "$tidy" = false; then
 			prattle "Temporary directory for this job is
           $PDFJAM_TEMP_DIR"
 		fi
 	else
+		tidy=false  ##  used in error message
 		(umask 077 && mkdir -p "$build_dir") || error_exit \
 			"Cannot create build directory '$build_dir'." $E_USAGE
 		PDFJAM_TEMP_DIR="$(realpath -- "$build_dir")"
@@ -1072,11 +1091,16 @@ else prattle "Calling ${latex} $runs times..."
 fi
 failureText=\
 "FAILED.
-The call to $latex resulted in an error.
-If '--no-tidy' was used, you can examine the
-log file at
+The call to $latex resulted in an error."
+if [ "$tidy" = false ]; then
+	failureText="$failureText
+You can examine the log file at
         $fileName.log
 to try to diagnose the problem."
+else
+	failureText="$failureText
+Rerun with '--no-tidy' (or '--build-dir PATH') to diagnose the problem."
+fi
 i=1
 while [ "$i" -le "$runs" ]; do
 	"$latex" "$fileName.tex" >"$fileName.msgs" || {

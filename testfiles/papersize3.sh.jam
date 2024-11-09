@@ -1,0 +1,1 @@
+eval "PAPERSIZE=legal $pdfjam a4numbers.pdf"

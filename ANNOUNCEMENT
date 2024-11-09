@@ -1,3 +1,0 @@
-New co-maintainer.
-Several bug fixes.
-New option `--build-dir path` to build in `path` instead of a temporary directory.
