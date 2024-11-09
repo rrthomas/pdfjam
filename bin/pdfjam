@@ -765,7 +765,6 @@ if test "$keepinfo" = true; then
 		;;
 	esac
 fi
-## A function to check if using non-Cygwin "${latex}" from Cygwin
 using_non_cygwin_latex_from_cygwin() {
 	if [ -z "${__cache__using_non_cygwin_latex_from_cygwin}" ]; then
 		if uname | grep -q CYGWIN \
@@ -832,7 +831,6 @@ else
 	PDFJAM_TEMP_DIR="$PDFJAM_TEMP_DIR/file$PDFJAM_CALL_NUMBER"
 	(umask 077 && mkdir -p "$PDFJAM_TEMP_DIR")
 fi
-## Next is from the Cygwin patch contributed by Lucas
 if using_non_cygwin_latex_from_cygwin; then
 	PDFJAM_TEMP_DIR=$(cygpath -w "$PDFJAM_TEMP_DIR")
 fi
@@ -936,7 +934,7 @@ for k in ${fileSpec}; do
 	fi
 	case $sourcePath in
 	/dev/stdin)
-		uniqueName="$PDFJAM_TEMP_DIR"/stdin.pdf
+		uniqueName=stdin.pdf
 		if test "$stdinUnread" = true; then
 			if tty -s; then
 				error_exit \
@@ -955,12 +953,10 @@ for k in ${fileSpec}; do
 		cd "$pwd" || exit 1
 		sourceFullPath="$sourceDir"/"$pdfName"
 		uniqueName="source-$counter.pdf"
-		uniqueName="$PDFJAM_TEMP_DIR"/"$uniqueName"
-		## Next is from the Cygwin patch contributed by Lucas
 		if using_non_cygwin_latex_from_cygwin; then
-			cp "$sourceFullPath" "$uniqueName"
+			cp "$sourceFullPath" "$PDFJAM_TEMP_DIR/$uniqueName"
 		else
-			ln -s "$sourceFullPath" "$uniqueName"
+			ln -s "$sourceFullPath" "$PDFJAM_TEMP_DIR/$uniqueName"
 		fi
 		;;
 	esac
@@ -1025,7 +1021,6 @@ raw_pdfkeyw=$(echo_pdfinfodata 'Keywords' "$pdfkeyw")
 ##
 cd "$PDFJAM_TEMP_DIR" || exit 1
 fileName="$(pwd)/a"
-## Next is adapted from the Cygwin patch sent by Lucas
 if using_non_cygwin_latex_from_cygwin; then
 	filePageList=$(echo "$filePageList" | sed 's~\\~/~g')
 fi

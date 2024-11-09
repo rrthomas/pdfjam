@@ -1,34 +1,34 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-<../source-1.pdf, id=1, 614.295pt x 794.97pt>
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf  used on input line ....
+<source-1.pdf, id=1, 614.295pt x 794.97pt>
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf>
+Package pdftex.def Info: source-1.pdf  used on input line ....
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf  used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf>
+Package pdftex.def Info: source-1.pdf  used on input line ....
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
-<../source-1.pdf, id=4, page=1, 614.295pt x 794.97pt>
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 1>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page1 used on input line ....
+<source-1.pdf, id=4, page=1, 614.295pt x 794.97pt>
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 1>
+Package pdftex.def Info: source-1.pdf , page1 used on input line ....
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 1>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page1 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 1>
+Package pdftex.def Info: source-1.pdf , page1 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 1>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page1 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 1>
+Package pdftex.def Info: source-1.pdf , page1 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 1>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page1 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 1>
+Package pdftex.def Info: source-1.pdf , page1 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 1>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page1 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 1>
+Package pdftex.def Info: source-1.pdf , page1 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 Completed box being shipped out [1]
 \vbox(650.66685+0.0)x435.61078
@@ -120,19 +120,19 @@ Completed box being shipped out [1]
 ...\glue 0.0 plus 1.0fil minus 1.0fil
 .\kern 650.66685
 .\kern 0.0
- <../source-1.pdf>
-<../source-1.pdf, id=71, page=2, 614.295pt x 794.97pt>
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 2>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page2 used on input line ....
+ <./source-1.pdf>
+<source-1.pdf, id=71, page=2, 614.295pt x 794.97pt>
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 2>
+Package pdftex.def Info: source-1.pdf , page2 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 2>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page2 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 2>
+Package pdftex.def Info: source-1.pdf , page2 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 2>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page2 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 2>
+Package pdftex.def Info: source-1.pdf , page2 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 Completed box being shipped out [2]
 \vbox(650.66685+0.0)x435.61078
@@ -222,19 +222,19 @@ Completed box being shipped out [2]
 ...\glue 0.0 plus 1.0fil minus 1.0fil
 .\kern 650.66685
 .\kern 0.0
- <../source-1.pdf>
-<../source-1.pdf, id=75, page=3, 614.295pt x 794.97pt>
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 3>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page3 used on input line ....
+ <./source-1.pdf>
+<source-1.pdf, id=75, page=3, 614.295pt x 794.97pt>
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 3>
+Package pdftex.def Info: source-1.pdf , page3 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 3>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page3 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 3>
+Package pdftex.def Info: source-1.pdf , page3 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 3>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page3 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 3>
+Package pdftex.def Info: source-1.pdf , page3 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 Completed box being shipped out [3]
 \vbox(650.66685+0.0)x435.61078
@@ -324,19 +324,19 @@ Completed box being shipped out [3]
 ...\glue 0.0 plus 1.0fil minus 1.0fil
 .\kern 650.66685
 .\kern 0.0
- <../source-1.pdf>
-<../source-1.pdf, id=79, page=4, 614.295pt x 794.97pt>
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 4>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page4 used on input line ....
+ <./source-1.pdf>
+<source-1.pdf, id=79, page=4, 614.295pt x 794.97pt>
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 4>
+Package pdftex.def Info: source-1.pdf , page4 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 4>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page4 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 4>
+Package pdftex.def Info: source-1.pdf , page4 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 4>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page4 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 4>
+Package pdftex.def Info: source-1.pdf , page4 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 Completed box being shipped out [4]
 \vbox(650.66685+0.0)x435.61078
@@ -426,19 +426,19 @@ Completed box being shipped out [4]
 ...\glue 0.0 plus 1.0fil minus 1.0fil
 .\kern 650.66685
 .\kern 0.0
- <../source-1.pdf>
-<../source-1.pdf, id=83, page=5, 614.295pt x 794.97pt>
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 5>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page5 used on input line ....
+ <./source-1.pdf>
+<source-1.pdf, id=83, page=5, 614.295pt x 794.97pt>
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 5>
+Package pdftex.def Info: source-1.pdf , page5 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 5>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page5 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 5>
+Package pdftex.def Info: source-1.pdf , page5 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 5>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page5 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 5>
+Package pdftex.def Info: source-1.pdf , page5 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 Completed box being shipped out [5]
 \vbox(650.66685+0.0)x435.61078
@@ -528,19 +528,19 @@ Completed box being shipped out [5]
 ...\glue 0.0 plus 1.0fil minus 1.0fil
 .\kern 650.66685
 .\kern 0.0
- <../source-1.pdf>
-<../source-1.pdf, id=87, page=6, 614.295pt x 794.97pt>
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 6>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page6 used on input line ....
+ <./source-1.pdf>
+<source-1.pdf, id=87, page=6, 614.295pt x 794.97pt>
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 6>
+Package pdftex.def Info: source-1.pdf , page6 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 6>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page6 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 6>
+Package pdftex.def Info: source-1.pdf , page6 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 6>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page6 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 6>
+Package pdftex.def Info: source-1.pdf , page6 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 Completed box being shipped out [6]
 \vbox(650.66685+0.0)x435.61078
@@ -630,19 +630,19 @@ Completed box being shipped out [6]
 ...\glue 0.0 plus 1.0fil minus 1.0fil
 .\kern 650.66685
 .\kern 0.0
- <../source-1.pdf>
-<../source-1.pdf, id=91, page=7, 614.295pt x 794.97pt>
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 7>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page7 used on input line ....
+ <./source-1.pdf>
+<source-1.pdf, id=91, page=7, 614.295pt x 794.97pt>
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 7>
+Package pdftex.def Info: source-1.pdf , page7 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 7>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page7 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 7>
+Package pdftex.def Info: source-1.pdf , page7 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 7>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page7 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 7>
+Package pdftex.def Info: source-1.pdf , page7 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 Completed box being shipped out [7]
 \vbox(650.66685+0.0)x435.61078
@@ -732,19 +732,19 @@ Completed box being shipped out [7]
 ...\glue 0.0 plus 1.0fil minus 1.0fil
 .\kern 650.66685
 .\kern 0.0
- <../source-1.pdf>
-<../source-1.pdf, id=96, page=8, 614.295pt x 794.97pt>
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 8>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page8 used on input line ....
+ <./source-1.pdf>
+<source-1.pdf, id=96, page=8, 614.295pt x 794.97pt>
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 8>
+Package pdftex.def Info: source-1.pdf , page8 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 8>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page8 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 8>
+Package pdftex.def Info: source-1.pdf , page8 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 8>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page8 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 8>
+Package pdftex.def Info: source-1.pdf , page8 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 Completed box being shipped out [8]
 \vbox(650.66685+0.0)x435.61078
@@ -834,19 +834,19 @@ Completed box being shipped out [8]
 ...\glue 0.0 plus 1.0fil minus 1.0fil
 .\kern 650.66685
 .\kern 0.0
- <../source-1.pdf>
-<../source-1.pdf, id=100, page=9, 614.295pt x 794.97pt>
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 9>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page9 used on input line ....
+ <./source-1.pdf>
+<source-1.pdf, id=100, page=9, 614.295pt x 794.97pt>
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 9>
+Package pdftex.def Info: source-1.pdf , page9 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 9>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page9 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 9>
+Package pdftex.def Info: source-1.pdf , page9 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 9>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page9 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 9>
+Package pdftex.def Info: source-1.pdf , page9 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 Completed box being shipped out [9]
 \vbox(650.66685+0.0)x435.61078
@@ -936,19 +936,19 @@ Completed box being shipped out [9]
 ...\glue 0.0 plus 1.0fil minus 1.0fil
 .\kern 650.66685
 .\kern 0.0
- <../source-1.pdf>
-<../source-1.pdf, id=104, page=10, 614.295pt x 794.97pt>
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 10>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page10 used on input line ....
+ <./source-1.pdf>
+<source-1.pdf, id=104, page=10, 614.295pt x 794.97pt>
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 10>
+Package pdftex.def Info: source-1.pdf , page10 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 10>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page10 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 10>
+Package pdftex.def Info: source-1.pdf , page10 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 10>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page10 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 10>
+Package pdftex.def Info: source-1.pdf , page10 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 Completed box being shipped out [10]
 \vbox(650.66685+0.0)x435.61078
@@ -1038,19 +1038,19 @@ Completed box being shipped out [10]
 ...\glue 0.0 plus 1.0fil minus 1.0fil
 .\kern 650.66685
 .\kern 0.0
- <../source-1.pdf>
-<../source-1.pdf, id=108, page=11, 614.295pt x 794.97pt>
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 11>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page11 used on input line ....
+ <./source-1.pdf>
+<source-1.pdf, id=108, page=11, 614.295pt x 794.97pt>
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 11>
+Package pdftex.def Info: source-1.pdf , page11 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 11>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page11 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 11>
+Package pdftex.def Info: source-1.pdf , page11 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 11>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page11 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 11>
+Package pdftex.def Info: source-1.pdf , page11 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 Completed box being shipped out [11]
 \vbox(650.66685+0.0)x435.61078
@@ -1140,19 +1140,19 @@ Completed box being shipped out [11]
 ...\glue 0.0 plus 1.0fil minus 1.0fil
 .\kern 650.66685
 .\kern 0.0
- <../source-1.pdf>
-<../source-1.pdf, id=112, page=12, 614.295pt x 794.97pt>
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 12>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page12 used on input line ....
+ <./source-1.pdf>
+<source-1.pdf, id=112, page=12, 614.295pt x 794.97pt>
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 12>
+Package pdftex.def Info: source-1.pdf , page12 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 12>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page12 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 12>
+Package pdftex.def Info: source-1.pdf , page12 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 12>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page12 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 12>
+Package pdftex.def Info: source-1.pdf , page12 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 Completed box being shipped out [12]
 \vbox(650.66685+0.0)x435.61078
@@ -1242,19 +1242,19 @@ Completed box being shipped out [12]
 ...\glue 0.0 plus 1.0fil minus 1.0fil
 .\kern 650.66685
 .\kern 0.0
- <../source-1.pdf>
-<../source-1.pdf, id=116, page=13, 614.295pt x 794.97pt>
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 13>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page13 used on input line ....
+ <./source-1.pdf>
+<source-1.pdf, id=116, page=13, 614.295pt x 794.97pt>
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 13>
+Package pdftex.def Info: source-1.pdf , page13 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 13>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page13 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 13>
+Package pdftex.def Info: source-1.pdf , page13 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 13>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page13 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 13>
+Package pdftex.def Info: source-1.pdf , page13 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 Completed box being shipped out [13]
 \vbox(650.66685+0.0)x435.61078
@@ -1344,19 +1344,19 @@ Completed box being shipped out [13]
 ...\glue 0.0 plus 1.0fil minus 1.0fil
 .\kern 650.66685
 .\kern 0.0
- <../source-1.pdf>
-<../source-1.pdf, id=121, page=14, 614.295pt x 794.97pt>
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 14>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page14 used on input line ....
+ <./source-1.pdf>
+<source-1.pdf, id=121, page=14, 614.295pt x 794.97pt>
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 14>
+Package pdftex.def Info: source-1.pdf , page14 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 14>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page14 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 14>
+Package pdftex.def Info: source-1.pdf , page14 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 14>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page14 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 14>
+Package pdftex.def Info: source-1.pdf , page14 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 Completed box being shipped out [14]
 \vbox(650.66685+0.0)x435.61078
@@ -1446,19 +1446,19 @@ Completed box being shipped out [14]
 ...\glue 0.0 plus 1.0fil minus 1.0fil
 .\kern 650.66685
 .\kern 0.0
- <../source-1.pdf>
-<../source-1.pdf, id=125, page=15, 614.295pt x 794.97pt>
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 15>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page15 used on input line ....
+ <./source-1.pdf>
+<source-1.pdf, id=125, page=15, 614.295pt x 794.97pt>
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 15>
+Package pdftex.def Info: source-1.pdf , page15 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 15>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page15 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 15>
+Package pdftex.def Info: source-1.pdf , page15 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 15>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page15 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 15>
+Package pdftex.def Info: source-1.pdf , page15 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 Completed box being shipped out [15]
 \vbox(650.66685+0.0)x435.61078
@@ -1548,19 +1548,19 @@ Completed box being shipped out [15]
 ...\glue 0.0 plus 1.0fil minus 1.0fil
 .\kern 650.66685
 .\kern 0.0
- <../source-1.pdf>
-<../source-1.pdf, id=129, page=16, 614.295pt x 794.97pt>
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 16>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page16 used on input line ....
+ <./source-1.pdf>
+<source-1.pdf, id=129, page=16, 614.295pt x 794.97pt>
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 16>
+Package pdftex.def Info: source-1.pdf , page16 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 16>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page16 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 16>
+Package pdftex.def Info: source-1.pdf , page16 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 16>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page16 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 16>
+Package pdftex.def Info: source-1.pdf , page16 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 Completed box being shipped out [16]
 \vbox(650.66685+0.0)x435.61078
@@ -1650,19 +1650,19 @@ Completed box being shipped out [16]
 ...\glue 0.0 plus 1.0fil minus 1.0fil
 .\kern 650.66685
 .\kern 0.0
- <../source-1.pdf>
-<../source-1.pdf, id=138, page=17, 614.295pt x 794.97pt>
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 17>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page17 used on input line ....
+ <./source-1.pdf>
+<source-1.pdf, id=138, page=17, 614.295pt x 794.97pt>
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 17>
+Package pdftex.def Info: source-1.pdf , page17 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 17>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page17 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 17>
+Package pdftex.def Info: source-1.pdf , page17 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf Graphic file (type pdf)
-<use /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf, page 17>
-Package pdftex.def Info: /home/markus/src/pdfjam/build/test/example4.d/source-1.pdf , page17 used on input line ....
+File: source-1.pdf Graphic file (type pdf)
+<use source-1.pdf, page 17>
+Package pdftex.def Info: source-1.pdf , page17 used on input line ....
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 Completed box being shipped out [17]
 \vbox(650.66685+0.0)x435.61078
@@ -1752,4 +1752,4 @@ Completed box being shipped out [17]
 ...\glue 0.0 plus 1.0fil minus 1.0fil
 .\kern 650.66685
 .\kern 0.0
- <../source-1.pdf> (a.aux)
+ <./source-1.pdf> (a.aux)
