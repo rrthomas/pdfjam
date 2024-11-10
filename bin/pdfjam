@@ -203,6 +203,7 @@ build_dir=          ##  Directory to use instead of temporary one
 keepinfo=           ##  Don't try to preserve "pdfinfo" data
 twoside=            ##  No "twoside" option to documentclass
 checkfiles=         ##  Don't use the Unix 'file -Lb' utility to
+enc=                ##  Assume default encoding, whatever this may be
 ##                      identify PDF files from their contents;
 ##                      rely on the .pdf or .PDF extension instead.
 suffix=pdfjam       ##  Default filename suffix to be used when
@@ -919,7 +920,7 @@ if test -n "$keepinfo"; then
 fi
 
 echo_iconv_from_enc() {
-	printf %s "$1" | "$iconv" -f "${enc-}" -t UTF-8
+	printf %s "$1" | "$iconv" -f "$enc" -t UTF-8
 }
 if test -n "${pdftitle+X}"; then
 	pdftitl=$(echo_iconv_from_enc "${pdftitle-}")
