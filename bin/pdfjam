@@ -190,26 +190,22 @@ iconv=$(command -v iconv)
 if [ -z "$iconv" ]; then iconv="not found"; fi
 ##
 ##
-##  Default for the output file location:
+##  Defaults
 ##
 outFile="$pwd"      ##  Output to the current working directory
-##
-##
-##  A few more default settings for pdfjam:
-##
-runs=1              ##  Run latex just once
-tidy=tidy           ##  Delete all temporary files at the end
-build_dir=          ##  Directory to use instead of temporary one
-keepinfo=           ##  Don't try to preserve "pdfinfo" data
-twoside=            ##  No "twoside" option to documentclass
-checkfiles=         ##  Don't use the Unix 'file -Lb' utility to
-enc=                ##  Assume default encoding, whatever this may be
-##                      identify PDF files from their contents;
-##                      rely on the .pdf or .PDF extension instead.
 suffix=pdfjam       ##  Default filename suffix to be used when
 ##                      --outfile is either (a) a directory, or (b)
 ##                      not specified in a --batch call.
-##
+checkfiles=         ##  Don't use the Unix 'file -Lb' utility to
+##                      identify PDF files from their contents;
+##                      rely on the .pdf or .PDF extension instead.
+keepinfo=           ##  Don't try to preserve "pdfinfo" data
+landscape=          ##  Use portrait./Do not switch width and height.
+twoside=            ##  No "twoside" option to documentclass
+tidy=tidy           ##  Delete all temporary files at the end
+runs=1              ##  Run latex just once
+build_dir=          ##  Directory to use instead of temporary one
+enc=                ##  Have `iconv` guess command line encoding
 preamble=           ##  Default LaTeX preamble string.
 ##  END OF SETTINGS MADE DIRECTLY WITHIN THE SCRIPT
 ##
