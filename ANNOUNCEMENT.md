@@ -11,3 +11,7 @@
 * Support `--paper a4` etc. as alternative to `--paper a4paper`.
 * Support `--papersize 595,842` as alternative to `--papersize 595bp,842bp`.
   Prevents people adding unit `pt` where they actually mean `bp`.
+* Renames duplex edge flipping options `--longedge` to `--other-edge` and
+  `--shortedge` to `--no-other-edge` to reflect their actual behaviour.
+* Support `--keepinfo --pdfauthor ''` to discard only the corresponding field
+  while keeping the remaining pdfinfo.
