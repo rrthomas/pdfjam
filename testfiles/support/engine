@@ -9,4 +9,5 @@ if [[ "${in%.sh.jam}" = "${in}" ]]; then
 else
 	source "$in"
 fi
-awk '/^ *\[[0-9]*$/{ORS=""} /\]/{ORS="\n"} //' <"$job.d/a.log" >"$job.log"
+awk '/^ *\[[0-9]*$/{ORS=""} /\]/{ORS="\n"} /^END-TEST-LOG$/ {system("pdfinfo '"$out"'")} //' \
+	<"$job.d/a.log" >"$job.log"

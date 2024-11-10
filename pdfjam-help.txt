@@ -101,11 +101,10 @@ where
                   Provide text for the  Title, Author, Subject and Keywords
                   in the output PDF file.  Requires the  LaTeX 'hyperref'
                   package.  These options, individually, over-ride --keepinfo.
-     --longedge
-     --shortedge
-                  Specify the direction in which double-sided pages are
-                  flipped. It may not work correctly in all cases, so if every
-                  other page is rotated 180°, flip this switch.
+     --other-edge
+     --no-other-edge
+                  Rotate every odd page by 180 degrees (or not).  Thus changes
+                  along which edge the pages are flipped in duplex printing.
      --landscape
      --no-landscape
                   Specify landscape page orientation (or not) in the
