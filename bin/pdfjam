@@ -279,14 +279,15 @@ if test -z "$paper"; then
 			echo "The 'paper' program seems not to be working; not using it"
 		fi
 	fi
-	if command -v paperconf >/dev/null; then  ## provided by libpaper>=1
-		if ! paper=$(to_paper "$(paperconf)"); then
-			papersize=$(paperconf -s|sed -E 's/(.*) (.*)/\1bp,\2bp/')
-		fi
-	fi
 	if test -z "$paper$papersize"; then
-		paper='a4paper' ## fallback paper size is ISO A4
-		papersize=''    ## clear papersize
+		if command -v paperconf >/dev/null; then  ## provided by libpaper>=1
+			if ! paper=$(to_paper "$(paperconf)"); then
+				papersize=$(paperconf -s|sed -E 's/(.*) (.*)/\1bp,\2bp/')
+			fi
+		else
+			paper='a4paper' ## fallback paper size is ISO A4
+			papersize=''    ## clear papersize
+		fi
 	fi
 fi
 ##
