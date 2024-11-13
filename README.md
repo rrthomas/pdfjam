@@ -1,11 +1,11 @@
-![GitHub CI](https://github.com/rrthomas/pdfjam/actions/workflows/ci.yml/badge.svg)
+![GitHub CI](https://github.com/pdfjam/pdfjam/actions/workflows/ci.yml/badge.svg)
 # pdfjam
 
 _Reuben Thomas_ <https://rrt.sc3d.org/>
 
 A snapshot of this page is included as _README.md_
 in the distributed package.  The most up-to-date version is maintained online at
-<https://github.com/rrthomas/pdfjam>.
+<https://github.com/pdfjam/pdfjam>.
 
 1. [Overview](#overview)
     - [What is pdfjam?](#whatis)
@@ -65,7 +65,7 @@ constructing more elaborate wrapper scripts as required.
 
 Those 'wrapper' scripts are **no longer maintained**. I continue to make
 them available in a separate repository
-<https://github.com/rrthomas/pdfjam-extras>,
+<https://github.com/pdfjam/pdfjam-extras>,
 in case anyone wants to see them, to use them, or to improve and maintain
 them independently as a separate project.
 
@@ -81,7 +81,7 @@ at version 3.02 are:
 - `pdfjam-slides3up`, `pdfjam-slides6up`
 
 For those scripts and for more information on them, please now see
-<https://github.com/rrthomas/pdfjam-extras>.
+<https://github.com/pdfjam/pdfjam-extras>.
 
 
 # <a name="prereq"> Pre-requisites
@@ -120,7 +120,7 @@ that might change, so users are referred to the current
 
 In case you want to look at the `pdfjam --help` text template online, for example
 before you decide whether to install **pdfjam**, the source is available at
-<https://github.com/rrthomas/pdfjam/blob/master/pdfjam-help.txt>.
+<https://github.com/pdfjam/pdfjam/blob/master/pdfjam-help.txt>.
 
 There is also a (very basic) `man` page, accessed in the usual way
 (after installation) by
@@ -143,7 +143,7 @@ _TeX Live_.
 2.  Install it yourself (e.g., if you don't want _TeX Live_, or if you want a later
 release of **pdfjam** than the one that's currently in _TeX Live_).
 Download the latest packaged release of **pdfjam** from
-<https://github.com/rrthomas/pdfjam/releases>.
+<https://github.com/pdfjam/pdfjam/releases>.
 If for some reason you don't want the latest released version, or even a recently released version, you can still get older versions too: see <https://davidfirth.github.io/pdfjam>.
 
 **The first way, via _TeX Live_, is recommended** as the easiest way for most users.
@@ -172,7 +172,7 @@ temporary files, or a specific paper size for output PDFs ---
 or some other reason.
 
 The file
-[pdfjam.conf](https://github.com/rrthomas/pdfjam/raw/master/pdfjam.conf)
+[pdfjam.conf](https://github.com/pdfjam/pdfjam/raw/master/pdfjam.conf)
 is a sample configuration file which can be edited as needed.  After editing,
 either install the file for site-wide use (at `/etc/pdfjam.conf`,
 `/usr/share/etc/pdfjam.conf`, `/usr/local/share/pdfjam.conf`, or
@@ -291,7 +291,7 @@ option is passed to LaTeX's `\includegraphics` command.
 Slides made by LaTeX's _beamer_ package, using the `handout` class option,
 work especially nicely with this! The example wrapper scripts `pdfjam-slides3up`
 and `pdfjam-slides6up`, in the
-[pdfjam-extras](https://github.com/rrthomas/pdfjam-extras) repository,
+[pdfjam-extras](https://github.com/pdfjam/pdfjam-extras) repository,
 are for 3-up and 6-up handouts, respectively.
 
 ### Example 6: Trimming pages; and piped output
@@ -386,7 +386,7 @@ for this suggestion and links to more information.
 
 Please report any bugs found in `pdfjam`, either
 
-- by reporting as an issue at GitHub, <https://github.com/rrthomas/pdfjam/issues>
+- by reporting as an issue at GitHub, <https://github.com/pdfjam/pdfjam/issues>
 - by email (see <https://warwick.ac.uk/dfirth> for my email address)
 
 ### Some known problems:
@@ -425,6 +425,6 @@ so that people can still see and use/adapt them if they want.
 And maybe even someone else will
 want to take on the task of improving and maintaining some of them,
 who knows?  The wrapper scripts (**no longer maintained**) can now be found at
-<https://github.com/rrthomas/pdfjam-extras>.
+<https://github.com/pdfjam/pdfjam-extras>.
 
 _Releases up to version 2.08 are still available at <https://davidfirth.github.io/pdfjam>._

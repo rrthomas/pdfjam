@@ -13,6 +13,6 @@ You can also execute a single test this way:
 
 If after you have checked all of the pre-requisites there are still differences
 reported between the actual and expected outputs from the tests, please
-report the problem on https://github.com/rrthomas/pdfjam/issues.
+report the problem on https://github.com/pdfjam/pdfjam/issues.
 When making such a report it is helpful to provide information
 about your operating system and what shell you use as /bin/sh.

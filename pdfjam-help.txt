@@ -85,7 +85,7 @@ where
                   is used more than once in the call, the supplied preamble
                   strings are simply concatenated.  For a note on avoiding
                   clashes, see the README file, also available at
-                  https://github.com/rrthomas/pdfjam
+                  https://github.com/pdfjam/pdfjam
      --keepinfo
      --no-keepinfo
                   Preserve (or not) Title, Author, Subject and Keywords
@@ -204,4 +204,4 @@ necessary.  Any user-specific configuration should be put in a file named
 if the '--vanilla' argument is used.)
 
 For more information, including a sample configuration file, see
-https://github.com/rrthomas/pdfjam.
+https://github.com/pdfjam/pdfjam.

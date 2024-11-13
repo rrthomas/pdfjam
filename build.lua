@@ -15,8 +15,8 @@ uploadconfig = {
 	license = "lppl",
 	summary = "",
 	ctanPath = "/support/pdfjam",
-	repository = "https://codeberg.org/rrthomas/pdfjam",
-	bugtracker = "https://codeberg.org/rrthomas/pdfjam/issues",
+	repository = "https://codeberg.org/pdfjam/pdfjam",
+	bugtracker = "https://codeberg.org/pdfjam/pdfjam/issues",
 	description = "",
 	topic = {},
 }
