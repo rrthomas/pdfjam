@@ -1,7 +1,14 @@
 module = "pdfjam"
 
-version = string.sub(io.popen("git describe --tags --match 'v?.*'"):read(), 2)
-isprerelease = string.match(version, "-") ~= nil
+version = io.popen("git describe --tags --match 'v?.*'"):read()
+if version then
+	version = string.sub(version, 2)
+	isprerelease = string.match(version, "-") ~= nil
+else
+	version = ""
+	isprerelease = false
+	print("Could not set version via `git describe`.")
+end
 next_version = isprerelease and string.sub(version, 1, 4) + .01 or version
 
 installfiles = {"pdfjam"}
@@ -15,16 +22,19 @@ target_list.check.pre = function(_)
 end
 
 bundleunpack = function()
+	version || return 1
 	return os.execute("utils/build.sh " .. version)
 end
 
 ctanzip = "build/pdfjam-ctan.zip"
 target_list.ctan.func = function(_)
+	next_version || return 1
 	os.execute("utils/build.sh " .. next_version)
 	return runcmd("zip -r pdfjam-ctan.zip pdfjam", "build")
 end
 
 target_list.release = { func = function(a)
+	version || return 1
 	if isprerelease then target_list.tag.func(a) end
 	target_list.ctan.func(a)
 	return os.execute("utils/github.sh " .. next_version)
