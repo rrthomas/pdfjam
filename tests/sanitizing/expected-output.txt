@@ -8,6 +8,6 @@
               ----
   pdfjam:     This is pdfjam version N.NN.
   pdfjam:     Effective call for this run of pdfjam:
-              ../../bin/pdfjam --vanilla --picturecommand '\put(20,20){Letters.\quad What'\''s $9\cdot6$?}' --suffix actual-output --outfile . -- ../batch-job/letters.pdf -
-  pdfjam:     Calling /usr/bin/pdflatex...
+              ../../pdfjam --vanilla --picturecommand '\put(20,20){Letters.\quad What'\''s $9\cdot6$?}' --suffix actual-output --outfile . -- ../batch-job/letters.pdf -
+  pdfjam:     Calling /usr/pdflatex...
   pdfjam:     Finished.  Output was written to './letters-actual-output.pdf'.
