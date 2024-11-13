@@ -1,14 +1,8 @@
 module = "pdfjam"
 
 version = io.popen("git describe --tags --match 'v?.*'"):read()
-if version then
-	version = string.sub(version, 2)
-	isprerelease = string.match(version, "-") ~= nil
-else
-	version = ""
-	isprerelease = false
-	print("Could not set version via `git describe`.")
-end
+version = version and string.sub(version, 2) or "N.NN"
+isprerelease = string.match(version, "-") ~= nil
 next_version = isprerelease and string.sub(version, 1, 4) + .01 or version
 
 installfiles = {"pdfjam"}
