@@ -12,6 +12,7 @@ end
 next_version = isprerelease and string.sub(version, 1, 4) + .01 or version
 
 installfiles = {"pdfjam"}
+scriptfiles = {"pdfjam"}
 scriptmanfiles = {"pdfjam.1"}
 textfiles = {"COPYING", "README.md"}
 
@@ -22,19 +23,19 @@ target_list.check.pre = function(_)
 end
 
 bundleunpack = function()
-	version || return 1
+	if not version then return 1 end
 	return os.execute("utils/build.sh " .. version)
 end
 
 ctanzip = "build/pdfjam-ctan.zip"
 target_list.ctan.func = function(_)
-	next_version || return 1
+	if not version then return 1 end
 	os.execute("utils/build.sh " .. next_version)
-	return runcmd("zip -r pdfjam-ctan.zip pdfjam", "build")
+	return runcmd("zip -r release/pdfjam-ctan.zip pdfjam", "build")
 end
 
 target_list.release = { func = function(a)
-	version || return 1
+	if not version then return 1 end
 	if isprerelease then target_list.tag.func(a) end
 	target_list.ctan.func(a)
 	return os.execute("utils/github.sh " .. next_version)
