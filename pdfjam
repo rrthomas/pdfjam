@@ -509,7 +509,7 @@ while test -n "$1$2"; do
 		*) ##  All other args should be PDF (or JPG/PNG)
 			##  source files and page selections; if not, we'll quit
 			if test -n "$checkfiles"; then ## not always available
-				case $(file -Lb "$1") in
+				case $(file -Lb -- "$1") in
 				"PDF document"* | "JPEG image data"* | "PNG image"*)
 					##  it's a PDF file (or JPG/PNG) as expected
 					fileSpec="$fileSpec$newline$1|awaited"
@@ -872,8 +872,8 @@ for k in ${fileSpec}; do
 		fi
 		;;
 	*)
-		pdfName=$(basename "$sourcePath")
-		sourceDir=$(dirname "$sourcePath") ## zsh on Mac OS 10.5 chokes here
+		pdfName=$(basename -- "$sourcePath")
+		sourceDir=$(dirname -- "$sourcePath") ## zsh on Mac OS 10.5 chokes here
 		cd "$sourceDir" || exit 1  ##  just to get the full path
 		sourceDir=$(pwd)
 		cd "$pwd" || exit 1
@@ -1034,7 +1034,7 @@ if test -f "$fileName".pdf; then ## if LaTeX didn't choke
 			separator=-"$pageSpec"-
 		fi
 		outFile=$(printf "%s" "$outFile" | sed 's/\/$//') ## delete any trailing slash
-		pdfName=$(basename "$sourcePath")
+		pdfName=$(basename -- "$sourcePath")
 		pdfName=$(printf "%s" "$pdfName" |
 			sed 's/\.[pP][dD][fF]$//') ## strip extension
 		pdfName="$pdfName$separator$suffix".pdf

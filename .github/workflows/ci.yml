@@ -10,12 +10,11 @@ jobs:
     - name: Install dependencies
       run: sudo apt-get update && sudo apt-get -y --no-install-recommends install texlive-latex-extra shellcheck devscripts poppler-utils
     - name: l3build check
-      run: PATH="$PATH:." l3build check || { cat build/test/*.diff; false; }
-    - name: Build
+      run: l3build check || { cat build/test/*.diff; false; }
+    - name: Other tests
+      run: tests/run.sh
+    - name: Code check
       run: |
-        ./build.sh
-        cd built_package/pdfjam*
-        unzip tests.zip
-        tests/run.sh
-        shellcheck bin/pdfjam
-        checkbashisms -xp bin/pdfjam
+        l3build unpack
+        shellcheck build/unpacked/pdfjam
+        checkbashisms -xp build/unpacked/pdfjam
