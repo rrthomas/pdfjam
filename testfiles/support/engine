@@ -1,9 +1,9 @@
 #!/bin/bash
 
-in=${!##\\input }
+in=${!##\\input } # ${!#} is the last argument
 job="$(basename -s.jam "$in")"
 out="$job.pdf"
-pdfjam="./pdfjam --build-dir '$job.d' --outfile '$out' --preamble '"'\input{regression-test.tex}\AtBeginDocument{\START}'\'
+pdfjam="./pdfjam --vanilla --build-dir '$job.d' --outfile '$out' --preamble '"'\input{regression-test.tex}\AtBeginDocument{\START}'\'
 if [[ "${in%.sh.jam}" = "${in}" ]]; then
 	eval "$pdfjam $(< "$in")"
 else

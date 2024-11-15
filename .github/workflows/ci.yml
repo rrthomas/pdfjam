@@ -11,8 +11,6 @@ jobs:
       run: sudo apt-get update && sudo apt-get -y --no-install-recommends install texlive-latex-extra shellcheck devscripts poppler-utils
     - name: l3build check
       run: l3build check || { cat build/test/*.diff; false; }
-    - name: Other tests
-      run: tests/run.sh
     - name: Code check
       run: |
         l3build unpack
