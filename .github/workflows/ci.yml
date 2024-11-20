@@ -9,8 +9,10 @@ jobs:
     - uses: actions/checkout@v4
     - name: Install dependencies
       run: sudo apt-get update && sudo apt-get -y --no-install-recommends install texlive-latex-extra shellcheck devscripts poppler-utils
-    - name: l3build check
+    - name: Check
       run: l3build check || { cat build/test/*.diff; false; }
+    - name: TeX checks
+      run: l3build check -ccheck-tex || { cat build/test-check-tex/*.diff; false; }
     - name: Code check
       run: |
         l3build unpack

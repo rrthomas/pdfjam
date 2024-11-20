@@ -1,7 +1,9 @@
+# This test comes with an accompanying empty .zz.jam; this is bad practice
 set -e
 eval "$pdfjam --batch --nup 2x1 --outfile '$(pwd)' --suffix 2up --landscape file1.pdf file2.pdf"
 mv file1-2up.pdf example1.sh.pdf
 mv file2-2up.pdf example1.zz.sh.pdf
-cp example1.sh.d/file1/a.log example1.sh.d/a.log
-mkdir -p example1.zz.sh.d
-cp example1.sh.d/file2/a.log example1.zz.sh.d/a.log
+cp -Tr example1.sh.d/file1 example1.sh.d
+cp -Tr example1.sh.d/file2 example1.zz.sh.d
+: >example1.zz.sh.d/messages.txt
+: >example1.zz.sh.d/a.log

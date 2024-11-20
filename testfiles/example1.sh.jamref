@@ -1,0 +1,37 @@
+%%% a.tex
+\batchmode
+\documentclass[a4paper,landscape,]{article}
+\usepackage[]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{pdfpages}
+\begin{document}
+\includepdfmerge[nup=2x1]{source-1.pdf,-}
+\end{document}
+
+%%% call.txt
+cd <TESTDIR>
+./pdfjam --latex <TESTDIR>/dryrun --vanilla --build-dir example1.sh.d --outfile example1.sh.pdf --nup 2x1 --outfile <TESTDIR> --suffix 2up --landscape -- file1.pdf -
+
+%%% messages.txt
+          ----
+  pdfjam: This is pdfjam version N.NN.
+  pdfjam: Called with '--vanilla': no user or site configuration
+          files will be read.
+  pdfjam: --
+  pdfjam: Processing file 1, 'file1.pdf'...
+  pdfjam: Page spec is '-'.
+              ----
+  pdfjam:     This is pdfjam version N.NN.
+  pdfjam:     Effective call for this run of pdfjam:
+              ./pdfjam --latex <TESTDIR>/dryrun --vanilla --build-dir example1.sh.d --outfile example1.sh.pdf --nup 2x1 --outfile <TESTDIR> --suffix 2up --landscape -- file1.pdf -
+  pdfjam:     Calling <TESTDIR>/dryrun...
+  pdfjam:     Finished.  Output was written to '<TESTDIR>/file1-2up.pdf'.
+  pdfjam: --
+  pdfjam: Processing file 2, 'file2.pdf'...
+  pdfjam: Page spec is '-'.
+              ----
+  pdfjam:     This is pdfjam version N.NN.
+  pdfjam:     Effective call for this run of pdfjam:
+              ./pdfjam --latex <TESTDIR>/dryrun --vanilla --build-dir example1.sh.d --outfile example1.sh.pdf --nup 2x1 --outfile <TESTDIR> --suffix 2up --landscape -- file2.pdf -
+  pdfjam:     Calling <TESTDIR>/dryrun...
+  pdfjam:     Finished.  Output was written to '<TESTDIR>/file2-2up.pdf'.

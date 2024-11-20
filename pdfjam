@@ -81,7 +81,7 @@ newline='
 ##  Use '' to escape string with multiple tricky characters and \ otherwise
 enquote() {
 	case "$1" in
-	*$newline*) escape_quote "$1" ;;
+	*$newline*) printf %s "$1" >&2; escape_quote "$1" ;;
 	'' | *)
 		if printf %s "$1"|grep -Eq '([	 !"#$&()*<>?\^`{|}~].*){2}'; then
 			escape_quote "$1"  ##    ^-- matched twice due to --^
@@ -91,7 +91,7 @@ enquote() {
 	esac
 }
 escape_quote() {  ## Put everything in '' and care for actual '
-	(printf %s "${1}" | sed "s/'/'\\\\''/g;s/^\\|\$/'/g")
+	printf %s "'$(printf %s "$1" | sed "s/'/'\\\\''/g")'"
 }
 escape_chars() {  ## Prefix tricky characters with \
 	printf %s "$1" | sed 's/[	 !"#$&-*;<>?[-^`{|}~]/\\&/g'
@@ -451,7 +451,7 @@ while test -n "$1$2"; do
 				shift
 				;;
 			--preamble)
-				preamble="$preamble$2"
+				preamble="$preamble$newline$2"
 				shift
 				;;
 			--latex | --build-dir | --enc | --pagecolor | \
@@ -587,7 +587,7 @@ fi
 \$paper='$paper' and \$papersize='$papersize' must be set." $E_SOFTWARE
 miscOptions="${miscOptions#,}"
 if test -n "$preamble"; then
-	callOptions="$callOptions --preamble $(enquote "$preamble")"
+	callOptions="$callOptions --preamble $(enquote "${preamble#$newline}")"
 fi
 callOptions="${callOptions# }"
 if [ -n "$other_edge" ]; then
@@ -982,8 +982,7 @@ fileName="$(pwd)/a"
 \documentclass[$documentOptions]{article}$colorcode
 \usepackage[$papersize]{geometry}
 \usepackage[utf8]{inputenc}$raw_pdfinfo
-\usepackage{pdfpages}
-$preamble$other_edge
+\usepackage{pdfpages}$other_edge$preamble
 \begin{document}
 \includepdfmerge[$miscOptions]{$filePageList}
 \end{document}
@@ -1005,12 +1004,12 @@ failureText=\
 The call to $latex resulted in an error."
 if [ -n "$tidy" ]; then
 	failureText="$failureText
+Rerun with '--no-tidy' (or '--build-dir PATH') to diagnose the problem."
+else
+	failureText="$failureText
 You can examine the log file at
         $fileName.log
 to try to diagnose the problem."
-else
-	failureText="$failureText
-Rerun with '--no-tidy' (or '--build-dir PATH') to diagnose the problem."
 fi
 i=1
 while [ "$i" -le "$runs" ]; do

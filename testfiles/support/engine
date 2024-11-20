@@ -1,13 +1,28 @@
 #!/bin/bash
 
 in=${!##\\input } # ${!#} is the last argument
-job="$(basename -s.jam "$in")"
+job=${in%.jam}
 out="$job.pdf"
-pdfjam="./pdfjam --vanilla --build-dir '$job.d' --outfile '$out' --preamble '"'\input{regression-test.tex}\AtBeginDocument{\START}'\'
-if [[ "${in%.sh.jam}" = "${in}" ]]; then
-	eval "$pdfjam $(< "$in")"
-else
-	source "$in"
-fi
-awk '/^ *\[[0-9]*$/{ORS=""} /\]/{ORS="\n"} /^END-TEST-LOG$/ {system("pdfinfo '"$out"'")} //' \
-	<"$job.d/a.log" >"$job.log"
+
+case "$0" in *-pdf|*-xe|*-lua)
+	latex=" --latex $(command -v "${0##*-}latex")"
+esac
+pdfjam="./pdfjam$latex --vanilla --build-dir '$job.d' --outfile '$out' --preamble '"\
+'\input{regression-test.tex}\AtBeginDocument{\START}'\'
+
+case "$job" in
+	*.sh) source "$in" ;;
+	*) eval "$pdfjam $(< "$in")" ;;
+esac
+
+<"$job.d/a.log" awk '/^ *\[[0-9]*$/{ORS=""} /\]/{ORS="\n"}
+		/^END-TEST-LOG$/{system("pdfinfo '"$out"'")}
+		//' \
+	| sed '/^\[[0-9]\+/s/ //g
+		s/\.\([0-9]\{3\}\)[0-9]*pt/.\1pt/g
+		s/luatex\.def/pdftex.def/
+		/^<\(source-[0-9]*\|stdin\).pdf,/s/id=[0-9]*/id=00/
+		s/^\(Producer:        \).*$/\1TeXengine/
+		s/^\(File size:       \)[0-9]\{4,\} bytes/\10000 bytes/
+		' \
+	>"$job.log"

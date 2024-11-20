@@ -1,2 +1,2 @@
 eval "$pdfjam --batch a4.pdf --picturecommand '\\put(20,20){Letters.\\quad What'\\''s \$9\\cdot6\$?}'"
-cp sanitizing.sh.d/file1/a.log sanitizing.sh.d/a.log
+cp -Tr sanitizing.sh.d/file1 sanitizing.sh.d
