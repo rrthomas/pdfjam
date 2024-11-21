@@ -129,7 +129,7 @@ where
                       --papersize 612,792
                   Units may also be specified explicitly, e.g.
                       --papersize 10in,18cm
-                  [Libpaper default: $papersize]
+                  [Default for you at this site: papersize=$papersize]
      --pagecolor RGBSPEC
                   Specify a background colour for the output pages.  The
                   RGBSPEC must be a comma-separated trio of integers

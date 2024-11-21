@@ -1,1 +1,1 @@
-eval "PAPERSIZE=a10 $pdfjam a4numbers.pdf"
+eval "PATH='mock/paperconf/system:$PATH' PAPERSIZE=a10 $pdfjam a4numbers.pdf"

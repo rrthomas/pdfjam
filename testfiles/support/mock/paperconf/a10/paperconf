@@ -1,0 +1,6 @@
+#!/bin/sh
+case "$*" in
+	'') echo a10 ;;
+	-s) echo 73.7008 104.882 ;;
+	*) echo a10/paperconf miscalled ;;
+esac

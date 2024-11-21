@@ -15,7 +15,8 @@ next_version = isprerelease and string.sub(version, 1, 4) + .01 or version
 builddir = "build"
 testdir = builddir .. "/test"
 
-installfiles = {"pdfjam"}
+-- used for l3build install
+installfiles = {"pdfjam"} -- also used by l3build check
 scriptfiles = {"pdfjam"}
 scriptmanfiles = {"pdfjam.1"}
 textfiles = {"COPYING", "README.md"}
@@ -40,7 +41,7 @@ test_types = {
 		test = ".jam",
 		reference = ".jamref",
 		generated = "", -- it gets an implicit .dryrun anyway
-		rewrite = function(source, normalized, engine, errorcode)
+		rewrite = function(source, normalized)
 			local dir=source .. ".d/"
 			local f = io.open(normalized, "w")
 			f:write("%%% a.tex\n", read_file(dir.."a.tex"),
@@ -49,17 +50,23 @@ test_types = {
 				rewrite_version(rewrite_test_dir(read_file(dir.."messages.txt"))))
 			f:close()
 		end
+	},
+	sh = {
+		test = ".sh",
+		reference = ".shref",
+		generated = ".log",
+		rewrite = function(source, normalized) cp(source, ".", normalized) end
 	}
 }
 
 checkengines = {"dryrun"}
 checkconfigs = {"build"}
 lvtext = ".jam" -- Used in check_tex; cannot be overridden
-test_order = {"jam"}
+test_order = {"jam", "sh"}
 
 -- Set PATH for `l3build check` and `l3build save`
 target_list.check.pre = function(_)
-	return os.setenv("PATH", os.getenv("PATH") .. ":.") and 0 or 1
+	return os.setenv("PATH",  "mock/paperconf/a4:.:" .. os.getenv("PATH")) and 0 or 1
 end
 target_list.save.pre = target_list.check.pre
 

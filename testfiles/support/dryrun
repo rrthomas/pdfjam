@@ -4,7 +4,8 @@ in=${!##\\input } # ${!#} is the last argument
 job=${in%.*}
 
 case "$in" in
-	*.tex) cp --verbose -- "$in" "$job.pdf"; exit ;;
+	*.tex) cp --verbose -- "$in" "$job.pdf"; exit $? ;;
+	*.sh) source "$in" >"$job.dryrun.log"; exit $? ;;
 	*.jam) ;;
 	*) echo "Wrong usage of $0"; exit 1 ;;
 esac

@@ -3,11 +3,20 @@
 in=${!##\\input } # ${!#} is the last argument
 job=${in%.jam}
 out="$job.pdf"
+dir="$job.d"
 
-case "$0" in *-pdf|*-xe|*-lua)
-	latex=" --latex $(command -v "${0##*-}latex")"
+case "$0" in
+	*engine-pdf|*engine-xe|*engine-lua)
+		tex=${0##*-}
+		mkdir -p "$tex/$dir"
+		rm -fr "$dir" && ln -s "$tex/$dir" "$dir"
+		latex=" --latex $(command -v "${tex}latex")"
+		;;
+	*engine) [ -L "$dir" ] && rm "$dir" ;;
+	*) echo "name $0 unexpected"; exit 1
 esac
-pdfjam="./pdfjam$latex --vanilla --build-dir '$job.d' --outfile '$out' --preamble '"\
+
+pdfjam="./pdfjam$latex --vanilla --build-dir '$dir' --outfile '$out' --preamble '"\
 '\input{regression-test.tex}\AtBeginDocument{\START}'\'
 
 case "$job" in
@@ -15,7 +24,7 @@ case "$job" in
 	*) eval "$pdfjam $(< "$in")" ;;
 esac
 
-<"$job.d/a.log" awk '/^ *\[[0-9]*$/{ORS=""} /\]/{ORS="\n"}
+<"$dir/a.log" awk '/^ *\[[0-9]*$/{ORS=""} /\]/{ORS="\n"}
 		/^END-TEST-LOG$/{system("pdfinfo '"$out"'")}
 		//' \
 	| sed '/^\[[0-9]\+/s/ //g
