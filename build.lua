@@ -41,8 +41,9 @@ test_types = {
 		test = ".jam",
 		reference = ".jamref",
 		generated = "", -- it gets an implicit .dryrun anyway
-		rewrite = function(source, normalized)
-			local dir=source .. ".d/"
+		rewrite = function(source, normalized, engine)
+			local t={["engine-xe"]="xe", ["engine-pdf"]="pdf", ["engine-lua"]="lua", engine="a"}
+			local dir=t[engine] .. "/" .. source .. ".d/"
 			local f = io.open(normalized, "w")
 			f:write("%%% a.tex\n", read_file(dir.."a.tex"),
 				"\n%%% call.txt\n", rewrite_test_dir(read_file(dir.."call.txt")),

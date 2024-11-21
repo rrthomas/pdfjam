@@ -3,7 +3,6 @@ set -e
 eval "$pdfjam --batch --nup 2x1 --outfile '$(pwd)' --suffix 2up --landscape file1.pdf file2.pdf"
 mv file1-2up.pdf example1.sh.pdf
 mv file2-2up.pdf example1.zz.sh.pdf
-cp -Tr example1.sh.d/file1 example1.sh.d
-cp -Tr example1.sh.d/file2 example1.zz.sh.d
-: >example1.zz.sh.d/messages.txt
-: >example1.zz.sh.d/a.log
+cp -Tr $tex/example1.sh.d/file1 $tex/example1.sh.d
+cp -Tr $tex/example1.sh.d/file2 $tex/example1.zz.sh.d
+: >$tex/example1.zz.sh.d/messages.txt
