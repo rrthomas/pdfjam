@@ -21,17 +21,4 @@ jobs:
         shellcheck build/unpacked/pdfjam
         checkbashisms -xp build/unpacked/pdfjam
     - name: Check TeX outputs
-      run: |
-        l3build check -ccheck-tex || {
-          cd build/test-check-tex
-          for i in *.diff; do
-            echo "=== $i ==="
-            cat "$i"
-            echo
-            t=${i%.diff}
-            echo "=== $t.log ==="
-            cat "${t##*.engine-}/${t%.engine-*}.d/a.log"
-            echo
-          done
-          false
-        }
+      run: utils/check-tex.sh
