@@ -10,7 +10,9 @@ jobs:
     - name: Install dependencies
       run: sudo apt-get update && sudo apt-get -y --no-install-recommends install texlive-latex-extra texlive-xetex shellcheck devscripts poppler-utils
     - name: Move libpaper
-      run: sudo mv /usr/bin/paper /usr/bin/xpaper; sudo mv /usr/bin/paperconf /usr/bin/xpaperconf
+      run: |
+        sudo mv /usr/bin/paper /usr/bin/xpaper || :
+        sudo mv /usr/bin/paperconf /usr/bin/xpaperconf
     - name: Check
       run: l3build check || { cat build/test/*.diff; false; }
     - name: TeX checks
