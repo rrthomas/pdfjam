@@ -10,6 +10,7 @@ case "$in" in
 	*) echo "Wrong usage of $0"; exit 1 ;;
 esac
 
+tex=.
 out="$job.pdf"
 pdfjam="./pdfjam --latex $(realpath "$0") --vanilla --build-dir '$job.d' --outfile '$out'"
 
