@@ -23,7 +23,11 @@ case "$job" in
 	*) eval "$pdfjam $(< "$in")" ;;
 esac
 
-<"$dir/a.log" awk '/^ *\[[0-9]+/{ORS=""} /\]/{ORS="\n"}
+<"$dir/a.log" awk 'BEGIN{s=0}
+/^ *\[[0-9]+/{ORS=""}
+/]$/{ORS="\n"}
+/]\(/{s=1}
+/\)/&&s=1{s=0;ORS="\n"}
 /^END-TEST-LOG$/{system("TZ=UTC pdfinfo '"$dir/a.pdf"'")}
 //' \
 	| sed '/^ *\[[0-9]\+/s/ //g
