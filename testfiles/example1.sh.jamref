@@ -10,7 +10,7 @@
 
 %%% call.txt
 cd <TESTDIR>
-./pdfjam --latex <TESTDIR>/dryrun --vanilla --build-dir example1.sh.d --outfile example1.sh.pdf --nup 2x1 --outfile <TESTDIR> --suffix 2up --landscape -- file1.pdf -
+./pdfjam --latex <TESTDIR>/dryrun --vanilla --builddir example1.sh.d --outfile example1.sh.pdf --nup 2x1 --outfile <TESTDIR> --suffix 2up --landscape -- file1.pdf -
 
 %%% messages.txt
           ----
@@ -23,7 +23,7 @@ cd <TESTDIR>
               ----
   pdfjam:     This is pdfjam version N.NN.
   pdfjam:     Effective call for this run of pdfjam:
-              ./pdfjam --latex <TESTDIR>/dryrun --vanilla --build-dir example1.sh.d --outfile example1.sh.pdf --nup 2x1 --outfile <TESTDIR> --suffix 2up --landscape -- file1.pdf -
+              ./pdfjam --latex <TESTDIR>/dryrun --vanilla --builddir example1.sh.d --outfile example1.sh.pdf --nup 2x1 --outfile <TESTDIR> --suffix 2up --landscape -- file1.pdf -
   pdfjam:     Calling <TESTDIR>/dryrun...
   pdfjam:     Finished.  Output was written to '<TESTDIR>/file1-2up.pdf'.
   pdfjam: --
@@ -32,6 +32,6 @@ cd <TESTDIR>
               ----
   pdfjam:     This is pdfjam version N.NN.
   pdfjam:     Effective call for this run of pdfjam:
-              ./pdfjam --latex <TESTDIR>/dryrun --vanilla --build-dir example1.sh.d --outfile example1.sh.pdf --nup 2x1 --outfile <TESTDIR> --suffix 2up --landscape -- file2.pdf -
+              ./pdfjam --latex <TESTDIR>/dryrun --vanilla --builddir example1.sh.d --outfile example1.sh.pdf --nup 2x1 --outfile <TESTDIR> --suffix 2up --landscape -- file2.pdf -
   pdfjam:     Calling <TESTDIR>/dryrun...
   pdfjam:     Finished.  Output was written to '<TESTDIR>/file2-2up.pdf'.

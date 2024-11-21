@@ -204,7 +204,7 @@ landscape=          ##  Use portrait./Do not switch width and height.
 twoside=            ##  No "twoside" option to documentclass
 tidy=tidy           ##  Delete all temporary files at the end
 runs=1              ##  Run latex just once
-build_dir=          ##  Directory to use instead of temporary one
+builddir=           ##  Directory to use instead of temporary one
 enc=                ##  Have `iconv` guess command line encoding
 preamble=           ##  Default LaTeX preamble string.
 ##  END OF SETTINGS MADE DIRECTLY WITHIN THE SCRIPT
@@ -460,29 +460,28 @@ while test -n "$1$2"; do
 				preamble="$preamble$newline$2"
 				shift
 				;;
-			--latex | --build-dir | --enc | --pagecolor | \
+			--latex | --builddir | --enc | --pagecolor | \
 			--pdftitle | --pdfauthor | --pdfsubject | --pdfkeywords)
-				eval "$(echo "${1#--}"|tr - _)='$2'"
+				eval "${1#--}=$(escape_quote "$2")"
 				callOptions="$callOptions $1 $(enquote "$2")"
 				shift
 				;;
-			--tidy | --keepinfo | --landscape | --twoside | --other-edge)
-				option=$(echo "${1#--}"|tr - _)
-				eval "$option=$option"
+			--tidy | --keepinfo | --landscape | --twoside | --otheredge)
+				eval "${1#--}=${1#--}"
 				callOptions="$callOptions $1"
 				;;
 			--no-tidy | --no-keepinfo | --no-landscape | --no-twoside | \
-			--no-other-edge)
+			--no-otheredge)
 				eval "$(echo "${1#--no-}"|tr - _)="
 				callOptions="$callOptions $1"
 				;;
 			--longedge)  ##  legacy
-				other_edge=other_edge
-				callOptions="$callOptions --other-edge"
+				otheredge=otheredge
+				callOptions="$callOptions --otheredge"
 				;;
 			--shortedge)  ##  legacy
-				other_edge=
-				callOptions="$callOptions --no-other-edge"
+				otheredge=
+				callOptions="$callOptions --no-otheredge"
 				;;
 			--*) ##  miscellaneous options for \includepdfmerge
 				miscOptions="$miscOptions,${1#--}=$(embrace "$2")"
@@ -596,8 +595,8 @@ if test -n "$preamble"; then
 	callOptions="$callOptions --preamble $(enquote "${preamble#"$newline"}")"
 fi
 callOptions="${callOptions# }"
-if [ -n "$other_edge" ]; then
-	other_edge='
+if [ -n "$otheredge" ]; then
+	otheredge='
 {\makeatletter\AddToHook{shipout/before}{\ifodd\c@page\pdfpageattr{/Rotate 180}\fi}}'
 fi
 if [ -n "$papersize" ]; then
@@ -718,7 +717,7 @@ using_non_cygwin_latex_from_cygwin() {
 ##  with random name to make file collisions less likely.
 ##
 if test "$PDFJAM_CALL_NUMBER" = 0; then ## don't repeat this work for secondary calls
-	if test -z "$build_dir"; then
+	if test -z "$builddir"; then
 		PDFJAM_TEMP_DIR=''
 		tidycode=$([ -n "$tidy" ] && echo ';cd "$pwd";rm -rf "$PDFJAM_TEMP_DIR"')
 		trap "IFS='$OIFS'$tidycode;exit 1" HUP INT TERM
@@ -731,7 +730,7 @@ if test "$PDFJAM_CALL_NUMBER" = 0; then ## don't repeat this work for secondary 
 		}
 		tempfileDir="$(get_tempfile_dir)" || error_exit \
 			'Cannot determine directory for temporary files.
-		Fix your installation or provide --build-dir PATH.' $E_SOFTWARE
+		Fix your installation or provide --builddir PATH.' $E_SOFTWARE
 		##  Try mktemp. If this fails, portably make up a random number.
 		PDFJAM_TEMP_DIR=$( (umask 077 && mktemp -d "$tempfileDir/pdfjam-XXXXXX") 2>/dev/null) \
 			|| {
@@ -740,16 +739,16 @@ if test "$PDFJAM_CALL_NUMBER" = 0; then ## don't repeat this work for secondary 
 				(umask 077 && mkdir "$PDFJAM_TEMP_DIR")
 			} && [ -d "$PDFJAM_TEMP_DIR" ] && [ -w "$PDFJAM_TEMP_DIR" ] \
 			|| error_exit 'Failed to create a temporary directory.
-		Fix your installation or provide --build-dir PATH.' $E_SOFTWARE
+		Fix your installation or provide --builddir PATH.' $E_SOFTWARE
 		if [ -z "$tidy" ]; then
 			prattle "Temporary directory for this job is
           $PDFJAM_TEMP_DIR"
 		fi
 	else
 		tidy=  ##  used in error message
-		(umask 077 && mkdir -p "$build_dir") || error_exit \
-			"Cannot create build directory '$build_dir'." $E_USAGE
-		PDFJAM_TEMP_DIR="$(realpath -- "$build_dir")"
+		(umask 077 && mkdir -p "$builddir") || error_exit \
+			"Cannot create build directory '$builddir'." $E_USAGE
+		PDFJAM_TEMP_DIR="$(realpath -- "$builddir")"
 	fi
 	export PDFJAM_TEMP_DIR ##  so that same dir is used in secondary calls
 	PDFJAM_MESSAGES_FILE="$PDFJAM_TEMP_DIR"/messages.txt
@@ -988,7 +987,7 @@ fileName="$(pwd)/a"
 \documentclass[$documentOptions]{article}$colorcode
 \usepackage[$papersize]{geometry}
 \usepackage[utf8]{inputenc}$raw_pdfinfo
-\usepackage{pdfpages}$other_edge$preamble
+\usepackage{pdfpages}$otheredge$preamble
 \begin{document}
 \includepdfmerge[$miscOptions]{$filePageList}
 \end{document}
@@ -1010,7 +1009,7 @@ failureText=\
 The call to $latex resulted in an error."
 if [ -n "$tidy" ]; then
 	failureText="$failureText
-Rerun with '--no-tidy' (or '--build-dir PATH') to diagnose the problem."
+Rerun with '--no-tidy' (or '--builddir PATH') to diagnose the problem."
 else
 	failureText="$failureText
 You can examine the log file at

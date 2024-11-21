@@ -22,7 +22,7 @@
 
 %%% call.txt
 cd <TESTDIR>
-./pdfjam --latex <TESTDIR>/dryrun --vanilla --build-dir pdfinfo1.d --outfile pdfinfo1.pdf --keepinfo -- beamer.pdf 3-1 
+./pdfjam --latex <TESTDIR>/dryrun --vanilla --builddir pdfinfo1.d --outfile pdfinfo1.pdf --keepinfo -- beamer.pdf 3-1 
 
 %%% messages.txt
           ----
@@ -30,7 +30,7 @@ cd <TESTDIR>
   pdfjam: Called with '--vanilla': no user or site configuration
           files will be read.
   pdfjam: Effective call for this run of pdfjam:
-          ./pdfjam --latex <TESTDIR>/dryrun --vanilla --build-dir pdfinfo1.d --outfile pdfinfo1.pdf --keepinfo -- beamer.pdf 3-1 
+          ./pdfjam --latex <TESTDIR>/dryrun --vanilla --builddir pdfinfo1.d --outfile pdfinfo1.pdf --keepinfo -- beamer.pdf 3-1 
   pdfjam: Calling /usr/bin/pdfinfo...
   pdfjam: Calling <TESTDIR>/dryrun...
   pdfjam: Finished.  Output was written to 'pdfinfo1.pdf'.

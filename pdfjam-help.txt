@@ -101,8 +101,8 @@ where
                   Provide text for the  Title, Author, Subject and Keywords
                   in the output PDF file.  Requires the  LaTeX 'hyperref'
                   package.  These options, individually, over-ride --keepinfo.
-     --other-edge
-     --no-other-edge
+     --otheredge
+     --no-otheredge
                   Rotate every odd page by 180 degrees (or not).  Thus changes
                   along which edge the pages are flipped in duplex printing.
      --landscape
@@ -139,10 +139,10 @@ where
      --tidy
      --no-tidy
                   Specify whether the temporary directory created by
-                  pdfjam should be deleted.  Use '--no-tidy' or '--build-dir'
+                  pdfjam should be deleted.  Use '--no-tidy' or '--builddir'
                   below to help debug most errors.
                   [Default for you at this site: tidy=$tidy]
-     --build-dir PATH
+     --builddir PATH
                   Specifies a build directory to be used in place of a
                   temporary one. Existing files inside will be overwritten.
      --latex PATHTOLATEX

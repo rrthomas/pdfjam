@@ -10,6 +10,6 @@
 
 %%% call.txt
 cd <TESTDIR>
-./pdfjam --latex <TESTDIR>/dryrun --vanilla --build-dir example1.sh.d --outfile example1.sh.pdf --nup 2x1 --outfile <TESTDIR> --suffix 2up --landscape -- file2.pdf -
+./pdfjam --latex <TESTDIR>/dryrun --vanilla --builddir example1.sh.d --outfile example1.sh.pdf --nup 2x1 --outfile <TESTDIR> --suffix 2up --landscape -- file2.pdf -
 
 %%% messages.txt

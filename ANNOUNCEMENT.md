@@ -1,7 +1,7 @@
 * Major version bumped to 4.00 to reflect major refactoring, and some minor backwards-incompatible changes.
 * New co-maintainer.
 * Several minor bug fixes.
-* New option `--build-dir path` to build in `path` instead of a temporary
+* New option `--builddir path` to build in `path` instead of a temporary
   directory. Overwrites files in `path` without further notice.
 * In the constructed tex file, included files are now referenced as
   `source-1.pdf` etc. instead of `/tmp/pdfjam-XXXXXX/source-1.pdf`.
@@ -14,8 +14,8 @@
 * Support `--papersize 595,842` as alternative to `--papersize 595bp,842bp`.
   Prevents people adding unit `pt` where they actually mean `bp`.
 * Mirror page when `--papersize` and `--landscape` given.
-* Renames duplex edge flipping options `--longedge` to `--other-edge` and
-  `--shortedge` to `--no-other-edge` to reflect their actual behaviour.
+* Renames duplex edge flipping options `--longedge` to `--otheredge` and
+  `--shortedge` to `--no-otheredge` to reflect their actual behaviour.
 * Support `--keepinfo --pdfauthor ''` to discard only the corresponding field
   while keeping the remaining pdfinfo.
 * Adds lots of regression and integration tests.

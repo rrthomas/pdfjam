@@ -11,7 +11,7 @@
 \fi
 \ifdefined\pdfinfo%
   \pdfinfo{%
-    /Author <feff004400e6006d006f006e0020d83dde08> %
+    /Author <feff004400e6006d006f006e00270073002000700061006300740020d83dde08> %
     /Subject <feff0057006900740063006800630072006100660074> %
   }%
 \fi
@@ -22,7 +22,7 @@
 
 %%% call.txt
 cd <TESTDIR>
-./pdfjam --latex <TESTDIR>/dryrun --vanilla --build-dir pdfinfo3.d --outfile pdfinfo3.pdf --enc UTF-8 --pdfauthor Dæmon\ 😈 --pdfsubject Witchcraft -- a4.pdf - 
+./pdfjam --latex <TESTDIR>/dryrun --vanilla --builddir pdfinfo3.d --outfile pdfinfo3.pdf --enc UTF-8 --pdfauthor 'Dæmon'\''s pact 😈' --pdfsubject Witchcraft -- a4.pdf - 
 
 %%% messages.txt
           ----
@@ -30,6 +30,6 @@ cd <TESTDIR>
   pdfjam: Called with '--vanilla': no user or site configuration
           files will be read.
   pdfjam: Effective call for this run of pdfjam:
-          ./pdfjam --latex <TESTDIR>/dryrun --vanilla --build-dir pdfinfo3.d --outfile pdfinfo3.pdf --enc UTF-8 --pdfauthor Dæmon\ 😈 --pdfsubject Witchcraft -- a4.pdf - 
+          ./pdfjam --latex <TESTDIR>/dryrun --vanilla --builddir pdfinfo3.d --outfile pdfinfo3.pdf --enc UTF-8 --pdfauthor 'Dæmon'\''s pact 😈' --pdfsubject Witchcraft -- a4.pdf - 
   pdfjam: Calling <TESTDIR>/dryrun...
   pdfjam: Finished.  Output was written to 'pdfinfo3.pdf'.

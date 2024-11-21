@@ -22,7 +22,7 @@
 
 %%% call.txt
 cd <TESTDIR>
-./pdfjam --latex <TESTDIR>/dryrun --vanilla --build-dir pdfinfo2.d --outfile pdfinfo2.pdf --keepinfo --enc UTF-8 --pdftitle  --pdfkeywords ' tab	nl
+./pdfjam --latex <TESTDIR>/dryrun --vanilla --builddir pdfinfo2.d --outfile pdfinfo2.pdf --keepinfo --enc UTF-8 --pdftitle  --pdfkeywords ' tab	nl
 "!@$^&,}]{[\|:~`crash?ሴ🙄🏳️‍🌈finally ☺️' --keepinfo -- /dev/stdin - 
 
 %%% messages.txt
@@ -32,7 +32,7 @@ cd <TESTDIR>
           files will be read.
   pdfjam: No PDF/JPG/PNG source specified: input is from stdin.
   pdfjam: Effective call for this run of pdfjam:
-          ./pdfjam --latex <TESTDIR>/dryrun --vanilla --build-dir pdfinfo2.d --outfile pdfinfo2.pdf --keepinfo --enc UTF-8 --pdftitle  --pdfkeywords ' tab	nl
+          ./pdfjam --latex <TESTDIR>/dryrun --vanilla --builddir pdfinfo2.d --outfile pdfinfo2.pdf --keepinfo --enc UTF-8 --pdftitle  --pdfkeywords ' tab	nl
           "!@$^&,}]{[\|:~`crash?ሴ🙄🏳️‍🌈finally ☺️' --keepinfo -- /dev/stdin - 
   pdfjam: Calling /usr/bin/pdfinfo...
   pdfjam: Calling <TESTDIR>/dryrun...

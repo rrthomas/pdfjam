@@ -15,7 +15,7 @@ case "$0" in
 esac
 dir="$tex/$job.d"
 
-pdfjam="./pdfjam$latex --vanilla --build-dir '$dir' --outfile '$out' --preamble '"\
+pdfjam="./pdfjam$latex --vanilla --builddir '$dir' --outfile '$out' --preamble '"\
 '\input{regression-test.tex}\AtBeginDocument{\START}'\'
 
 case "$job" in

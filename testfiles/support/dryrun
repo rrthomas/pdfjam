@@ -12,7 +12,7 @@ esac
 
 tex=.
 out="$job.pdf"
-pdfjam="./pdfjam --latex $(realpath "$0") --vanilla --build-dir '$job.d' --outfile '$out'"
+pdfjam="./pdfjam --latex $(realpath "$0") --vanilla --builddir '$job.d' --outfile '$out'"
 
 case "$job" in
 	*.sh) source "$in" ;;
