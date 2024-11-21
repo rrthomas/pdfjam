@@ -23,9 +23,7 @@ case "$job" in
 	*) eval "$pdfjam $(< "$in")" ;;
 esac
 
-<"$dir/a.log" awk '/^ *\[[0-9]*$/{ORS=""} /\]/{ORS="\n"}
-		/^END-TEST-LOG$/{system("TZ=UTC pdfinfo '"$dir/a.pdf"'")}
-		//' \
+<"$dir/a.log" awk '/^ *\[[0-9]*$/{ORS=""} /\]/{ORS="\n"} /^END-TEST-LOG$/{system("TZ=UTC pdfinfo '"$dir/a.pdf"'")} //' \
 	| sed '/^\[[0-9]\+/s/ //g
 		s/\.\([0-9]\{3\}\)[0-9]*pt/.\1pt/g
 		s/luatex\.def/pdftex.def/
