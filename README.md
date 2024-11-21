@@ -1,7 +1,9 @@
 ![GitHub CI](https://github.com/pdfjam/pdfjam/actions/workflows/ci.yml/badge.svg)
-# pdfjam
 
-_Reuben Thomas_ <https://rrt.sc3d.org/>
+pdfjam
+===
+
+_Reuben Thomas_ <https://rrt.sc3d.org>, _Markus Kurtz_ <_anything_ at mgkurtz.de>
 
 A snapshot of this page is included as _README.md_
 in the distributed package.  The most up-to-date version is maintained online at
@@ -95,7 +97,7 @@ For those scripts and for more information on them, please now see
   and
 [**geometry**](https://www.ctan.org/tex-archive/macros/latex/contrib/geometry).
 
-With [libpaper](https://github.com/rrthomas/libpaper) version 2 or later installed, `pdfjam` will be able to find your default paper size, which you can configure if desired.
+With [libpaper](https://github.com/rrthomas/libpaper) installed, `pdfjam` will be able to find your default paper size, which you can configure if desired.
 
 For some years now, **pdfjam** has been included in the _TeX Live_ distribution,
 which includes all the necessary programs and packages to make `pdfjam` run smoothly.
