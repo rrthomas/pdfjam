@@ -593,7 +593,7 @@ fi
 \$paper='$paper' and \$papersize='$papersize' must be set." $E_SOFTWARE
 miscOptions="${miscOptions#,}"
 if test -n "$preamble"; then
-	callOptions="$callOptions --preamble $(enquote "${preamble#$newline}")"
+	callOptions="$callOptions --preamble $(enquote "${preamble#"$newline"}")"
 fi
 callOptions="${callOptions# }"
 if [ -n "$other_edge" ]; then
