@@ -1,14 +1,20 @@
 module = "pdfjam"
 
 -- For testing, run `l3build check`
+-- For testing tex outputs, run `l3build check -ccheck-tex`
 -- For releasing, run `l3build release`
--- For major releases tag manually beforehand
+-- For major releases `git tag vN.00` manually beforehand
 
----- Version information
-version = io.popen("git describe --tags --match 'v?.*'"):read()
-version = version and string.sub(version, 2) or "N.NN"
-isprerelease = string.match(version, "-") ~= nil
-next_version = isprerelease and string.sub(version, 1, 4) + .01 or version
+---- Version information from git tag
+version = io.popen("git describe --tags --match 'v?.*' 2>/dev/null"):read()
+if version then
+	version = string.sub(version, 2)
+	isprerelease = string.match(version, "-") ~= nil
+	next_version = isprerelease and string.sub(version, 1, 4) + .01 or version
+else -- As for shallow clones, e.g. in GitHub workflow
+	version = "N.NN"
+	next_version = nil -- Disable some targets
+end
 
 ---- Constants
 -- Defaults are set later. Hence define all values we explicitly use here.
@@ -80,19 +86,20 @@ end
 ---- Self-made targets
 ctanzip = "build/pdfjam-ctan.zip"
 target_list.ctan.func = function(_)
-	if not version then return 1 end
+	if next_version == nil then return 1 end
 	os.execute("utils/build.sh " .. next_version)
 	return runcmd("zip -r release/pdfjam-ctan.zip pdfjam", "build")
 end
 
 target_list.release = { func = function(a)
-	if not version then return 1 end
+	if next_version == nil then return 1 end
 	if isprerelease then target_list.tag.func(a) end
 	target_list.ctan.func(a)
 	return os.execute("utils/github.sh " .. next_version)
 end }
 
 target_list.tag = { func = function(_)
+	if next_version == nil then return 1 end
 	os.execute("git tag --sign --edit --file=ANNOUNCEMENT.md v" .. next_version)
 end }
 
