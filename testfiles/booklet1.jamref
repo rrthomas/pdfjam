@@ -1,0 +1,23 @@
+%%% a.tex
+\batchmode
+\documentclass[a4paper,landscape,]{article}
+\usepackage[]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{pdfpages}
+\begin{document}
+\includepdfmerge[signature=8]{source-1.pdf,-,source-2.pdf,-}
+\end{document}
+
+%%% call.txt
+cd <TESTDIR>
+./pdfjam --latex <TESTDIR>/dryrun --vanilla --build-dir booklet1.d --outfile booklet1.pdf --landscape --signature 8 -- a4numbers.pdf - a4.pdf - 
+
+%%% messages.txt
+          ----
+  pdfjam: This is pdfjam version N.NN.
+  pdfjam: Called with '--vanilla': no user or site configuration
+          files will be read.
+  pdfjam: Effective call for this run of pdfjam:
+          ./pdfjam --latex <TESTDIR>/dryrun --vanilla --build-dir booklet1.d --outfile booklet1.pdf --landscape --signature 8 -- a4numbers.pdf - a4.pdf - 
+  pdfjam: Calling <TESTDIR>/dryrun...
+  pdfjam: Finished.  Output was written to 'booklet1.pdf'.

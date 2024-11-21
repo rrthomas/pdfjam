@@ -1,0 +1,23 @@
+%%% a.tex
+\batchmode
+\documentclass[a5paper,]{article}
+\usepackage[]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{pdfpages}
+\begin{document}
+\includepdfmerge[]{source-1.pdf,-}
+\end{document}
+
+%%% call.txt
+cd <TESTDIR>
+./pdfjam --latex <TESTDIR>/dryrun --vanilla --build-dir papersize7.sh.d --outfile papersize7.sh.pdf --paper a5paper -- a4numbers.pdf - 
+
+%%% messages.txt
+          ----
+  pdfjam: This is pdfjam version N.NN.
+  pdfjam: Called with '--vanilla': no user or site configuration
+          files will be read.
+  pdfjam: Effective call for this run of pdfjam:
+          ./pdfjam --latex <TESTDIR>/dryrun --vanilla --build-dir papersize7.sh.d --outfile papersize7.sh.pdf --paper a5paper -- a4numbers.pdf - 
+  pdfjam: Calling <TESTDIR>/dryrun...
+  pdfjam: Finished.  Output was written to 'papersize7.sh.pdf'.

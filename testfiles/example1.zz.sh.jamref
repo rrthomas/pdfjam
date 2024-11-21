@@ -1,0 +1,15 @@
+%%% a.tex
+\batchmode
+\documentclass[a4paper,landscape,]{article}
+\usepackage[]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{pdfpages}
+\begin{document}
+\includepdfmerge[nup=2x1]{source-1.pdf,-}
+\end{document}
+
+%%% call.txt
+cd <TESTDIR>
+./pdfjam --latex <TESTDIR>/dryrun --vanilla --build-dir example1.sh.d --outfile example1.sh.pdf --nup 2x1 --outfile <TESTDIR> --suffix 2up --landscape -- file2.pdf -
+
+%%% messages.txt

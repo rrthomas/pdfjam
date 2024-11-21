@@ -1,0 +1,11 @@
+suffix=pdfjam
+checkfiles=
+keepinfo=
+landscape=
+twoside=
+paper=a4paper
+papersize=
+tidy=tidy
+latex=/usr/bin/pdflatex
+runs=1
+enc=

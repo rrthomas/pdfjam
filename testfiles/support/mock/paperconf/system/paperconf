@@ -1,0 +1,9 @@
+#!/bin/sh
+if [ -x /usr/bin/paperconf ]; then
+	/usr/bin/paperconf "$@"
+elif [ -x /usr/bin/xpaperconf ]; then
+	/usr/bin/xpaperconf "$@"
+else
+	echo libpaper not installed
+	exit
+fi

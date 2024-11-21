@@ -8,11 +8,30 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Install dependencies
-      run: sudo apt-get update && sudo apt-get -y --no-install-recommends install texlive-latex-extra shellcheck devscripts poppler-utils
-    - name: l3build check
+      run: sudo apt-get update && sudo apt-get -y --no-install-recommends install texlive-latex-extra texlive-xetex texlive-luatex shellcheck devscripts poppler-utils
+    - name: Rename libpaper binaries
+      run: |
+        sudo mv /usr/bin/paper /usr/bin/xpaper || :
+        sudo mv /usr/bin/paperconf /usr/bin/xpaperconf
+    - name: Check TeX inputs
       run: l3build check || { cat build/test/*.diff; false; }
-    - name: Code check
+    - name: Check code
       run: |
         l3build unpack
         shellcheck build/unpacked/pdfjam
         checkbashisms -xp build/unpacked/pdfjam
+    - name: Check TeX outputs
+      run: |
+        l3build check -ccheck-tex || {
+          cd build/test-check-tex
+          for i in *.diff; do
+            echo "=== $i ==="
+            cat "$i"
+            echo
+            t=${i%.diff}
+            echo "=== $t.log ==="
+            cat "${t##*.engine-}/${t%.engine-*}.d/a.log"
+            echo
+          done
+          false
+        }

@@ -1,0 +1,6 @@
+#!/bin/sh
+case "$*" in
+	'') echo halfletter ;;
+	-s) echo 396 612 ;;
+	*) echo halfletter/paperconf miscalled ;;
+esac

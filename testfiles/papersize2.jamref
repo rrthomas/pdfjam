@@ -1,0 +1,23 @@
+%%% a.tex
+\batchmode
+\documentclass[landscape,]{article}
+\usepackage[papersize={30cm,360bp}]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{pdfpages}
+\begin{document}
+\includepdfmerge[]{source-1.pdf,{},1-4}
+\end{document}
+
+%%% call.txt
+cd <TESTDIR>
+./pdfjam --latex <TESTDIR>/dryrun --vanilla --build-dir papersize2.d --outfile papersize2.pdf --landscape --papersize 360bp,30cm -- beamer.pdf {},1-4 
+
+%%% messages.txt
+          ----
+  pdfjam: This is pdfjam version N.NN.
+  pdfjam: Called with '--vanilla': no user or site configuration
+          files will be read.
+  pdfjam: Effective call for this run of pdfjam:
+          ./pdfjam --latex <TESTDIR>/dryrun --vanilla --build-dir papersize2.d --outfile papersize2.pdf --landscape --papersize 360bp,30cm -- beamer.pdf {},1-4 
+  pdfjam: Calling <TESTDIR>/dryrun...
+  pdfjam: Finished.  Output was written to 'papersize2.pdf'.

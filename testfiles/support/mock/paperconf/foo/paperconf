@@ -1,0 +1,6 @@
+#!/bin/sh
+case "$*" in
+	'') echo foo ;;
+	-s) echo This will not help you either. ;;
+	*) echo foo/paperconf miscalled ;;
+esac
