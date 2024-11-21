@@ -81,7 +81,7 @@ newline='
 ##  Use '' to escape string with multiple tricky characters and \ otherwise
 enquote() {
 	case "$1" in
-	*$newline*) printf %s "$1" >&2; escape_quote "$1" ;;
+	*$newline*) escape_quote "$1" ;;
 	'' | *)
 		if printf %s "$1"|grep -Eq '([	 !"#$&()*<>?\^`{|}~].*){2}'; then
 			escape_quote "$1"  ##    ^-- matched twice due to --^
