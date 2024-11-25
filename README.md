@@ -386,10 +386,13 @@ for this suggestion and links to more information.
 
 # <a name="bugs"></a> Reporting bugs
 
-Please report any bugs found in `pdfjam`, either
+Please report any bugs found in `pdfjam` by reporting as an issue at GitHub:
+<https://github.com/pdfjam/pdfjam/issues>
 
-- by reporting as an issue at GitHub, <https://github.com/pdfjam/pdfjam/issues>
-- by email (see <https://warwick.ac.uk/dfirth> for my email address)
+# Developing
+
+This project uses [l3build](https://ctan.org/pkg/l3build). See the header of
+`build.lua` for more information.
 
 ### Some known problems:
 
