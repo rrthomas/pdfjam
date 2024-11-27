@@ -742,10 +742,10 @@ if test "$PDFJAM_CALL_NUMBER" = 0; then ## don't repeat this work for secondary 
 		Fix your installation or provide --builddir PATH.' $E_SOFTWARE
 		if [ -z "$tidy" ]; then
 			prattle "Temporary directory for this job is
-          $PDFJAM_TEMP_DIR"
+        $PDFJAM_TEMP_DIR"
 		fi
 	else
-		tidy=  ##  used in error message
+		tidy=
 		(umask 077 && mkdir -p "$builddir") || error_exit \
 			"Cannot create build directory '$builddir'." $E_USAGE
 		PDFJAM_TEMP_DIR="$(realpath -- "$builddir")"
@@ -1009,11 +1009,11 @@ failureText=\
 The call to $latex resulted in an error."
 if [ -n "$tidy" ]; then
 	failureText="$failureText
-Rerun with '--no-tidy' (or '--builddir PATH') to diagnose the problem."
+Rerun with '--no-tidy' or '--builddir PATH' to diagnose the problem."
 else
 	failureText="$failureText
-You can examine the log file at
-        $fileName.log
+You can examine the build directory at
+        $(pwd)
 to try to diagnose the problem."
 fi
 i=1
