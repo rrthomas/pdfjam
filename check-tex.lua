@@ -1,3 +1,3 @@
-checkengines = {"engine-pdf", "engine-xe", "engine-lua"}
-stdengine = "engine"
+checkengines = {"pdftex", "xetex", "luatex"}
+stdengine = checkengines[1]
 test_order = {"log"}

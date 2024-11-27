@@ -9,10 +9,6 @@ jobs:
     - uses: actions/checkout@v4
     - name: Install dependencies
       run: sudo apt-get update && sudo apt-get -y --no-install-recommends install texlive-latex-extra texlive-xetex texlive-luatex shellcheck devscripts poppler-utils
-    - name: Rename libpaper binaries
-      run: |
-        sudo mv /usr/bin/paper /usr/bin/xpaper || :
-        sudo mv /usr/bin/paperconf /usr/bin/xpaperconf
     - name: Check TeX inputs
       run: l3build check || { cat build/test/*.diff; false; }
     - name: Check code

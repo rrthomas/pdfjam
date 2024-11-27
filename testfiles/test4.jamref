@@ -10,7 +10,7 @@
 
 %%% call.txt
 cd <TESTDIR>
-./pdfjam --latex <TESTDIR>/dryrun --vanilla --builddir test4.d --outfile test4.pdf --landscape --paper a5paper -- test.pdf - 
+./pdfjam --latex <TESTDIR>/engine --vanilla --builddir test4.d/dryrun --outfile test4.pdf --landscape --paper a5paper -- test.pdf - 
 
 %%% messages.txt
           ----
@@ -18,6 +18,6 @@ cd <TESTDIR>
   pdfjam: Called with '--vanilla': no user or site configuration
           files will be read.
   pdfjam: Effective call for this run of pdfjam:
-          ./pdfjam --latex <TESTDIR>/dryrun --vanilla --builddir test4.d --outfile test4.pdf --landscape --paper a5paper -- test.pdf - 
-  pdfjam: Calling <TESTDIR>/dryrun...
+          ./pdfjam --latex <TESTDIR>/engine --vanilla --builddir test4.d/dryrun --outfile test4.pdf --landscape --paper a5paper -- test.pdf - 
+  pdfjam: Calling <TESTDIR>/engine...
   pdfjam: Finished.  Output was written to 'test4.pdf'.

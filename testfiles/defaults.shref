@@ -6,6 +6,6 @@ twoside=
 paper=a4paper
 papersize=
 tidy=tidy
-latex=/usr/bin/pdflatex
+latex=<TESTDIR>/../bin/pdflatex
 runs=1
 enc=

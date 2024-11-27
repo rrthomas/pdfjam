@@ -1,7 +1,6 @@
-_PATH=$(printf %s ":$PATH"|sed 's=:mock/[^:]*==g')
 papersize() {
 	echo "=== $1 ==="
-	eval "PATH='$1$_PATH' ./pdfjam --help" \
+	eval "PATH='$1:$PATH' ./pdfjam --help" \
 		| sed -n 's/^ *\[Default for you at this site: \(paper.*\)\]/\1/p'
 }
 

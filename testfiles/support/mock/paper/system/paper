@@ -1,9 +1,0 @@
-#!/bin/sh
-if [ -x /usr/bin/paper ]; then
-	/usr/bin/paper "$@"
-elif [ -x /usr/bin/xpaper ]; then
-	/usr/bin/xpaper "$@"
-else
-	echo libpaper2 not installed
-	exit
-fi

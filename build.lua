@@ -2,6 +2,7 @@ module = "pdfjam"
 
 -- For testing, run `l3build check`
 -- For testing tex outputs, run `l3build check -ccheck-tex`
+-- For installing in TEXMFHOME/scripts/pdfjam/, run `l3build install`
 -- For releasing, run `l3build release`
 -- For major releases `git tag vN.00` manually beforehand
 
@@ -48,8 +49,7 @@ test_types = {
 		reference = ".jamref",
 		generated = "", -- it gets an implicit .dryrun anyway
 		rewrite = function(source, normalized, engine)
-			local t={["engine-xe"]="xe", ["engine-pdf"]="pdf", ["engine-lua"]="lua", engine="a", dryrun="."}
-			local dir=t[engine] .. "/" .. source .. ".d/"
+			local dir=source .. ".d/" .. engine .. "/"
 			local f = io.open(normalized, "w")
 			f:write("%%% a.tex\n", read_file(dir.."a.tex"),
 				"\n%%% call.txt\n", rewrite_test_dir(read_file(dir.."call.txt")),
@@ -66,14 +66,21 @@ test_types = {
 	}
 }
 
+specialformats = { latex = {
+	dryrun = { binary = "./engine dryrun" },
+	pdftex = { binary = "./engine pdftex" },
+	xetex = { binary = "./engine xetex" },
+	luatex = { binary = "./engine luatex" },
+} }
+
 checkengines = {"dryrun"}
 checkconfigs = {"build"}
-lvtext = ".jam" -- Used in check_tex; cannot be overridden
+lvtext = ".jam" -- Used in check_tex; cannot be overridden there (for whatever reason)
 test_order = {"jam", "sh"}
 
--- Set PATH for `l3build check` and `l3build save`
+-- Symlink all binaries needed by pdfjam to allow resetting PATH
 target_list.check.pre = function(_)
-	return os.setenv("PATH",  "mock/paperconf/a4:.:" .. os.getenv("PATH")) and 0 or 1
+	return os.execute("utils/sandbox.sh") and 0 or 1
 end
 target_list.save.pre = target_list.check.pre
 
