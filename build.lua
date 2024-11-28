@@ -1,10 +1,9 @@
 module = "pdfjam"
 
--- For testing, run `l3build check`
--- For testing tex outputs, run `l3build check -ccheck-tex`
--- For installing in TEXMFHOME/scripts/pdfjam/, run `l3build install`
--- For releasing, run `l3build release`
--- For major releases `git tag vN.00` manually beforehand
+-- For testing, run `l3build check`.
+-- For testing tex outputs, run `l3build check -ccheck-tex`.
+-- For installing in TEXMFHOME/scripts/pdfjam/, run `l3build install`.
+-- For releasing, run `l3build release`, for major releases `l3build release major`.
 
 ---- Version information from git tag
 version = io.popen("git describe --tags --match 'v?.*' 2>/dev/null"):read()
@@ -79,10 +78,9 @@ lvtext = ".jam" -- Used in check_tex; cannot be overridden there (for whatever r
 test_order = {"jam", "sh"}
 
 -- Symlink all binaries needed by pdfjam to allow resetting PATH
-target_list.check.pre = function(_)
+checkinit_hook = function(_)
 	return os.execute("utils/sandbox.sh") and 0 or 1
 end
-target_list.save.pre = target_list.check.pre
 
 ---- Overwrite unpacking (used by most targets)
 bundleunpack = function()
@@ -91,23 +89,31 @@ bundleunpack = function()
 end
 
 ---- Self-made targets
-ctanzip = "build/pdfjam-ctan.zip"
+ctanzip = "build/release/pdfjam-ctan"
 target_list.ctan.func = function(_)
 	if next_version == nil then return 1 end
 	os.execute("utils/build.sh " .. next_version)
-	return runcmd("zip -r release/pdfjam-ctan.zip pdfjam", "build")
+	os.remove("release", "pdfjam-ctan.zip")
+	return runcmd("zip -r release/pdfjam-ctan.zip pdfjam", builddir)
 end
 
 target_list.release = { func = function(a)
 	if next_version == nil then return 1 end
 	if isprerelease then target_list.tag.func(a) end
-	target_list.ctan.func(a)
-	return os.execute("utils/github.sh " .. next_version)
+	target_list.ctan.func()
+	os.execute("utils/github.sh " .. next_version)
+	return target_list.upload.func()
 end }
 
-target_list.tag = { func = function(_)
+target_list.tag = { func = function(a)
 	if next_version == nil then return 1 end
-	os.execute("git tag --sign --edit --file=ANNOUNCEMENT.md v" .. next_version)
+	if not isprerelease then print("Already tagged") return 1 end
+	if a and a[1] == "major" then next_version = math.floor(next_version + 1) .. ".00" end
+	mkdir(builddir .. "/release")
+	local f = io.open(builddir .. "/release/ANNOUNCEMENT.md", "w")
+	f:write("Version " .. next_version .. "\n\n", read_file("ANNOUNCEMENT.md"))
+	f:close()
+	return runcmd("git tag --sign --file="..builddir.."/release/ANNOUNCEMENT.md v" .. next_version)
 end }
 
 ---- Information for `l3build upload`
@@ -116,13 +122,14 @@ uploadconfig = {
 	version = version,
 	announcement_file = "ANNOUNCEMENT.md",
 	author = "David Firth; Reuben Thomas; Markus Kurtz",
-	uploader = "Markus Kurtz",
+	uploader = "Reuben Thomas",
+	-- note = "",
 	license = "lppl",
 	summary = "Shell script interface to pdfpages",
 	ctanPath = "/support/pdfjam",
 	repository = "https://codeberg.org/pdfjam/pdfjam",
 	bugtracker = "https://codeberg.org/pdfjam/pdfjam/issues",
-	description = [[The package makes available the pdfjam shell script that provides a simple interface to much of the functionality of the excellent pdfpages package (by Andreas Matthias) for LaTeX. The pdfjam script takes one or more PDF files (and/or JPG/PNG graphics files) as input, and produces one or more PDF files as output.
+	description = [[The package makes available the pdfjam shell script that provides a simple interface to much of the functionality of the excellent <a href="/pkg/pdfpages">pdfpages</a> package (by Andreas Matthias) for LaTeX. The pdfjam script takes one or more PDF files (and/or JPG/PNG graphics files) as input, and produces one or more PDF files as output.
 
 It is useful for joining files together, selecting pages, reducing several source pages onto one output page, etc., etc.]],
 	topic = {"pdfprocess"},

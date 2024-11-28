@@ -1,4 +1,5 @@
-* Major version bumped to 4.00 to reflect major refactoring, and some minor backwards-incompatible changes.
+* Major version bumped to 4.00 to reflect major refactoring, and some minor
+  backwards-incompatible changes.
 * New co-maintainer.
 * Several minor bug fixes.
 * New option `--builddir path` to build in `path` instead of a temporary
