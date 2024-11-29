@@ -127,8 +127,8 @@ uploadconfig = {
 	license = "lppl",
 	summary = "Shell script interface to pdfpages",
 	ctanPath = "/support/pdfjam",
-	repository = "https://codeberg.org/pdfjam/pdfjam",
-	bugtracker = "https://codeberg.org/pdfjam/pdfjam/issues",
+	repository = "https://github.com/pdfjam/pdfjam",
+	bugtracker = "https://github.com/pdfjam/pdfjam/issues",
 	description = [[The package makes available the pdfjam shell script that provides a simple interface to much of the functionality of the excellent <a href="/pkg/pdfpages">pdfpages</a> package (by Andreas Matthias) for LaTeX. The pdfjam script takes one or more PDF files (and/or JPG/PNG graphics files) as input, and produces one or more PDF files as output.
 
 It is useful for joining files together, selecting pages, reducing several source pages onto one output page, etc., etc.]],
