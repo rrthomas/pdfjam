@@ -129,8 +129,7 @@ uploadconfig = {
 	ctanPath = "/support/pdfjam",
 	repository = "https://github.com/pdfjam/pdfjam",
 	bugtracker = "https://github.com/pdfjam/pdfjam/issues",
-	description = [[The package makes available the pdfjam shell script that provides a simple interface to much of the functionality of the excellent <a href="/pkg/pdfpages">pdfpages</a> package (by Andreas Matthias) for LaTeX. The pdfjam script takes one or more PDF files (and/or JPG/PNG graphics files) as input, and produces one or more PDF files as output.
-
-It is useful for joining files together, selecting pages, reducing several source pages onto one output page, etc., etc.]],
+	description = [[<p>The package makes available the <tt>pdfjam<//tt> shell script that provides a simple interface to much of the functionality of the excellent <a href="/pkg/pdfpages">pdfpages</a> package (by Andreas Matthias) for LaTeX. The <tt>pdfjam</tt> script takes one or more PDF (and/or JPG/PNG) files as input, and produces one or more PDF files as output.</p>
+<p>It is useful for joining files together, selecting pages, reducing several source pages onto one output page, etc., etc.</p>]],
 	topic = {"pdfprocess"},
 }
