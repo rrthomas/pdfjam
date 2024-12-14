@@ -113,7 +113,7 @@ target_list.tag = { func = function(a)
 	local f = io.open(builddir .. "/release/ANNOUNCEMENT.md", "w")
 	f:write("Version " .. next_version .. "\n\n", read_file("ANNOUNCEMENT.md"))
 	f:close()
-	return runcmd("git tag --sign --file="..builddir.."/release/ANNOUNCEMENT.md v" .. next_version)
+	return os.execute("git tag --sign --file="..builddir.."/release/ANNOUNCEMENT.md v" .. next_version) and 0 or 1
 end }
 
 ---- Information for `l3build upload`
@@ -123,13 +123,13 @@ uploadconfig = {
 	announcement_file = "ANNOUNCEMENT.md",
 	author = "David Firth; Reuben Thomas; Markus Kurtz",
 	uploader = "Reuben Thomas",
-	-- note = "",
+	note = "Please check, whether the HTML description is fine this way. Please note, that this package contains no PDF documentation, but a comprehensive --help output instead.", -- Note necessary for automatic validation to accept package without PDF documentation.
 	license = "lppl",
 	summary = "Shell script interface to pdfpages",
 	ctanPath = "/support/pdfjam",
 	repository = "https://github.com/pdfjam/pdfjam",
 	bugtracker = "https://github.com/pdfjam/pdfjam/issues",
-	description = [[<p>The package makes available the <tt>pdfjam<//tt> shell script that provides a simple interface to much of the functionality of the excellent <a href="/pkg/pdfpages">pdfpages</a> package (by Andreas Matthias) for LaTeX. The <tt>pdfjam</tt> script takes one or more PDF (and/or JPG/PNG) files as input, and produces one or more PDF files as output.</p>
+	description = [[<p>The package makes available the <tt>pdfjam</tt> shell script that provides a simple interface to much of the functionality of the excellent <a href="/pkg/pdfpages">pdfpages</a> package (by Andreas Matthias) for LaTeX. The <tt>pdfjam</tt> script takes one or more PDF (and/or JPG/PNG) files as input, and produces one or more PDF files as output.</p>
 <p>It is useful for joining files together, selecting pages, reducing several source pages onto one output page, etc., etc.</p>]],
 	topic = {"pdfprocess"},
 }
